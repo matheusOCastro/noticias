@@ -20,6 +20,40 @@ return array(
                     ),
                 ),
             ),
+            
+            'cadastros' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/cadastros',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'cadastros',
+                    ),
+                ),
+            ),
+            
+            'consultas' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/consultas',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'consultas',
+                    ),
+                ),
+            ),
+            
+            'sobre' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/sobre',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'sobre',
+                    ),
+                ),
+            ),
+            
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -34,6 +68,8 @@ return array(
                         'action'        => 'index',
                     ),
                 ),
+                
+                      
                 'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
@@ -52,6 +88,9 @@ return array(
             ),
         ),
     ),
+    
+    
+    
     'service_manager' => array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -59,10 +98,11 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ),
     ),
     'translator' => array(
-        'locale' => 'en_US',
+        'locale' => 'pt-BR',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',

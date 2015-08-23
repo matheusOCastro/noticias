@@ -1,16 +1,52 @@
 <?php
-/**
- * Global Configuration Override
- *
- * You can use this file for overriding configuration values from modules, etc.
- * You would place values in here that are agnostic to the environment and not
- * sensitive to security.
- *
- * @NOTE: In practice, this file will typically be INCLUDED in your source
- * control, so do not include passwords or other sensitive information in this
- * file.
- */
-
-return array(
-    // ...
-);
+ 
+return [
+    'navigation' => [
+        'default' => [
+            [
+                'label' => 'Home',
+                'route' => 'home',
+                'action' => 'index'
+                
+            ],
+            [
+                'label' => 'Cadastros',
+                'route' => 'cadastros',
+                'pages' => [
+                    [
+                        'label' => 'Cad 1',
+                        'route' => 'cadastros',
+                        'action' => 'cadastros',
+                    ],
+                    [
+                        'label' => 'Cad 2',
+                        'route' => 'cadastros',
+                        'action' => 'cadastros',
+                    ],
+                ]
+            ],
+            [
+                'label' => 'Consultas',
+                'route' => 'consultas',
+                'pages' => [
+                    [
+                        'label' => 'Cons 1',
+                        'route' => 'consultas',
+                        'action' => 'consultas',
+                    ],
+                    [
+                        'label' => 'Cons 1',
+                        'route' => 'consultas',
+                        'action' => 'consultas',
+                    ],
+                ]
+            ],
+            [
+                'label' => 'Sobre',
+                'route' => 'sobre',
+                'action' => 'sobre'
+                
+            ],
+        ]
+    ],
+];
