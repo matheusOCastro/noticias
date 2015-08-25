@@ -1,7 +1,36 @@
+
+
 <div class="jumbotron">
-    <h1><?php echo sprintf($this->translate('Consultas to %sZend Framework 2%s'), '<span class="zf-green">', '</span>') ?></h1>
-    <p><?php echo sprintf($this->translate('Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This skeleton can serve as a simple starting point for you to begin building your application on ZF2.'), '<a href="https://github.com/zendframework/ZendSkeletonApplication" target="_blank">', '</a>', \Zend\Version\Version::VERSION) ?></p>
-    <p><a class="btn btn-success btn-lg" href="https://github.com/zendframework/zf2" target="_blank"><?php echo $this->translate('Fork Zend Framework 2 on GitHub') ?> &raquo;</a></p>
+    <iframe
+        align="center"
+        width="600"
+        height="450"
+        frameborder="0" style="border:0"
+        
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAa9Axkb6KEXjui-NHK3GFqAgA-a7vUk0Y
+        &q=Space+Needle,Seattle+WA" allowfullscreen>
+    </iframe>
+    <?php
+    //importa o arquivo funcao_combo.php
+        //require_once(Application);
+ 
+    //Conexão com o banco de dados
+        $link = mysqli_connect('localhost', 'root', '24071991', 'agua', '3306', 'tcp/ip') or die ('Erro ao conectar com o servidor');
+        //mysqli_select_db('agua') or die ('Erro ao conectar com o banco de dados');
+ 
+    //consulta
+        $rs = mysqli_query($link, "SELECT * FROM capacidade_especifica ORDER BY ponto");
+ 
+    
+        echo("<select name='capacidade_especifica'>");
+            echo("t<option value=''>--Selecione--</option>n");
+            while ($obj = mysqli_fetch_object($rs)){			
+		echo("t<option value='".$obj->ponto."' > ". $obj->ponto." </option>");
+            }
+            echo("</select>");
+        
+    ?>
+    
 </div>
 
 <div class="row">
