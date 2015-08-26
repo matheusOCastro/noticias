@@ -15,14 +15,14 @@
         //require_once(Application);
  
     //Conexão com o banco de dados
-        $link = mysqli_connect('localhost', 'root', '24071991', 'agua', '3306', 'tcp/ip') or die ('Erro ao conectar com o servidor');
+        $link = mysqli_connect('localhost', 'root', '24071991', 'sisagua', '3306', 'tcp/ip') or die ('Erro ao conectar com o servidor');
         //mysqli_select_db('agua') or die ('Erro ao conectar com o banco de dados');
  
     //consulta
-        $rs = mysqli_query($link, "SELECT * FROM capacidade_especifica ORDER BY ponto");
+        $rs = mysqli_query($link, "SELECT * FROM capacidade ORDER BY ponto");
  
     
-        echo("<select name='capacidade_especifica'>");
+        echo("<select name='capacidade'>");
             echo("t<option value=''>--Selecione--</option>n");
             while ($obj = mysqli_fetch_object($rs)){			
 		echo("t<option value='".$obj->ponto."' > ". $obj->ponto." </option>");
