@@ -32,13 +32,24 @@ return array(
                 ),
             ),
             
-            'consultas' => array(
+            'consbaciavarzea' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/consultas',
+                    'route'    => '/consbaciavarzea',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
-                        'action'     => 'consultas',
+                        'action'     => 'consbaciavarzea',
+                    ),
+                ),
+            ),
+            
+            'consmunicipio' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/consmunicipio',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'consmunicipio',
                     ),
                 ),
             ),

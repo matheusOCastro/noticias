@@ -1,38 +1,13 @@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false">
+</script>
 
-
-<div class="jumbotron">
-    <iframe
-        align="center"
-        width="600"
-        height="450"
-        frameborder="0" style="border:0"
-        
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAa9Axkb6KEXjui-NHK3GFqAgA-a7vUk0Y
-        &q=Space+Needle,Seattle+WA" allowfullscreen>
-    </iframe>
-    <?php
-    //importa o arquivo funcao_combo.php
-        //require_once(Application);
- 
-    //Conexão com o banco de dados
-        $link = mysqli_connect('localhost', 'root', '24071991', 'sisagua', '3306', 'tcp/ip') or die ('Erro ao conectar com o servidor');
-        //mysqli_select_db('agua') or die ('Erro ao conectar com o banco de dados');
- 
-    //consulta
-        $rs = mysqli_query($link, "SELECT * FROM capacidade ORDER BY ponto");
- 
+<script type="text/javascript" src="js/map.js"></script>
     
-        echo("<select name='capacidade'>");
-            echo("t<option value=''>--Selecione--</option>n");
-            while ($obj = mysqli_fetch_object($rs)){			
-		echo("t<option value='".$obj->ponto."' > ". $obj->ponto." </option>");
-            }
-            echo("</select>");
-        
-    ?>
-    
-</div>
+    <h1><?php echo $this->translate ('Municípios pertencentes a zona do Rio da Várzea') ?></h1>
 
+<div id="map-canvas" style=" height: 400px; margin-bottom: 20px"></div>
+
+<!--
 <div class="row">
 
     <div class="col-md-4">
@@ -71,3 +46,4 @@
         </div>
     </div>
 </div>
+-->

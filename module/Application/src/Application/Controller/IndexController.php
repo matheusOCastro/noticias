@@ -12,7 +12,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class IndexController extends AbstractActionController 
 {
     public function indexAction()
     {
@@ -24,7 +24,12 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
     
-    public function consultasAction()
+    public function consbaciavarzeaAction()
+    {
+        return new ViewModel();
+    }
+    
+    public function consmunicipioAction()
     {
         return new ViewModel();
     }

@@ -30,14 +30,14 @@ return [
                 'route' => 'consultas',
                 'pages' => [
                     [
-                        'label' => 'Cons 1',
-                        'route' => 'consultas',
-                        'action' => 'consultas',
+                        'label' => 'Bacia da Várzea',
+                        'route' => 'consbaciavarzea',
+                        'action' => 'consbaciavarzea',
                     ],
                     [
-                        'label' => 'Cons 1',
-                        'route' => 'consultas',
-                        'action' => 'consultas',
+                        'label' => 'Municípios do Rio da Várzea',
+                        'route' => 'consmunicipio',
+                        'action' => 'consmunicipio',
                     ],
                 ]
             ],
