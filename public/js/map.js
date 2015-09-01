@@ -292,7 +292,7 @@ function initialize() {
    var mapOptions = {
       center: new google.maps.LatLng(40.601203,-8.668173),
       zoom: 9,
-      mapTypeId: 'roadmap',
+      mapTypeId: 'roadmap'
    };
 
    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -341,7 +341,7 @@ function displayMarkers(){
 }
 
 // Função que cria os marcadores e define o conteúdo de cada Info Window.
-function createMarker(latlng, nome, morada1, morada2, codPostal){
+function createMarker(latlng, nome){
    var marker = new google.maps.Marker({
       map: map,
       position: latlng,
