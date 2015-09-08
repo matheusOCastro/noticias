@@ -21,35 +21,25 @@ return array(
                 ),
             ),
             
-            'cadastros' => array(
+            
+            'municipios' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/cadastros',
+                    'route'    => '/municipios',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
-                        'action'     => 'cadastros',
+                        'action'     => 'municipios',
                     ),
                 ),
             ),
             
-            'consbaciavarzea' => array(
+            'pocoscadastrados' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/consbaciavarzea',
+                    'route'    => '/pocoscadastrados',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
-                        'action'     => 'consbaciavarzea',
-                    ),
-                ),
-            ),
-            
-            'consmunicipio' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/consmunicipio',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'consmunicipio',
+                        'action'     => 'pocoscadastrados',
                     ),
                 ),
             ),

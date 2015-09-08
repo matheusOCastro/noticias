@@ -40,6 +40,8 @@ function initMap() {
       {lat: -27.99400, lng: -52.77100},
       {lat: -28.05900, lng: -52.67700}
   ];
+  
+  
 
   // Construct the polygon.
   var bermudaTriangle = new google.maps.Polygon({
@@ -53,28 +55,72 @@ function initMap() {
   bermudaTriangle.setMap(map);
 
   // Add a listener for the click event.
-  bermudaTriangle.addListener('click', showArrays);
+  bermudaTriangle.addListener('click', showCidades);
 
   infoWindow = new google.maps.InfoWindow;
 }
 
-/** @this {google.maps.Polygon} */
-function showArrays(event) {
+
+function showCidades(event) {
   // Since this polygon has only one path, we can call getPath() to return the
   // MVCArray of LatLngs.
-  var vertices = this.getPath();
+ 
+    var contentString = '<b>Cidades pertencentes a Bacia do Rio da Várzea</b><br>';
 
-  var contentString = '<b>Bermuda Triangle polygon</b><br>' +
-      'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
-      '<br>';
-
-  // Iterate over the vertices.
-  for (var i =0; i < vertices.getLength(); i++) {
-    var xy = vertices.getAt(i);
-    contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
-        xy.lng();
-  }
-
+    contentString += 'Almirante Tamandaré do Sul<br>'+
+                        'Alpestre<br>'+
+                        'Ametista do Sul<br>'+
+                        'Barra do Guarita<br>'+
+                        'Barra Funda<br>'+
+                        'Boa Vista das Missões<br>'+
+                        'Caiçara<br>'+
+                        'Carazinho<br>'+
+                        'Cerro Grande<br>'+
+                        'Chapada<br>'+
+                        'Constantina<br>'+
+                        'Coqueiros do Sul<br>'+
+                        'Coronel Bicaco<br>'+
+                        'Cristal do Sul<br>'+
+                        'Derrubadas<br>'+
+                        'Dois Irmãos das Missões<br>'+
+                        'Engenho Velho<br>'+
+                        'Erval Seco<br>'+
+                        'Frederico Westphalen<br>'+
+                        'Gramado dos Loureiros<br>'+
+                        'Iraí<br>'+
+                        'Jaboticaba<br>'+
+                        'Lajeado do Bugre<br>'+
+                        'Liberato Salzano<br>'+
+                        'Miraguaí<br>'+
+                        'Nonoai<br>'+
+                        'Nova Boa Vista<br>'+
+                        'Novo Tiradentes<br>'+
+                        'Novo Xingu<br>'+
+                        'Novo Barreriro<br>'+
+                        'Palmeira das Missões<br>'+
+                        'Palmitinho<br>'+
+                        'Passo Fundo<br>'+
+                        'Pinhal<br>'+
+                        'Pinheirinho do Vale<br>'+
+                        'Planalto<br>'+
+                        'Pontão<br>'+
+                        'Redentora<br>'+
+                        'Rio dos Índios<br>'+
+                        'Rodeio Bonito<br>'+
+                        'Ronda Alta<br>'+
+                        'Rondinha<br>'+
+                        'Sagrada Família<br>'+
+                        'Santo Antônio do Planalto<br>'+
+                        'São José das Missões<br>'+
+                        'São Pedro das Missões<br>'+
+                        'Sarandi<br>'+
+                        'Taquaruçu do Sul<br>'+
+                        'Tenente Portela<br>'+
+                        'Três Palmeiras<br>'+
+                        'Trindade do Sul<br>'+
+                        'Vicente Dutra<br>'+
+                        'Vista Alegre<br>'+
+                        'Vista Gaúcha<br>';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);

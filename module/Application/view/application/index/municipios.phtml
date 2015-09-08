@@ -1,12 +1,17 @@
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false">
-</script>
-
-<script type="text/javascript" src="js/map.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"></script>
     
-    <h1><?php echo $this->translate ('Municípios pertencentes a zona do Rio da Várzea') ?></h1>
+<script type="text/javascript" src="js/cidades.js"></script>
 
-<div id="map-canvas" style=" height: 400px; margin-bottom: 20px"></div>
+<h1><?php echo $this->translate ('Municípios pertencentes a Bacia do Rio da Várzea') ?></h1>
+<center><iframe src="https://www.google.com/maps/d/embed?mid=z_HIhPo9pv1Y.kTVljpIDbZyE" width="1100" height="480"></iframe></center>
 
+<!--<div id="map-canvas" style=" height: 400px; margin-bottom: 20px"></div>
+<!--
+<div style=" height: 500px; margin-bottom: 20px">
+    <iframe src= https://www.google.com/maps/d/embed?mid=z_HIhPo9pv1Y.KTVljpIDbZyE" height="500"></iframe>
+</div>
+-->
 <!--
 <div class="row">
 

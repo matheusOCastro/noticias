@@ -10,6 +10,12 @@ return [
                 
             ],
             [
+                'label' => 'Municípios',
+                'route' => 'municipios',
+                'action' => 'municipios'
+                
+            ],
+            /*[
                 'label' => 'Cadastros',
                 'route' => 'cadastros',
                 'pages' => [
@@ -24,22 +30,12 @@ return [
                         'action' => 'cadastros',
                     ],
                 ]
-            ],
+            ],*/
             [
-                'label' => 'Consultas',
-                'route' => 'consultas',
-                'pages' => [
-                    [
-                        'label' => 'Bacia da Várzea',
-                        'route' => 'consbaciavarzea',
-                        'action' => 'consbaciavarzea',
-                    ],
-                    [
-                        'label' => 'Municípios do Rio da Várzea',
-                        'route' => 'consmunicipio',
-                        'action' => 'consmunicipio',
-                    ],
-                ]
+                'label' => 'Poços Cadastrados',
+                'route' => 'pocoscadastrados',
+                'action' => 'pocoscadastrados',
+                
             ],
             [
                 'label' => 'Sobre',

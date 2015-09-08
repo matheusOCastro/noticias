@@ -1,7 +1,16 @@
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"></script>
+    
+<script type="text/javascript" src="js/mapbacia.js"></script>
+
 <div class="jumbotron">
     <center><h1><?php echo sprintf($this->translate('Bem vindo ao Sistema de Visualização de Análise de Água!'), '<span class="zf-green">', '</span>') ?></h1></center>
     <center><p><?php echo sprintf($this->translate('Sistema capaz de realizar consultas sobre qualidade de água de diferentes lugares na região do Rio da Várzea. Estas consultas estão integradas com APIs do Google Maps em conjunto com diversos outros filtros para facilitar a visualização!'), '<a href="https://github.com/zendframework/ZendSkeletonApplication" target="_blank">', '</a>', \Zend\Version\Version::VERSION) ?></p></center>
 </div>
+
+<h1><?php echo $this->translate ('Delimitação da Bacia Hidrográfica do Rio da Várzea') ?></h1>
+
+<div id="map-canvas" style=" height: 400px; margin-bottom: 20px"></div>
 <!--
 <div class="row">
 
