@@ -9,13 +9,14 @@ return [
                 'action' => 'index'
                 
             ],
+            /*
             [
                 'label' => 'Municípios',
                 'route' => 'municipios',
                 'action' => 'municipios'
                 
             ],
-            /*[
+            [
                 'label' => 'Cadastros',
                 'route' => 'cadastros',
                 'pages' => [
@@ -30,13 +31,13 @@ return [
                         'action' => 'cadastros',
                     ],
                 ]
-            ],*/
+            ],
             [
                 'label' => 'Poços Cadastrados',
                 'route' => 'pocoscadastrados',
                 'action' => 'pocoscadastrados',
                 
-            ],
+            ],*/
             [
                 'label' => 'Sobre',
                 'route' => 'sobre',

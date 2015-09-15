@@ -25,7 +25,7 @@ class IndexController extends AbstractActionController
     }
     
     public function pocoscadastradosAction()
-    {
+    {   
         return new ViewModel();
     }
     
