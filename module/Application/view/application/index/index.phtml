@@ -3,6 +3,20 @@
     
 <script type="text/javascript" src="js/cidades.js"></script>
 
+<style>
+    
+    #titulo{
+    width:700px;
+    height:80px;
+    background-color:#bfe0ff;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 80px;
+    
+    }
+</style>
+    
+
 <div class="jumbotron">
     <center><h1><?php echo sprintf($this->translate('Bem vindo ao Sistema de Visualização de Análise de Água!'), '<span class="zf-green">', '</span>') ?></h1></center>
     <center><p><?php echo sprintf($this->translate('Sistema capaz de realizar consultas sobre qualidade de água de diferentes lugares na região do Rio da Várzea. Estas consultas estão integradas com APIs do Google Maps em conjunto com diversos outros filtros para facilitar a visualização!'), '<a href="https://github.com/zendframework/ZendSkeletonApplication" target="_blank">', '</a>', \Zend\Version\Version::VERSION) ?></p></center>
@@ -10,7 +24,8 @@
     <p><a class="btn btn-success pull-left" href="/pocoscadastrados"><?php echo $this->translate('Poços Cadastrados') ?> &raquo;</a></p>
     <p><a class="btn btn-success pull-left" href="/sobre"><?php echo $this->translate('Sobre') ?> &raquo;</a></p></center>
 </div>
-
-<h1><?php echo $this->translate ('Municípios pertencentes a Bacia do Rio da Várzea') ?></h1>
-
+<div id="titulo">
+    <hl><img src="img/mapa.png" alt=""align="left"></hl>
+    <h1><?php echo $this->translate ('Municípios pertencentes a Bacia do Rio da Várzea') ?></h1>
+</div>
 <div id="map-canvas" style=" height: 550px; margin-bottom: 20px"></div>
