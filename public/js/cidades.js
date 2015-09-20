@@ -5,6 +5,7 @@
 var map;
 var infoWindow;
 
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 8,

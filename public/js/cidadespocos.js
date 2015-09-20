@@ -1,20 +1,35 @@
-// This example creates a simple polygon representing the Bermuda Triangle.
-// When the user clicks on the polygon an info window opens, showing
-// information about the polygon's coordinates.
-
+   
+   
+   var string_array = $array_js;
+   var arrayCordenada = string_array.split("|");
+   var i;
+       
 var map;
 var infoWindow;
 
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map-canvas'), {
-    zoom: 8,
-    center: {lat: -27.56300, lng: -53.18200},
-    //mapTypeId: google.maps.MapTypeId.TERRAIN
-    mapTypeId: 'roadmap'
-  });
 
-  // Define the LatLng coordinates for the polygon.
-  var boavistamissoes = [
+function initialize() {
+   var mapOptions = {
+      center: new google.maps.LatLng(-27.24900,-53.03500),
+      zoom: 9,
+      mapTypeId: 'roadmap'
+   };
+   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+   // cria a nova Info Window com referência à variável infowindow
+   // o conteúdo da Info Window será atribuído mais tarde
+   infoWindow = new google.maps.InfoWindow();
+
+   // evento que fecha a infoWindow com click no mapa
+   google.maps.event.addListener(map, 'click', function() {
+      infoWindow.close();
+   });
+
+   // Chamada para a função que vai percorrer a informação
+   // contida na variável markersData e criar os marcadores a mostrar no mapa
+   displayMarkers();
+   
+   var boavistamissoes = [
     {lng: -53.400519,lat: -27.620795}, 
     {lng: -53.40572,lat: -27.615766}, 
     {lng: -53.395504,lat: -27.612847}, 
@@ -9136,1388 +9151,1024 @@ var novotiradentes = [
      {lng: -53.2568,lat: -27.726848}
 
   ];
-
   
-  
-  
-  // Construct the polygon.
   var lajeadodobugre = new google.maps.Polygon({
     paths: lajeadodobugre,
-    strokeColor: '#ff0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
     fillColor: '#ff0000',
-    fillOpacity: 0.9
+    fillOpacity: 0
   });
   lajeadodobugre.setMap(map);
-  lajeadodobugre.addListener('click', lajeadoCidades);
+  lajeadodobugre.addListener('click',zoomLajeado);
   
   var palmitinho = new google.maps.Polygon({
     paths: palmitinho,
-    strokeColor: '#ff00cc',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#ff00cc',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   palmitinho.setMap(map);
-  palmitinho.addListener('click', palmitinhoCidades);
+  palmitinho.addListener('click',zoomPalmitinho);
   
   var vistaalegre = new google.maps.Polygon({
     paths: vistaalegre,
-    strokeColor: '#7e00ff',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#7e00ff',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   vistaalegre.setMap(map);
-  vistaalegre.addListener('click', vistaAlegreCidades);
+  vistaalegre.addListener('click',zoomVistaAlegre);
   
   var gramado = new google.maps.Polygon({
     paths: gramado,
-    strokeColor: '#1d0238',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#1d0238',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   gramado.setMap(map);
-  gramado.addListener('click', gramadoCidades);
+  gramado.addListener('click',zoomGramado);
   
   var cristaldosul = new google.maps.Polygon({
     paths: cristaldosul,
-    strokeColor: '#0b84ff',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#0b84ff',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   cristaldosul.setMap(map);
-  cristaldosul.addListener('click', cristalCidades);
+  cristaldosul.addListener('click',zoomCristal);
   
   var rondaalta = new google.maps.Polygon({
     paths: rondaalta,
-    strokeColor: '#283c50',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#283c50',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   rondaalta.setMap(map);
-  rondaalta.addListener('click', rondaCidades);
+  rondaalta.addListener('click',zoomRondaAlta);
   
   var constantina = new google.maps.Polygon({
     paths: constantina,
-    strokeColor: '#09ffe5',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#09ffe5',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   constantina.setMap(map);
-  constantina.addListener('click', constantinaCidades);
+  constantina.addListener('click',zoomConstantina);
   
   var novoxingu = new google.maps.Polygon({
     paths: novoxingu,
-    strokeColor: '#023e38',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#023e38',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   novoxingu.setMap(map);
-  novoxingu.addListener('click', novoXinguCidades);
+  novoxingu.addListener('click',zoomNovoXingu);
   
   var jaboticaba = new google.maps.Polygon({
     paths: jaboticaba,
-    strokeColor: '#00ff3c',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#00ff3c',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   jaboticaba.setMap(map);
-  jaboticaba.addListener('click', jaboticabaCidades);
+  jaboticaba.addListener('click',zoomJaboticaba);
   
   var sagradafamilia = new google.maps.Polygon({
     paths: sagradafamilia,
-    strokeColor: '#259540',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#259540',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   sagradafamilia.setMap(map);
-  sagradafamilia.addListener('click', sagradaCidades);
+  sagradafamilia.addListener('click',zoomSagrada);
   
   var derrubadas = new google.maps.Polygon({
     paths: derrubadas,
-    strokeColor: '#597960',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#597960',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   derrubadas.setMap(map);
-  derrubadas.addListener('click', derrubadasCidades);
+  derrubadas.addListener('click',zoomDerrubadas);
   
   var sarandi = new google.maps.Polygon({
     paths: sarandi,
-    strokeColor: '#929793',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#929793',
-    fillOpacity: 0.9
+    sstrokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   sarandi.setMap(map);
-  sarandi.addListener('click', sagradaCidades);
+  sarandi.addListener('click',zoomSarandi);
   
   var seberi = new google.maps.Polygon({
     paths: seberi,
-    strokeColor: '#50b208',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#50b208',
-    fillOpacity: 0.9
+    sstrokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   seberi.setMap(map);
-  seberi.addListener('click', seberiCidades);
+  seberi.addListener('click',zoomFrederico);
   
   var frederico = new google.maps.Polygon({
     paths: frederico,
-    strokeColor: '#132902',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#132902',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   frederico.setMap(map);
-  frederico.addListener('click', fredericoCidades);
+  frederico.addListener('click',zoomFrederico);
   
   var barradoguarita = new google.maps.Polygon({
     paths: barradoguarita,
-    strokeColor: '#f6ff02',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#f6ff02',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   barradoguarita.setMap(map);
-  barradoguarita.addListener('click', barraGuaritaCidades);
+  barradoguarita.addListener('click',zoomBarradoGuarita);
   
   var tenenteportela = new google.maps.Polygon({
     paths: tenenteportela,
-    strokeColor: '#5e6100',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#5e6100',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   tenenteportela.setMap(map);
-  tenenteportela.addListener('click', tenenteCidades);
+  tenenteportela.addListener('click',zoomTenente);
   
   var coqueiros = new google.maps.Polygon({
     paths: coqueiros,
-    strokeColor: '#3c3d24',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#3c3d24',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   coqueiros.setMap(map);
-  coqueiros.addListener('click', coqueirosCidades);
+  coqueiros.addListener('click',zoomCoqueiros);
   
   var nonoai = new google.maps.Polygon({
     paths: nonoai,
-    strokeColor: '#ff9600',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#ff9600',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   nonoai.setMap(map);
-  nonoai.addListener('click', nonoaiCidades);
+  nonoai.addListener('click',zoomNonoai);
   
   var trespalmeiras = new google.maps.Polygon({
     paths: trespalmeiras,
-    strokeColor: '#8f734b',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#8f734b',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   trespalmeiras.setMap(map);
-  trespalmeiras.addListener('click', tresPalmeirasCidades);
+  trespalmeiras.addListener('click',zoomTresPalmeiras);
   
   var novobarreiro = new google.maps.Polygon({
     paths: novobarreiro,
-    strokeColor: '#2f1e05',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#2f1e05',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   novobarreiro.setMap(map);
-  novobarreiro.addListener('click', novoBarreiroCidades);
+  novobarreiro.addListener('click',zoomNovoBarreiro);
   
   var chapada = new google.maps.Polygon({
     paths: chapada,
-    strokeColor: '#f94e32',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#f94e32',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   chapada.setMap(map);
-  chapada.addListener('click', chapadaCidades);
+  chapada.addListener('click',zoomChapada);
   
   var vistagaucha = new google.maps.Polygon({
     paths: vistagaucha,
-    strokeColor: '#fdcfc7',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#fdcfc7',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   vistagaucha.setMap(map);
-  vistagaucha.addListener('click', vistaGauchaCidades);
+  vistagaucha.addListener('click',zoomVistaGaucha);
   
   var coronelbicaco = new google.maps.Polygon({
     paths: coronelbicaco,
-    strokeColor: '#ec6a6a',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#ec6a6a',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   coronelbicaco.setMap(map);
-  coronelbicaco.addListener('click', coronelCidades);
+  coronelbicaco.addListener('click',zoomCoronel);
   
   var doisirmaos = new google.maps.Polygon({
     paths: doisirmaos,
-    strokeColor: '#674100',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#674100',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   doisirmaos.setMap(map);
-  doisirmaos.addListener('click', doisIrmaosCidades);
+  doisirmaos.addListener('click',zoomDoisIrmaos);
   
   var santoantonioplanalto = new google.maps.Polygon({
     paths: santoantonioplanalto,
-    strokeColor: '#5f5542',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#5f5542',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   santoantonioplanalto.setMap(map);
-  santoantonioplanalto.addListener('click', santoAntonioCidades);
+  santoantonioplanalto.addListener('click',zoomSantoAntonio);
   
   var saojose = new google.maps.Polygon({
     paths: saojose,
-    strokeColor: '#b2a081',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#b2a081',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   saojose.setMap(map);
-  saojose.addListener('click', saoJoseCidades);
+  saojose.addListener('click',zoomSaoJose);
   
   var redentora = new google.maps.Polygon({
     paths: redentora,
-    strokeColor: '#939500',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#939500',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   redentora.setMap(map);
-  redentora.addListener('click', redentoreCidades);
+  redentora.addListener('click',zoomRedentora);
   
   
   var boavista = new google.maps.Polygon({
     paths: boavistamissoes,
-    strokeColor: '#4e4f05',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#4e4f05',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   boavista.setMap(map);
-  boavista.addListener('click', boaVistaCidades);
+  boavista.addListener('click',zoomBoaVista);
 
   var caicara = new google.maps.Polygon({
     paths: caicara,
-    strokeColor: '#66bc00',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#66bc00',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   caicara.setMap(map);
-  caicara.addListener('click', caicaraCidades);
+  caicara.addListener('click',zoomCaicara);
   
   var barrafunda = new google.maps.Polygon({
     paths: barrafunda,
-    strokeColor: '#a3c17f',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#a3c17f',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   barrafunda.setMap(map);
-  barrafunda.addListener('click', barraFundaCidades);
+  barrafunda.addListener('click',zoomBarraFunda);
   
   var rondinha = new google.maps.Polygon({
     paths: rondinha,
-    strokeColor: '#d8fbaf',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#d8fbaf',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   rondinha.setMap(map);
-  rondinha.addListener('click', rondinhaCidades);
+  rondinha.addListener('click',zoomRondinha);
   
   var trindadedosul = new google.maps.Polygon({
     paths: trindadedosul,
-    strokeColor: '#ffffff',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#ffffff',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   trindadedosul.setMap(map);
-  trindadedosul.addListener('click', trindadeCidades);
+  trindadedosul.addListener('click',zoomTrindade);
   
   var taquarucudosul = new google.maps.Polygon({
     paths: taquarucudosul,
     strokeColor: '#000000',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '000000',
-    fillOpacity: 0.9
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   taquarucudosul.setMap(map);
-  taquarucudosul.addListener('click', taquarucuCidades);
+  taquarucudosul.addListener('click',zoomTaquarucu);
   
   var ametistadosul = new google.maps.Polygon({
     paths: ametistadosul,
-    strokeColor: '#037100',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#037100',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   ametistadosul.setMap(map);
-  ametistadosul.addListener('click', ametistaCidades);
+  ametistadosul.addListener('click',zoomAmetista);
   
   var almirantetamandare = new google.maps.Polygon({
     paths: almirantetamandare,
-    strokeColor: '#03ff7a',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#03ff7a',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   almirantetamandare.setMap(map);
-  almirantetamandare.addListener('click', almiranteCidades);
+  almirantetamandare.addListener('click',zoomAlmirante);
   
   var vicentedutra = new google.maps.Polygon({
     paths: vicentedutra,
-    strokeColor: '#96ffc7',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#96ffc7',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   vicentedutra.setMap(map);
-  vicentedutra.addListener('click', vicenteCidades);
+  vicentedutra.addListener('click',zoomVicente);
 
   var cerrogrande = new google.maps.Polygon({
     paths: cerrogrande,
-    strokeColor: '#84bb9e',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#84bb9e',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   cerrogrande.setMap(map);
-  cerrogrande.addListener('click', cerroCidades);
+  cerrogrande.addListener('click',zoomCerro);
   
   var rodeiobonito = new google.maps.Polygon({
     paths: rodeiobonito,
-    strokeColor: '#05562b',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#05562b',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   rodeiobonito.setMap(map);
-  rodeiobonito.addListener('click', rodeioCidades);
+  rodeiobonito.addListener('click',zoomRodeio);
   
   var saopedro = new google.maps.Polygon({
     paths: saopedro,
-    strokeColor: '#05b6c1',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#05b6c1',
-    fillOpacity:0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   saopedro.setMap(map);
-  saopedro.addListener('click', saoPedroCidades);
+  saopedro.addListener('click',zoomSaoPedro);
   
   var novotiradentes = new google.maps.Polygon({
     paths: novotiradentes,
-    strokeColor: '#25686c',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#25686c',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   novotiradentes.setMap(map);
-  novotiradentes.addListener('click', novoTiradentesCidades);
+  novotiradentes.addListener('click',zoomNovoTiradentes);
   
   var miraguai = new google.maps.Polygon({
     paths: miraguai,
-    strokeColor: '#748c8e',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#748c8e',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   miraguai.setMap(map);
-  miraguai.addListener('click', miraguaiCidades);
+  miraguai.addListener('click',zoomMiraguai);
   
   var pinhal = new google.maps.Polygon({
     paths: pinhal,
-    strokeColor: '#0041ad',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#0041ad',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   pinhal.setMap(map);
-  pinhal.addListener('click', pinhalCidades);
+  pinhal.addListener('click',zoomPinhal);
   
   var novaboavista = new google.maps.Polygon({
     paths: novaboavista,
-    strokeColor: '#5f92e7',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#5f92e7',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   novaboavista.setMap(map);
-  novaboavista.addListener('click', novaBoaVistaCidades);
+  novaboavista.addListener('click',zoomNovaBoaVista);
   
   var pinheirinhovale = new google.maps.Polygon({
     paths: pinheirinhovale,
-    strokeColor: '#1e00ff',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#1e00ff',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   pinheirinhovale.setMap(map);
-  pinheirinhovale.addListener('click', pinheirinhoCidades);
+  pinheirinhovale.addListener('click',zoomPinheirinho);
   
   var riodosindios = new google.maps.Polygon({
     paths: riodosindios,
-    strokeColor: '#9c00ff',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#9c00ff',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   riodosindios.setMap(map);
-  riodosindios.addListener('click', riodosIndiosCidades);
+  riodosindios.addListener('click',zoomRiodosIndios);
   
   var alpestre = new google.maps.Polygon({
     paths: alpestre,
-    strokeColor: '#4c0078',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#4c0078',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   alpestre.setMap(map);
-  alpestre.addListener('click', alpestreCidades);
+  alpestre.addListener('click',zoomAlpestre);
   
   var pontao = new google.maps.Polygon({
     paths: pontao,
-    strokeColor: '#d8adf0',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#d8adf0',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   pontao.setMap(map);
-  pontao.addListener('click', pontaoCidades);
+  pontao.addListener('click',zoomPontao);
   
   var ervalseco = new google.maps.Polygon({
     paths: ervalseco,
-    strokeColor: '#675f6b',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#675f6b',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   ervalseco.setMap(map);
-  ervalseco.addListener('click', ervalCidades);
+  ervalseco.addListener('click', zoomErval);
   
   var carazinho = new google.maps.Polygon({
     paths: carazinho,
-    strokeColor: '#b200d8',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#b200d8',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   carazinho.setMap(map);
-  carazinho.addListener('click', carazinhoCidades);
+  carazinho.addListener('click', zoomCarazinho);
   
   var planalto = new google.maps.Polygon({
     paths: planalto,
-    strokeColor: '#32013c',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#32013c',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   planalto.setMap(map);
-  planalto.addListener('click', planaltoCidades);
+  planalto.addListener('click',zoomPlanalto);
   
   var liberatosalzano = new google.maps.Polygon({
     paths: liberatosalzano,
-    strokeColor: '#ff1fb8',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#ff1fb8',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   liberatosalzano.setMap(map);
-  liberatosalzano.addListener('click', liberatoCidades);
+  liberatosalzano.addListener('click',zoomLiberato);
   
   var irai = new google.maps.Polygon({
     paths: irai,
-    strokeColor: '#cf6eb0',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#cf6eb0',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   irai.setMap(map);
-  irai.addListener('click', iraiCidades);
+  irai.addListener('click', zoomIrai);
   
   var engenhovelho = new google.maps.Polygon({
     paths: engenhovelho,
-    strokeColor: '#d60047',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#d60047',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   engenhovelho.setMap(map);
-  engenhovelho.addListener('click', engenhoCidades);
+  engenhovelho.addListener('click', zoomEngenho);
   
   var palmeiramissoes = new google.maps.Polygon({
     paths: palmeiramissoes,
-    strokeColor: '#f2b8cb',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#f2b8cb',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0,
   });
   palmeiramissoes.setMap(map);
-  palmeiramissoes.addListener('click', palmeiraCidades);
+  palmeiramissoes.addListener('click',zoomPalmeira);
   
   var passofundo = new google.maps.Polygon({
     paths: passofundo,
-    strokeColor: '#640000',
-    strokeOpacity: 0.8,
-    strokeWeight: 1,
-    fillColor: '#640000',
-    fillOpacity: 0.9
+    strokeColor: '#000000',
+    strokeOpacity: 1,
+    strokeWeight: 2,
+    fillColor: '#ff0000',
+    fillOpacity: 0
   });
   passofundo.setMap(map);
-  passofundo.addListener('click', passoFundoCidades);
-    
-    infoWindow = new google.maps.InfoWindow;
-};
-
-
-function almiranteCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Almirante Tamandaré do Sul</b><br>';
-
-    contentString += 'População - 2.067<br>'+
-                     'Poços - 17';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+  passofundo.addListener('click', zoomPassoFundo);
 }
-function alpestreCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Alpestre</b><br>';
-
-    contentString += 'População - 8.027<br>'+
-                     'Poços - 17';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomPalmeira(event) {
+  map.setCenter( new google.maps.LatLng(-27.899,-53.314) );
+  map.setZoom(11);
 }
-function ametistaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Ametista do Sul</b><br>';
-
-    contentString += 'População - 7.323<br>'+
-                     'Poços - 21';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomPassoFundo(event) {
+  map.setCenter( new google.maps.LatLng(-28.263,-52.407) );
+  map.setZoom(11);
 }
-function barraGuaritaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Barra do Guarita</b><br>';
-
-    contentString += 'População - 3.089<br>'+
-                      'Poços - 7';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomEngenho(event) {
+  map.setCenter( new google.maps.LatLng(-27.708,-52.913) );
+  map.setZoom(11);
 }
-function barraFundaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Barra Funda</b><br>';
-
-    contentString += 'População - 2.367<br>'+
-                     'Poços - 17';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomIrai(event) {
+  map.setCenter( new google.maps.LatLng(-27.194,-53.251) );
+  map.setZoom(11);
 }
-function boaVistaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Boa Vista das Missões</b><br>';
-
-    contentString += 'População - 2.114<br>'+
-                     'Poços - 15';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomLiberato(event) {
+  map.setCenter( new google.maps.LatLng(-27.6,-53.073) );
+  map.setZoom(11);
 }
-function caicaraCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Caiçara</b><br>';
-
-    contentString += 'População - 5.071<br>'+
-                     'Poços - 22';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomPlanalto(event) {
+  map.setCenter( new google.maps.LatLng(-27.329,-53.059) );
+  map.setZoom(11);
 }
-function carazinhoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Carazinho</b><br>';
-
-    contentString += 'População - 59.317<br>'+
-                     'Poços - 7';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomCarazinho(event) {
+  map.setCenter( new google.maps.LatLng(-28.284,-52.786) );
+  map.setZoom(11);
 }
-function cerroCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Cerro Grande</b><br>';
-
-    contentString += 'População - 2.417<br>'+
-                     'Poços - 1';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomErval(event) {
+  map.setCenter( new google.maps.LatLng(-27.549,-53.504) );
+  map.setZoom(11);
 }
-function chapadaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Chapada</b><br>';
-
-    contentString += 'População - 9.377<br>'+
-                     'Poços - 13';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomPontao(event) {
+  map.setCenter( new google.maps.LatLng(-28.059,-52.677) );
+  map.setZoom(11);
 }
-function constantinaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Constantina</b><br>';
-
-    contentString += 'População - 9.752<br>'+
-                     'Poços - 27';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomAlpestre(event) {
+  map.setCenter( new google.maps.LatLng(-27.249,-53.035) );
+  map.setZoom(11);
 }
-function coqueirosCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Coqueiros do Sul</b><br>';
-
-    contentString += 'População - 2.457<br>'+
-                     'Poços - 13';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomRiodosIndios(event) {
+  map.setCenter( new google.maps.LatLng(-27.3,-52.841) );
+  map.setZoom(11);
 }
-function coronelCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Coronel Bicaco</b><br>';
-
-    contentString += 'População - 7.748<br>'+
-                     'Poços - 1';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomPinheirinho(event) {
+  map.setCenter( new google.maps.LatLng(-27.21,-53.612) );
+  map.setZoom(11);
 }
-function cristalCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Cristal do Sul</b><br>';
-
-    contentString += 'População - 2.826<br>'+
-                     'Poços - 24';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomNovaBoaVista(event) {
+  map.setCenter( new google.maps.LatLng(-27.994,-52.979) );
+  map.setZoom(11);
 }
-function derrubadasCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Derrubadas</b><br>';
-
-    contentString += 'População - 3.190<br>'+
-                     'Poços - 8';;
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomPinhal(event) {
+  map.setCenter( new google.maps.LatLng(-27.511,-53.215) );
+  map.setZoom(11);
 }
-function doisIrmaosCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Dois Irmãos das Missões</b><br>';
-
-    contentString += 'População - 2.157<br>'+
-                     'Poços - 0';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomMiraguai(event) {
+  map.setCenter( new google.maps.LatLng(-27.494,-53.686) );
+  map.setZoom(11);
 }
-function engenhoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Engenho Velho</b><br>';
-
-    contentString += 'População - 1.527<br>'+
-                     'Poços - 6';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomNovoTiradentes(event) {
+  map.setCenter( new google.maps.LatLng(-27.563,-53.182) );
+  map.setZoom(11);
 }
-function ervalCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Erval Seco</b><br>';
-
-    contentString += 'População - 7.878<br>'+
-                     'Poços - 2';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomSaoPedro(event) {
+  map.setCenter( new google.maps.LatLng(-27.771,-53.255) );
+  map.setZoom(11);
 }
-function fredericoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Frederico Westphalen</b><br>';
-
-    contentString += 'População - 28.843<br>'+
-                     'Poços - 70';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomRodeio(event) {
+  map.setCenter( new google.maps.LatLng(-27.471,-53.169) );
+  map.setZoom(11);
 }
-function gramadoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Gramado dos Loureiros</b><br>';
-
-    contentString += 'População - 2.269<br>'+
-                     'Poços - 11';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomCerro(event) {
+  map.setCenter( new google.maps.LatLng(-27.606,-53.167) );
+  map.setZoom(11);
 }
-function iraiCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Iraí</b><br>';
-
-    contentString += 'População - 8.078<br>'+
-                     'Poços - 16';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomVicente(event) {
+  map.setCenter( new google.maps.LatLng(-27.162,-53.405) );
+  map.setZoom(11);
 }
-function jaboticabaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Jaboticaba</b><br>';
-
-    contentString += 'População - 4.098<br>'+
-                     'Poços - 0';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomAlmirante(event) {
+  map.setCenter( new google.maps.LatLng(-28.113,-52.909) );
+  map.setZoom(11);
 }
-function lajeadoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Lajeado do Bugre</b><br>';
-
-    contentString += 'População - 2.487<br>'+
-                     'Poços - 0';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomAmetista(event) {
+  map.setCenter( new google.maps.LatLng(-27.361,-53.182) );
+  map.setZoom(11);
 }
-function liberatoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Liberato Salzano</b><br>';
-
-    contentString += 'População - 5.780<br>'+
-                     'Poços - 41';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomTaquarucu(event) {
+  map.setCenter( new google.maps.LatLng(-27.4,-53.467) );
+  map.setZoom(11);
 }
-function miraguaiCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Miraguaí</b><br>';
-
-    contentString += 'População - 4.855<br>'+
-                     'Poços - 3';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomTrindade(event) {
+  map.setCenter( new google.maps.LatLng(-27.522,-52.894) );
+  map.setZoom(11);
 }
-function nonoaiCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Nonoai</b><br>';
-
-    contentString += 'População - 12.074<br>'+
-                     'Poços - 0';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomRondinha(event) {
+  map.setCenter( new google.maps.LatLng(-27.828,-52.91) );
+  map.setZoom(11);
 }
-function novaBoaVistaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Nova Boa Vista</b><br>';
-
-    contentString += 'População - 1.960<br>'+
-                     'Poços - 15';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomBarraFunda(event) {
+  map.setCenter( new google.maps.LatLng(-27.923,-53.039) );
+  map.setZoom(11);
 }
-function novoTiradentesCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Novo Tiradentes</b><br>';
-
-    contentString += 'População - 2.277<br>'+
-                     'Poços - 8';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomCaicara(event) {
+  map.setCenter( new google.maps.LatLng(-27.274,-53.432) );
+  map.setZoom(11);
 }
-function novoXinguCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Novo Xingu</b><br>';
-
-    contentString += 'População - 1.757<br>'+
-                     'Poços - 10';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomBoaVista(event) {
+  map.setCenter( new google.maps.LatLng(-27.994,-52.979) );
+  map.setZoom(11);
 }
-function novoBarreiroCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Novo Barreiro</b><br>';
-
-    contentString += 'População - 3.978<br>'+
-                     'Poços - 0';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomRedentora(event) {
+  map.setCenter( new google.maps.LatLng(-27.664,-53.638) );
+  map.setZoom(11);
 }
-function palmeiraCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Palmeira das Missões</b><br>';
-
-    contentString += 'População - 34.328<br>'+
-                     'Poços - 136';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomSaoJose(event) {
+  map.setCenter( new google.maps.LatLng(-27.78,-53.122) );
+  map.setZoom(11);
 }
-function palmitinhoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Palmitinho</b><br>';
-
-    contentString += 'População - 6.920<br>'+
-                     'Poços - 14';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomSantoAntonio(event) {
+  map.setCenter( new google.maps.LatLng(-28.396,-52.691) );
+  map.setZoom(11);
 }
-function passoFundoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Passo Fundo</b><br>';
-
-    contentString += 'População - 184.826<br>'+
-                     'Poços - 5';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomDoisIrmaos(event) {
+  map.setCenter( new google.maps.LatLng(-27.659,-53.531) );
+  map.setZoom(11);
 }
-function pinhalCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Pinhal</b><br>';
-
-    contentString += 'População - 2.513<br>'+
-                     'Poços - 0';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomCoronel(event) {
+  map.setCenter( new google.maps.LatLng(-27.716,-53.701) );
+  map.setZoom(11);
 }
-function pinheirinhoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Pinheirinho do Vale</b><br>';
-
-    contentString += 'População - 4.497<br>'+
-                     'Poços - 15';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomVistaGaucha(event) {
+  map.setCenter( new google.maps.LatLng(-27.291,-53.702) );
+  map.setZoom(11);
 }
-function planaltoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Planalto</b><br>';
-
-    contentString += 'População - 10.524<br>'+
-                     'Poços - 6';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomChapada(event) {
+  map.setCenter( new google.maps.LatLng(-28.055,-53.068) );
+  map.setZoom(11);
 }
-function pontaoCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Pontao</b><br>';
-
-    contentString += 'População - 3.857<br>'+
-                     'Poços - 13';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomNovoBarreiro(event) {
+  map.setCenter( new google.maps.LatLng(-27.909,-53.108) );
+  map.setZoom(11);
 }
-function redentoreCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Redentora</b><br>';
-
-    contentString += 'População - 10.222<br>'+
-                     'Poços - 5';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomTresPalmeiras(event) {
+  map.setCenter( new google.maps.LatLng(-27.615,-52.841) );
+  map.setZoom(11);
 }
-function riodosIndiosCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Rio dos Índios</b><br>';
-
-    contentString += 'População - 3.616<br>'+
-                     'Poços - 3';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomNonoai(event) {
+  map.setCenter( new google.maps.LatLng(-27.362,-52.771) );
+  map.setZoom(11);
 }
-function rodeioCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Rodeio Bonito</b><br>';
-
-    contentString += 'População - 5.743<br>'+
-                     'Poços - 41';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomCoqueiros(event) {
+  map.setCenter( new google.maps.LatLng(-28.119,-52.783) );
+  map.setZoom(11);
 }
-function rondaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Ronda Alta</b><br>';
-
-    contentString += 'População - 10.221<br>'+
-                     'Poços - 15';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomTenente(event) {
+  map.setCenter( new google.maps.LatLng(-27.371,-53.758) );
+  map.setZoom(11);
 }
-function rondinhaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Rondinha</b><br>';
-
-    contentString += 'População - 5.518<br>'+
-                     'Poços - 35';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomBarradoGuarita(event) {
+  map.setCenter( new google.maps.LatLng(-27.192,-53.71) );
+  map.setZoom(11);
 }
-function sagradaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Sagrada Familia</b><br>';
-
-    contentString += 'População - 2.595<br>'+
-                     'Poços - 0';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomFrederico(event) {
+  map.setCenter( new google.maps.LatLng(-27.359,-53.394) );
+  map.setZoom(11);
 }
-function santoAntonioCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Santo Antônio do Planalto</b><br>';
-
-    contentString += 'População - 1.987<br>'+
-                     'Poços - 2';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomSarandi(event) {
+  map.setCenter( new google.maps.LatLng(-27.944,-52.923) );
+  map.setZoom(11);
 }
-function saoJoseCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>São josé das Missões</b><br>';
-
-    contentString += 'População - 2.720<br>'+
-                     'Poços - 0';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomSeberi(event) {
+  map.setCenter( new google.maps.LatLng(-27.478,-53.403) );
+  map.setZoom(11);
 }
-function saoPedroCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>São Pedro das Missões</b><br>';
-
-    contentString += 'População - 6.364<br>'+
-                     'Poços - 0';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomDerrubadas(event) {
+  map.setCenter( new google.maps.LatLng(-27.265,-53.861) );
+  map.setZoom(11);
 }
-function sarandiCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Sarandi</b><br>';
-
-    contentString += 'População - 21.285<br>'+
-                     'Poços - 50';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomSagrada(event) {
+  map.setCenter( new google.maps.LatLng(-27.707,-53.136) );
+  map.setZoom(11);
 }
-function seberiCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Seberi</b><br>';
-
-    contentString += 'População - 10.897<br>'+
-                     'Poços - 19';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomJaboticaba(event) {
+  map.setCenter( new google.maps.LatLng(-27.631,-53.277) );
+  map.setZoom(11);
 }
-function taquarucuCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Taquaruçu do Sul</b><br>';
-
-    contentString += 'População - 2.966<br>'+
-                     'Poços - 23';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomNovoXingu(event) {
+  map.setCenter( new google.maps.LatLng(-27.747,-53.055) );
+  map.setZoom(11);
 }
-function tenenteCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Tenente Portela</b><br>';
-
-    contentString += 'População - 13.719<br>'+
-                     'Poços - 52';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomConstantina(event) {
+  map.setCenter( new google.maps.LatLng(-27.735,-52.992) );
+  map.setZoom(11);
 }
-function tresPalmeirasCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Tres Palmeiras</b><br>';
-
-    contentString += 'População - 4.381<br>'+
-                     'Poços - 1';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomRondaAlta(event) {
+  map.setCenter( new google.maps.LatLng(-27.767,-52.802) );
+  map.setZoom(11);
 }
-function trindadeCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Trindade do Sul</b><br>';
-
-    contentString += 'População - 5.787<br>'+
-                     'Poços - 11';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomCristal(event) {
+  map.setCenter( new google.maps.LatLng(-27.454,-53.246) );
+  map.setZoom(11);
 }
-function vicenteCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Vicente Dutra</b><br>';
-
-    contentString += 'População - 5.285<br>'+
-                     'Poços - 44';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomGramado(event) {
+  map.setCenter( new google.maps.LatLng(-27.444,-52.918) );
+  map.setZoom(11);
 }
-function vistaAlegreCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Vista Alegre</b><br>';
-
-    contentString += 'População - 2.832<br>'+
-                     'Poços - 10';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
-
-  infoWindow.open(map);
+function zoomVistaAlegre(event) {
+  map.setCenter( new google.maps.LatLng(-27.367,-53.49) );
+  map.setZoom(11);
 }
-function vistaGauchaCidades(event) {
-  // Since this polygon has only one path, we can call getPath() to return the
-  // MVCArray of LatLngs.
- 
-    var contentString = '<b>Vista Gaucha</b><br>';
+function zoomPalmitinho(event) {
+  map.setCenter( new google.maps.LatLng(-27.355,-53.555) );
+  map.setZoom(11);
+}
+function zoomLajeado(event) {
+  map.setCenter( new google.maps.LatLng(-27.689,-53.182) );
+  map.setZoom(11);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
 
-    contentString += 'População - 2.759<br>'+
-                     'Poços - 24';
-  // Replace the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(event.latLng);
+// Esta função vai percorrer a informação contida na variável markersData
+// e cria os marcadores através da função createMarker
+function displayMarkers(){
 
-  infoWindow.open(map);
+   // esta variável vai definir a área de mapa a abranger e o nível do zoom
+   // de acordo com as posições dos marcadores
+   var bounds = new google.maps.LatLngBounds();
+   
+   // Loop que vai estruturar a informação contida em markersData
+   // para que a função createMarker possa criar os marcadores 
+   //for (var i = 0; i < markersData.length; i++){
+
+      //var latlng = new google.maps.LatLng(markersData[i].lat, markersData[i].lng);
+      //var nome = markersData[i].nome;
+    for (var i = 0; i<arrayCordenada.length; i++){
+        if (arrayCordenada[i] == ''){
+            arrayCordenada[i] = 'Dado Indisponível'
+        }
+    }
+    for (var i = 0; i<arrayCordenada.length; i=i+24){
+        var latlng = new google.maps.LatLng(arrayCordenada[i], arrayCordenada[i+1]);
+        var situacao = arrayCordenada[i+2];
+        var profundidade = arrayCordenada[i+3];
+        var uso_agua = arrayCordenada[i+4];
+        var alcalinidade = arrayCordenada[i+5];
+        var bicarbonatos = arrayCordenada[i+6];
+        var calcio = arrayCordenada[i+7];
+        var carbonatos = arrayCordenada[i+8];
+        var cloretos = arrayCordenada[i+9];
+        var condutividade_eletrica = arrayCordenada[i+10];
+        var dureza = arrayCordenada[i+11];
+        var fluor = arrayCordenada[i+12];
+        var magnesio = arrayCordenada[i+13];
+        var ph = arrayCordenada[i+14];
+        var potassio = arrayCordenada[i+15];
+        var sodio = arrayCordenada[i+16];
+        var solidos_tot_dissolvidos = arrayCordenada[i+17];
+        var sulfatos = arrayCordenada[i+18];
+        var temperatura = arrayCordenada[i+19];
+        var cap_especifica = arrayCordenada[i+20];
+        var niveldinamico = arrayCordenada[i+21];
+        var nivelestatico = arrayCordenada[i+22];
+        var vazao_estabilizacao = arrayCordenada[i+23];
+        
+        createMarker(latlng, situacao, profundidade, uso_agua, alcalinidade, bicarbonatos, calcio, carbonatos,
+                    cloretos, condutividade_eletrica, dureza, fluor, magnesio, ph, potassio, sodio, 
+                    solidos_tot_dissolvidos, sulfatos, temperatura, cap_especifica, niveldinamico, 
+                    nivelestatico, vazao_estabilizacao);
+
+      // Os valores de latitude e longitude do marcador são adicionados à
+      // variável bounds
+      bounds.extend(latlng);  
+   }
+
+   // Depois de criados todos os marcadores
+   // a API através da sua função fitBounds vai redefinir o nível do zoom
+   // e consequentemente a área do mapa abrangida.
+   map.fitBounds(bounds);
+}
+
+// Função que cria os marcadores e define o conteúdo de cada Info Window.
+function createMarker(latlng, situacao, profundidade, uso_agua, alcalinidade, bicarbonatos, calcio, carbonatos,
+                    cloretos, condutividade_eletrica, dureza, fluor, magnesio, ph, potassio, sodio, 
+                    solidos_tot_dissolvidos, sulfatos, temperatura, cap_especifica, niveldinamico, 
+                    nivelestatico, vazao_estabilizacao){
+   
+   if (situacao == "Precário"){
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/precario.png'
+   });
+   }else if(situacao == "Seco"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/seco.png'
+   });
+   }else if(situacao == "Abandonado"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/abandonado.png'
+   });
+   }else if(situacao == "Parado"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/parado.png'
+   });
+   }else if(situacao == "Bombeando"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/bombeando.png'
+   });
+   }else if(situacao == "Colmatado"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/colmatado.png'
+   });
+   }else if(situacao == "Equipado"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/equipado.png'
+   });
+   }else if(situacao == "Fechado"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/fechado.png'
+   });
+   }else if(situacao == "Não instalado"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/ninstalado.png'
+   });
+   }else if(situacao == "Não utilizável"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/nutilizavel.png'
+   });
+   }else if(situacao == "Obstruído"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/obstruido.png'
+   });
+   }else if(situacao == "0"){ 
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latlng,
+      title: situacao,
+      icon: 'img/zero.png'
+   });
+   }
+   // Evento que dá instrução à API para estar alerta ao click no marcador.
+   // Define o conteúdo e abre a Info Window.
+   google.maps.event.addListener(marker, 'click', function() {
+      
+      // Variável que define a estrutura do HTML a inserir na Info Window.
+      var iwContent = '<div id="iw_container">' +
+            '<div class="iw_title">' + '<b>===Sobre o Poço===</b>'+
+            '<br><b>Situação: </b>' +situacao + 
+            '<br><b>Profundidade: </b>'+profundidade+
+            '<br><b>Uso da Água: </b>'+uso_agua+
+            '<br><b>Capacidade Específica: </b>'+cap_especifica+
+            '<br><b>Nível Dinâmico: </b>'+niveldinamico+
+            '<br><b>Nível Estático: </b>'+nivelestatico+
+            '<br><b>Vazão de Estabilização: </b>'+vazao_estabilizacao+
+            
+            '<br><br><b>===Qualidade===</b>'+
+            
+            '<br><b>Alcalinidade: </b>'+alcalinidade+
+            '<br><b>Bicarbonatos: </b>'+bicarbonatos+
+            '<br><b>Cálcio: </b>'+calcio+
+            '<br><b>Carbonatos: </b>'+carbonatos+
+            '<br><b>Cloretos: </b>'+cloretos+
+            '<br><b>Condutividade Elétrica: </b>'+condutividade_eletrica+
+            '<br><b>Dureza: </b>'+dureza+
+            '<br><b>Fluor: </b>'+fluor+
+            '<br><b>Magnésio: </b>'+magnesio+
+            '<br><b>PH: </b>'+ph+
+            '<br><b>Potássio: </b>'+potassio+
+            '<br><b>Sódio: </b>'+sodio+
+            '<br><b>Sólidos Totais Dissolvidos: </b>'+solidos_tot_dissolvidos+
+            '<br><b>Sulfatos: </b>'+sulfatos+
+            '<br><b>Temperatura: </b>'+temperatura+'</div>';
+      
+      
+      // O conteúdo da variável iwContent é inserido na Info Window.
+      infoWindow.setContent(iwContent);
+
+      // A Info Window é aberta.
+      infoWindow.open(map, marker);
+   });
 }
