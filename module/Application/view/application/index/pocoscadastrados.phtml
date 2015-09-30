@@ -6,9 +6,15 @@
    
 require_once 'conexao.php'; 
 $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD); 
-    if (empty($_POST)){
+    if (empty($_POST['situacao'])){
         $_POST['situacao'] = 'todos';
     }
+    
+    
+    if (empty($_POST['filtro'])){
+        $_POST['filtro'] = 'situacao';
+    }
+    
     $cordenada = array();
     if ($_POST['situacao'] == 'todos'){
         $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
@@ -39,6 +45,73 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                     left join  capacidade_poco as c
                     on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                     where p.situacao = '$_POST[situacao]'";
+    }
+    if ($_POST['situacao'] == 'humano'){
+        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+        
+                    q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                    q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                    q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                    c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                from poco as p
+                    left join  qualidade_agua as q
+                            on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                    left join  capacidade_poco as c
+                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+				where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+					and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                    and q.solidos_tot_dissolvidos <= 1000";
+    }
+    if ($_POST['situacao'] == 'animais'){
+        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+        
+                    q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                    q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                    q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                    c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                from poco as p
+                    left join  qualidade_agua as q
+                            on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                    left join  capacidade_poco as c
+                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+				where q.fluor <= 2 and q.sulfatos <= 1000 ";
+    }
+    if ($_POST['situacao'] == 'irrigacao'){
+        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+        
+                    q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                    q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                    q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                    c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                from poco as p
+                    left join  qualidade_agua as q
+                            on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                    left join  capacidade_poco as c
+                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+				where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1";
+    }
+    
+    if ($_POST['situacao'] == 'recreacao'){
+        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+        
+                    q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                    q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                    q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                    c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                from poco as p
+                    left join  qualidade_agua as q
+                            on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                    left join  capacidade_poco as c
+                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+				where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400";
     }
     
    
@@ -72,74 +145,67 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
     <center><h1><?php echo $this->translate ('Poços perfurados na Bacia do Rio da Várzea') ?></h1></center>
     
 </div>
+<div class="filtro">  
+<fieldset>
+        
+    <legend>Selecione o Filtro desejado: <br><h5>Filtro selecionado -> <?php echo($_POST['situacao'])?></h5></legend>
+           
+</fieldset>
+<table>
+    <tr>
+       <td width="150">
+           <form action=pocoscadastrados method=post id="sit">
+                <select name="filtro" onchange="this.form.submit()">
+                    <option value="situacao">--Selecione--</option>
+                    <option value="situacao">Situação</option>
+                    <option value="qualidade">Qualidade</option>
+                </select>
+                    <input type="submit" value="Enviar" name="filtro" style="visibility: hidden">
+           </form>
+       </td>
+       <td width="150">
+           <form action=pocoscadastrados method=post id="qual">
+
+                <?php
+                    if ($_POST['filtro'] == 'situacao'){
+                        echo('<select name="situacao" onchange="this.form.submit()">
+                            <option value="todos">--Selecione--</option>
+                            <option value="todos">Todos</option>
+                            <option value="Abandonado">Abandonado</option>
+                            <option value="Bombeando">Bombeando</option>
+                            <option value="Colmatado">Colmatado</option>
+                            <option value="Equipado">Equipado</option>
+                            <option value="Fechado">Fechado</option>
+                            <option value="Não instalado">Não instalado</option>
+                            <option value="Não utilizável">Não utilizável</option>
+                            <option value="Obstruído">Obstruído</option>
+                            <option value="Parado">Parado</option>
+                            <option value="Precário">Precário</option>
+                            <option value="Seco">Seco</option>
+                        </select>');
+                    }
+                    if($_POST['filtro'] == 'qualidade'){
+                        echo('<select name="situacao" onchange="this.form.submit()">
+                                <option value="todos">--Selecione--</option>
+                                <option value="todos">Todos</option>
+                                <option value="humano">Consumo Humano</option>
+                                <option value="animais">Dessedentação de Animais</option>
+                                <option value="irrigacao">Irrigação</option>
+                                <option value="recreacao">Recreação</option>
+                              </select>');
+                    }
+                ?>
+
+                <input type="submit" value="Enviar" name="situacao" style="visibility: hidden">
+            </form>
+       </td>
+    </tr>
+</table>
+</div>  
 <div>
-    <p><form action=pocoscadastrados method=post>
-        <?php echo $this->translate ('<b>Situação do Poço: </b>') ?>
-        <select name="situacao">
-            <option value="todos">Todos</option>
-            <option value="Abandonado">Abandonado</option>
-            <option value="Bombeando">Bombeando</option>
-            <option value="Colmatado">Colmatado</option>
-            <option value="Equipado">Equipado</option>
-            <option value="Fechado">Fechado</option>
-            <option value="Não instalado">Não instalado</option>
-            <option value="Não utilizável">Não utilizável</option>
-            <option value="Obstruído">Obstruído</option>
-            <option value="Parado">Parado</option>
-            <option value="Precário">Precário</option>
-            <option value="Seco">Seco</option>
-        </select>
-        
-        
-        <input type="submit" value="Enviar" name="botao" onclick="">
-        
-        </form>
-     
-    </p>
-    <p>
-        <img width="100%" src="/img/legenda.png" alt="Legendas dos poços perfurados"></p>
+
+    <p><img width="100%" src="/img/legenda.png" alt="Legendas dos poços perfurados"></p>
    
 </div>
 
 <div id="map-canvas" style=" height: 600px; margin-bottom: 20px"></div>
-
-<!--
-<div class="row">
-
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Follow Development') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('Zend Framework 2 is under active development. If you are interested in following the development of ZF2, there is a special ZF2 portal on the official Zend Framework website which provides links to the ZF2 %swiki%s, %sdev blog%s, %sissue tracker%s, and much more. This is a great resource for staying up to date with the latest developments!'), '<a href="http://framework.zend.com/wiki/display/ZFDEV2/Home">', '</a>', '<a href="http://framework.zend.com/zf2/blog">', '</a>', '<a href="https://github.com/zendframework/zf2/issues">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://framework.zend.com/zf2" target="_blank"><?php echo $this->translate('ZF2 Development Portal') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Discover Modules') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('The community is working on developing a community site to serve as a repository and gallery for ZF2 modules. The project is available %son GitHub%s. The site is currently live and currently contains a list of some of the modules already available for ZF2.'), '<a href="https://github.com/zendframework/modules.zendframework.com">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://modules.zendframework.com/" target="_blank"><?php echo $this->translate('Explore ZF2 Modules') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Help &amp; Support') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('If you need any help or support while developing with ZF2, you may reach us via IRC: %s#zftalk on Freenode%s. We\'d love to hear any questions or feedback you may have regarding the beta releases. Alternatively, you may subscribe and post questions to the %smailing lists%s.'), '<a href="irc://irc.freenode.net/zftalk">', '</a>', '<a href="http://framework.zend.com/wiki/display/ZFDEV/Mailing+Lists">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://webchat.freenode.net?channels=zftalk" target="_blank"><?php echo $this->translate('Ping us on IRC') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
-</div>
--->
