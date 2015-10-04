@@ -313,7 +313,7 @@ body{
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size:14px;
     line-height:1.428571429;
-    color:#333;
+    color:#000;
     background-color:#fff
 }
 
@@ -4127,7 +4127,7 @@ textarea.input-group-sm>.input-group-btn>.btn{
     border-color:#080808
 }
 .navbar-inverse .navbar-brand{
-    color:#999
+    color:#fff
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus{
@@ -4138,7 +4138,7 @@ textarea.input-group-sm>.input-group-btn>.btn{
     color:#999
 }
 .navbar-inverse .navbar-nav>li>a{
-    color:#999
+    color:#ddd
 }
 .navbar-inverse .navbar-nav>li>a:hover,
 .navbar-inverse .navbar-nav>li>a:focus{
@@ -4479,7 +4479,7 @@ a.list-group-item.active>.badge,
     font-weight:200;
     line-height:2.1428571435;
     color:inherit;
-    background-color:#bfe0ff
+    background-color:#004674
 }
 .jumbotron h1,
 .jumbotron .h1{
@@ -4497,8 +4497,8 @@ a.list-group-item.active>.badge,
 }
 @media screen and (min-width:768px){
     .jumbotron{
-        padding-top:48px;
-        padding-bottom:48px
+        padding-top:18px;
+        padding-bottom:18px
     }
     .container .jumbotron{
         padding-right:60px;
@@ -4516,7 +4516,7 @@ a.list-group-item.active>.badge,
     font-weight:200;
     line-height:2.1428571435;
     color:inherit;
-    background-color:#bfe0ff
+    background-color:#004674
 }
 .filtro h1,
 .filtro .h1{
@@ -4765,7 +4765,7 @@ a.thumbnail.active{
     font-weight:200;
     line-height:2.1428571435;
     color:inherit;
-    background-color:#bfe0ff
+    background-color:#004674
 }
 .titulo h1,
 .titulo .h1{

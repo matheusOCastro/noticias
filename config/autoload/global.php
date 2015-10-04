@@ -4,7 +4,7 @@ return [
     'navigation' => [
         'default' => [
             [
-                'label' => 'Home',
+                'label' => 'HOME',
                 'route' => 'home',
                 'action' => 'index'
                 
@@ -31,15 +31,15 @@ return [
                         'action' => 'cadastros',
                     ],
                 ]
-            ],
+            ],*/
             [
-                'label' => 'Poços Cadastrados',
+                'label' => 'POÇOS',
                 'route' => 'pocoscadastrados',
                 'action' => 'pocoscadastrados',
                 
-            ],*/
+            ],
             [
-                'label' => 'Sobre',
+                'label' => 'SOBRE',
                 'route' => 'sobre',
                 'action' => 'sobre'
                 

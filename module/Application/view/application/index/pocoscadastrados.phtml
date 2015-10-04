@@ -140,15 +140,16 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
 <script type="text/javascript" src="js/cidadespocos.js"></script>
 
 
-<div class="titulo">
-    <hl><img src="img/mapa.png" alt=""align="left"></hl>
-    <center><h1><?php echo $this->translate ('Poços perfurados na Bacia do Rio da Várzea') ?></h1></center>
+<div class="titulo" style="color: #fff">
+    <hl><img class='hidden-xs' src="img/mapa.png" alt=""align="left"></hl>
+    <center><img class='visible-xs' src='img/mapa.png' width="150" alt="" /></center>
+    <center><h1><?php echo $this->translate ('Poços Perfurados na Bacia do Rio da Várzea') ?></h1></center>
     
 </div>
 <div class="filtro">  
 <fieldset>
         
-    <legend>Selecione o Filtro desejado: <br><h5>Filtro selecionado -> <?php echo($_POST['situacao'])?></h5></legend>
+    <legend style="color: #fff">Selecione o Filtro desejado: <br><h5>Filtro selecionado -> <?php echo($_POST['situacao'])?></h5></legend>
            
 </fieldset>
 <table>
