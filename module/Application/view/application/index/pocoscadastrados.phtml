@@ -1,144 +1,12 @@
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
-</script>
 <?php
-   
-require_once 'conexao.php'; 
-$conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD); 
-    if (empty($_POST['situacao'])){
-        $_POST['situacao'] = 'todos';
-    }
-    
-    
-    if (empty($_POST['filtro'])){
-        $_POST['filtro'] = 'situacao';
-    }
-    
-    $cordenada = array();
-    if ($_POST['situacao'] == 'todos'){
-        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
-        
-                    q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
-                    q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
-                    q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
-
-                    c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
-
-                from poco as p
-                    left join  qualidade_agua as q
-                            on p.utme = q.poco_utme and p.utmn = q.poco_utmn
-                    left join  capacidade_poco as c
-                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn";
-    }else{
-        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
-        
-                    q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
-                    q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
-                    q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
-
-                    c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
-
-                from poco as p
-                    left join  qualidade_agua as q
-                            on p.utme = q.poco_utme and p.utmn = q.poco_utmn
-                    left join  capacidade_poco as c
-                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                    where p.situacao = '$_POST[situacao]'";
-    }
-    if ($_POST['situacao'] == 'humano'){
-        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
-        
-                    q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
-                    q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
-                    q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
-
-                    c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
-
-                from poco as p
-                    left join  qualidade_agua as q
-                            on p.utme = q.poco_utme and p.utmn = q.poco_utmn
-                    left join  capacidade_poco as c
-                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-				where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
-					and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                    and q.solidos_tot_dissolvidos <= 1000";
-    }
-    if ($_POST['situacao'] == 'animais'){
-        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
-        
-                    q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
-                    q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
-                    q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
-
-                    c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
-
-                from poco as p
-                    left join  qualidade_agua as q
-                            on p.utme = q.poco_utme and p.utmn = q.poco_utmn
-                    left join  capacidade_poco as c
-                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-				where q.fluor <= 2 and q.sulfatos <= 1000 ";
-    }
-    if ($_POST['situacao'] == 'irrigacao'){
-        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
-        
-                    q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
-                    q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
-                    q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
-
-                    c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
-
-                from poco as p
-                    left join  qualidade_agua as q
-                            on p.utme = q.poco_utme and p.utmn = q.poco_utmn
-                    left join  capacidade_poco as c
-                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-				where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1";
-    }
-    
-    if ($_POST['situacao'] == 'recreacao'){
-        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
-        
-                    q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
-                    q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
-                    q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
-
-                    c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
-
-                from poco as p
-                    left join  qualidade_agua as q
-                            on p.utme = q.poco_utme and p.utmn = q.poco_utmn
-                    left join  capacidade_poco as c
-                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-				where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400";
-    }
-    
-   
-    if ($result = mysqli_query($conexao->conn, $query)) {
-
-        /* fetch associative array */
-        while ($row = mysqli_fetch_assoc($result)) {
-            array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
-                        $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
-                        $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
-                        $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
-                        $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
-                        $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
-        }
-        mysqli_free_result($result);
-    }
-    $string_array = implode("|", $cordenada);
-    /* close connection */
-    mysqli_close($conexao->conn); 
-    
+    require_once 'filtrapocos.php'; 
 ?>
-<script type="text/javascript">
-     var $array_js = '<?php echo $string_array;?>';
-</script>
 
+<script type="text/javascript">var $array_js = '<?php echo $string_array;?>';</script>
 <script type="text/javascript" src="js/cidadespocos.js"></script>
-
 
 <div class="titulo" style="color: #fff">
     <hl><img class='hidden-xs' src="img/mapa.png" alt=""align="left"></hl>
@@ -146,67 +14,55 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
     <center><h1><?php echo $this->translate ('Poços Perfurados na Bacia do Rio da Várzea') ?></h1></center>
     
 </div>
-<div class="filtro">  
-<fieldset>
-        
-    <legend style="color: #fff">Selecione o Filtro desejado: <br><h5>Filtro selecionado -> <?php echo($_POST['situacao'])?></h5></legend>
-           
-</fieldset>
-<table>
-    <tr>
-       <td width="150">
-           <form action=pocoscadastrados method=post id="sit">
-                <select name="filtro" onchange="this.form.submit()">
-                    <option value="situacao">--Selecione--</option>
-                    <option value="situacao">Situação</option>
-                    <option value="qualidade">Qualidade</option>
-                </select>
-                    <input type="submit" value="Enviar" name="filtro" style="visibility: hidden">
-           </form>
-       </td>
-       <td width="150">
-           <form action=pocoscadastrados method=post id="qual">
 
-                <?php
-                    if ($_POST['filtro'] == 'situacao'){
-                        echo('<select name="situacao" onchange="this.form.submit()">
-                            <option value="todos">--Selecione--</option>
-                            <option value="todos">Todos</option>
-                            <option value="Abandonado">Abandonado</option>
-                            <option value="Bombeando">Bombeando</option>
-                            <option value="Colmatado">Colmatado</option>
-                            <option value="Equipado">Equipado</option>
-                            <option value="Fechado">Fechado</option>
-                            <option value="Não instalado">Não instalado</option>
-                            <option value="Não utilizável">Não utilizável</option>
-                            <option value="Obstruído">Obstruído</option>
-                            <option value="Parado">Parado</option>
-                            <option value="Precário">Precário</option>
-                            <option value="Seco">Seco</option>
-                        </select>');
-                    }
-                    if($_POST['filtro'] == 'qualidade'){
-                        echo('<select name="situacao" onchange="this.form.submit()">
-                                <option value="todos">--Selecione--</option>
-                                <option value="todos">Todos</option>
-                                <option value="humano">Consumo Humano</option>
-                                <option value="animais">Dessedentação de Animais</option>
-                                <option value="irrigacao">Irrigação</option>
-                                <option value="recreacao">Recreação</option>
-                              </select>');
-                    }
-                ?>
+<div class="filtro" style="color: #fff"> 
+    <fieldset>
+        <legend style="color: #fff">Selecione o Filtro desejado: <br></legend>
+        <form action=pocoscadastrados method=post id="filtro">
+            <div class="col-sm-6">
+                <?php echo ('<b>Situação </b><br>');?>
+                <div class="col-sm-4">
+                    <INPUT TYPE="checkbox" NAME="bombeando" value="Bombeando" onchange="submit()" <?php echo($_POST['bombeando']);?>/> Bombeando<br>
+                    <INPUT TYPE="checkbox" NAME="abandonado" VALUE="Abandonado" onchange="submit()" <?php echo($_POST['abandonado']);?>/> Abandonado<br>
+                    <INPUT TYPE="checkbox" NAME="nutil" VALUE="Não utilizável" onchange="submit()" <?php echo($_POST['nutil']);?>> Não Utilizável<br>
+                    <INPUT TYPE="checkbox" NAME="ninstal" VALUE="Não Instalado" onchange="submit()" <?php echo($_POST['ninstal']);?>> Não Instalado<br>
+                </div>
+                <div class="col-sm-3">
+                    <INPUT TYPE="checkbox" NAME="fechado" VALUE="Fechado" onchange="submit()" <?php echo($_POST['fechado']);?>> Fechado<br>
+                    <INPUT TYPE="checkbox" NAME="precario" VALUE="Precário" onchange="submit()" <?php echo($_POST['precario']);?>> Precário<br>
+                    <INPUT TYPE="checkbox" NAME="obstruido" VALUE="Obstruído" onchange="submit()" <?php echo($_POST['obstruido']);?>> Obstruído<br>
+                    <INPUT TYPE="checkbox" NAME="colmatado" VALUE="Colmatado" onchange="submit()" <?php echo($_POST['colmatado']);?>> Colmatado<br>
+                </div>
+                <div class="col-sm-3">
+                    <INPUT TYPE="checkbox" NAME="parado" VALUE="Parado" onchange="submit()" <?php echo($_POST['parado']);?>> Parado<br>
+                    <INPUT TYPE="checkbox" NAME="seco" VALUE="Seco" onchange="submit()" <?php echo($_POST['seco']);?>> Seco<br>
+                    <INPUT TYPE="checkbox" NAME="equipado" VALUE="Equipado" onchange="submit()" <?php echo($_POST['equipado']);?>> Equipado<br>
+                    <INPUT TYPE="checkbox" NAME="indisp" VALUE="Indisponpível" onchange="submit()" <?php echo($_POST['indisp']);?>> Indisponível<br>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <?php echo ('<b>Qualidade </b><br>');?>
+                <div class="col-sm-7">
+                    <INPUT TYPE="checkbox" NAME="humano" VALUE="humano" onchange="submit()" <?php echo($_POST['humano']);?>> Consumo Humano<br>
+                    <INPUT TYPE="checkbox" NAME="animais" VALUE="animais" onchange="submit()" <?php echo($_POST['animais']);?>> Dessedentação de Animais<br>
+                    <INPUT TYPE="checkbox" NAME="irrigacao" VALUE="irrigacao" onchange="submit()" <?php echo($_POST['irrigacao']);?>> Irrigação<br>
+                    <INPUT TYPE="checkbox" NAME="recreacao" VALUE="recreacao" onchange="submit()" <?php echo($_POST['recreacao']);?>> Recreação<br>
+                </div>
+                <div class="col-sm-3">
+                    <INPUT TYPE="checkbox" NAME="todos" VALUE="todos" onchange="submit()" <?php echo($_POST['recreacao']);?>> Todos<br><br>
+                    <input type="submit" name="enviar" value="Enviar" style="visibility: hidden"/>
+                </div>
+            </div>
+            
 
-                <input type="submit" value="Enviar" name="situacao" style="visibility: hidden">
-            </form>
-       </td>
-    </tr>
-</table>
-</div>  
+        </form>
+    </fieldset>
+</div>
+<div id="pont">
+</div>
 <div>
 
-    <p><img width="100%" src="/img/legenda.png" alt="Legendas dos poços perfurados"></p>
-   
+    <p><img width="100%" src="img/legenda.png" alt="Legendas dos poços perfurados"></p>
 </div>
 
-<div id="map-canvas" style=" height: 600px; margin-bottom: 20px"></div>
+<div id="map-canvas" style=" height: 600px; margin-bottom: 20px"></div> 
