@@ -425,7 +425,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                     left join  capacidade_poco as c
                     on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                    where p.situacao = 'Indisponpível'";
+                    where p.situacao = '0'";
                     
             if ($result = mysqli_query($conexao->conn, $query)) {
                 
