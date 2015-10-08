@@ -2,7 +2,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <?php
-    require_once 'filtrapocos.php'; 
+    require_once 'filtraPocos.php'; 
 ?>
 
 <script type="text/javascript">var $array_js = '<?php echo $string_array;?>';</script>
@@ -19,8 +19,19 @@
     <fieldset>
         <legend style="color: #fff">Selecione o Filtro desejado: <br></legend>
         <form action=pocoscadastrados method=post id="filtro">
+            <div class="col-sm-4">
+                <INPUT TYPE="checkbox" NAME="todos" VALUE="todos" onchange="submit()" <?php echo($_POST['todos']);?>>Todos<br>
+                <?php echo ('<b>Qualidade </b><br>');?>
+                <!--<div class="col-sm-6">-->
+                    <INPUT TYPE="checkbox" NAME="humano" VALUE="humano" onchange="submit()" <?php echo($_POST['humano']);?>> Consumo Humano<br>
+                    <INPUT TYPE="checkbox" NAME="animais" VALUE="animais" onchange="submit()" <?php echo($_POST['animais']);?>> Dessedentação de Animais<br>
+                    <INPUT TYPE="checkbox" NAME="irrigacao" VALUE="irrigacao" onchange="submit()" <?php echo($_POST['irrigacao']);?>> Irrigação<br>
+                    <INPUT TYPE="checkbox" NAME="recreacao" VALUE="recreacao" onchange="submit()" <?php echo($_POST['recreacao']);?>> Recreação<br>
+                <!--</div>-->
+            </div>
+            
             <div class="col-sm-6">
-                <?php echo ('<b>Situação </b><br>');?>
+                <?php echo ('<b><br>Situação </b><br>');?>
                 <div class="col-sm-4">
                     <INPUT TYPE="checkbox" NAME="bombeando" value="Bombeando" onchange="submit()" <?php echo($_POST['bombeando']);?>/> Bombeando<br>
                     <INPUT TYPE="checkbox" NAME="abandonado" VALUE="Abandonado" onchange="submit()" <?php echo($_POST['abandonado']);?>/> Abandonado<br>
@@ -40,21 +51,8 @@
                     <INPUT TYPE="checkbox" NAME="indisp" VALUE="Indisponpível" onchange="submit()" <?php echo($_POST['indisp']);?>> Indisponível<br>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <?php echo ('<b>Qualidade </b><br>');?>
-                <div class="col-sm-7">
-                    <INPUT TYPE="checkbox" NAME="humano" VALUE="humano" onchange="submit()" <?php echo($_POST['humano']);?>> Consumo Humano<br>
-                    <INPUT TYPE="checkbox" NAME="animais" VALUE="animais" onchange="submit()" <?php echo($_POST['animais']);?>> Dessedentação de Animais<br>
-                    <INPUT TYPE="checkbox" NAME="irrigacao" VALUE="irrigacao" onchange="submit()" <?php echo($_POST['irrigacao']);?>> Irrigação<br>
-                    <INPUT TYPE="checkbox" NAME="recreacao" VALUE="recreacao" onchange="submit()" <?php echo($_POST['recreacao']);?>> Recreação<br>
-                </div>
-                <div class="col-sm-3">
-                    <INPUT TYPE="checkbox" NAME="todos" VALUE="todos" onchange="submit()" <?php echo($_POST['todos']);?>> Todos<br><br>
-                    <input type="submit" name="enviar" value="Enviar" style="visibility: hidden"/>
-                </div>
-            </div>
-            
-
+            <?php echo($consstring) ?>
+           <input type="submit" name="enviar" value="Enviar" style="visibility: hidden"/>         
         </form>
     </fieldset>
 </div>
