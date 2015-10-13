@@ -21,18 +21,7 @@ return array(
                 ),
             ),
             
-            
-            'municipios' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/municipios',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'municipios',
-                    ),
-                ),
-            ),
-            
+                        
             'pocoscadastrados' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

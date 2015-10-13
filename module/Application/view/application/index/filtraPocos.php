@@ -1,4 +1,6 @@
 <?php
+
+
 $_POST['bombeando'] = ( isset($_POST['bombeando']) ) ? 'checked' : null;
 $_POST['abandonado'] = ( isset($_POST['abandonado']) ) ? 'checked' : null;
 $_POST['nutil'] = ( isset($_POST['nutil']) ) ? 'checked' : null;
@@ -21,11 +23,6 @@ $_POST['recreacao'] = ( isset($_POST['recreacao']) ) ? 'checked' : null;
 
 $_POST['todos'] = ( isset($_POST['todos']) ) ? 'checked' : null;
 
-$consstring = '';
-$consstring1 = '';
-$consstring2 = '';
-$consstring3 = '';
-
 if ($_POST['humano']=='checked' || $_POST['animais'] == 'checked' ||
         $_POST['irrigacao']== 'checked' || $_POST['recreacao'] == 'checked'){
     $contand = 0;
@@ -33,54 +30,54 @@ if ($_POST['humano']=='checked' || $_POST['animais'] == 'checked' ||
     
     if ($_POST['bombeando'] == 'checked'){
         $contand ++;
-        $consstring1 = 'p.situacao = '.'"'.'Bombeando'.'"';
     }
     if ($_POST['abandonado'] == 'checked'){
         $contand ++;
-       $consstring2 = 'p.situacao = '.'"'.'Abandonado'.'"';
     }
     if ($_POST['nutil'] == 'checked'){
         $contand ++;
-        $consstring3 = 'p.situacao = '.'"'.'Não utilizável'.'"';
     }
     if ($_POST['ninstal'] == 'checked'){
         $contand ++;
-        $_POST['andsituacao'] = 'Não instalado';
     }
     if ($_POST['fechado'] == 'checked'){
         $contand ++;
-        $_POST['andsituacao'] = 'Fechado';
     }
     if ($_POST['precario'] == 'checked'){
         $contand ++;
-        $_POST['andsituacao'] = 'Precário';
     }
     if ($_POST['obstruido'] == 'checked'){
         $contand ++;
-        $_POST['andsituacao'] = 'Obstruído';
     }
     if ($_POST['colmatado'] == 'checked'){
         $contand ++;
-        $_POST['andsituacao'] = 'Colmatado';
     }
     if ($_POST['parado'] == 'checked'){
         $contand ++;
-        $_POST['andsituacao'] = 'Parado';
     }
     if ($_POST['seco'] == 'checked'){
         $contand ++;
-        $_POST['andsituacao'] = 'Seco';
     }
     if ($_POST['equipado'] == 'checked'){
         $contand ++;
-        $_POST['andsituacao'] = 'Equipado';
     }
     if ($_POST['indisp'] == 'checked'){
         $contand ++;
-        $_POST['andsituacao'] = '0';
     }
     
     
+}
+
+if ($_POST['bombeando'] == 'checked' || $_POST['abandonado']== 'checked' || $_POST['nutil'] == 'checked' || $_POST['ninstal']=='checked' ||
+        $_POST['fechado'] == 'checked' || $_POST['precario']=='checked' || $_POST['obstruido']=='checked' || $_POST['colmatado']=='checked' ||
+        $_POST['parado'] == 'checked' || $_POST['seco']=='checked' || $_POST['equipado']=='checked' || $_POST['indisp']=='checked' ||
+        $_POST['humano'] == 'checked' || $_POST['animais']=='checked' || $_POST['irrigacao']=='checked' || $_POST['recreacao']=='checked'){
+        if ($_POST['todos']=='checked'){
+            $_POST['todos']='checked';
+        }else{
+            $_POST['todos']=null;
+        }
+           
 }
 
 if ($_POST['bombeando'] == null && $_POST['abandonado']== null && $_POST['nutil'] == null && $_POST['ninstal']==null &&
@@ -88,8 +85,11 @@ if ($_POST['bombeando'] == null && $_POST['abandonado']== null && $_POST['nutil'
         $_POST['parado'] == null && $_POST['seco']==null && $_POST['equipado']==null && $_POST['indisp']==null &&
         $_POST['humano'] == null && $_POST['animais']==null && $_POST['irrigacao']==null && $_POST['recreacao']==null){
     
-            $_POST['todos']=true;
+            $_POST['todos']='checked';
 }
+
+
+
 
 require_once 'conexao.php'; 
 $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD); 
@@ -576,20 +576,351 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                     if ($_POST['abandonado']){
                         $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
 
-                        q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
-                        q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
-                        q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
 
-                        c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
 
-                    from poco as p
-                        left join  qualidade_agua as q
-                                on p.utme = q.poco_utme and p.utmn = q.poco_utmn
-                        left join  capacidade_poco as c
-                        on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                    where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
-                                            and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                        and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Abandonado'";
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Abandonado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    
+                    if ($_POST['nutil']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Não utilizável'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['ninstal']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Não instalado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['fechado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Fechado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['precario']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Precário'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['obstruido']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Obstruído'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['colmatado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Colmatado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['parado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Parado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['seco']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Seco'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['equipado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Equipado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['indisp']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
+                                                and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = '0'";
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -611,7 +942,8 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
             }
             if ($_POST['animais'] == 'checked'){
-                $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+                if ($contand == 0){
+                    $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
 
                         q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
                         q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
@@ -626,23 +958,404 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                     where q.fluor <= 2 and q.sulfatos <= 1000 ";
 
-                if ($result = mysqli_query($conexao->conn, $query)) {
-
-                    /* fetch associative array */
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
-                                    $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
-                                    $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
-                                    $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
-                                    $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
-                                    $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                    if ($result = mysqli_query($conexao->conn, $query)) {
+                        $coordAux = array();
+                        /* fetch associative array */
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                        $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                        $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                        $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                        $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                        $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                        }
+                        $coordAux = $coordAux+$cordenada;
+                        mysqli_free_result($result);
                     }
-                    $coordAux = $coordAux+$cordenada;
-                    mysqli_free_result($result);
+                }
+
+                if ($contand >= 1){
+                    if ($_POST['bombeando']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                        q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                        q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                        q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                        c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                    from poco as p
+                        left join  qualidade_agua as q
+                                on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                        left join  capacidade_poco as c
+                        on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                    where q.fluor <= 2 and q.sulfatos <= 1000  and p.situacao = 'Bombeando'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['abandonado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Abandonado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    
+                    if ($_POST['nutil']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Não utilizável'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['ninstal']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Não instalado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['fechado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Fechado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['precario']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Precário'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['obstruido']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Obstruído'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['colmatado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Colmatado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['parado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Parado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['seco']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Seco'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['equipado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Equipado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['indisp']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = '0'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    
                 }
             }
+            
+            
             if ($_POST['irrigacao'] == 'checked'){
-                $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+                if ($contand == 0){
+                    $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
 
                         q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
                         q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
@@ -657,23 +1370,405 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                     where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1";
 
-                if ($result = mysqli_query($conexao->conn, $query)) {
-
-                    /* fetch associative array */
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
-                                    $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
-                                    $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
-                                    $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
-                                    $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
-                                    $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                    if ($result = mysqli_query($conexao->conn, $query)) {
+                        $coordAux = array();
+                        /* fetch associative array */
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                        $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                        $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                        $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                        $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                        $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                        }
+                        $coordAux = $coordAux+$cordenada;
+                        mysqli_free_result($result);
                     }
-                    $coordAux = $coordAux+$cordenada;
-                    mysqli_free_result($result);
                 }
+
+                if ($contand >= 1){
+                    if ($_POST['bombeando']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                        q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                        q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                        q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                        c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                    from poco as p
+                        left join  qualidade_agua as q
+                                on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                        left join  capacidade_poco as c
+                        on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                    where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1  and p.situacao = 'Bombeando'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['abandonado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Abandonado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    
+                    if ($_POST['nutil']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Não utilizável'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['ninstal']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Não instalado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['fechado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Fechado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['precario']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Precário'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['obstruido']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Obstruído'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['colmatado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Colmatado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['parado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Parado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['seco']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Seco'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['equipado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Equipado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['indisp']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = '0'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    
+                }
+                
             }
+            
+            
             if ($_POST['recreacao'] == 'checked'){
-                $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+                if ($contand == 0){
+                    $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
 
                         q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
                         q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
@@ -688,27 +1783,401 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                     where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400";
 
-                if ($result = mysqli_query($conexao->conn, $query)) {
-
-                    /* fetch associative array */
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
-                                    $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
-                                    $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
-                                    $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
-                                    $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
-                                    $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                    if ($result = mysqli_query($conexao->conn, $query)) {
+                        $coordAux = array();
+                        /* fetch associative array */
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                        $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                        $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                        $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                        $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                        $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                        }
+                        $coordAux = $coordAux+$cordenada;
+                        mysqli_free_result($result);
                     }
-                    $coordAux = $coordAux+$cordenada;
-                    mysqli_free_result($result);
+                }
+
+                if ($contand >= 1){
+                    if ($_POST['bombeando']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                        q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                        q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                        q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                        c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                    from poco as p
+                        left join  qualidade_agua as q
+                                on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                        left join  capacidade_poco as c
+                        on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                    where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400  and p.situacao = 'Bombeando'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['abandonado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Abandonado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    
+                    if ($_POST['nutil']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Não utilizável'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['ninstal']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Não instalado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['fechado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Fechado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['precario']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Precário'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['obstruido']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Obstruído'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['colmatado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Colmatado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['parado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Parado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['seco']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Seco'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['equipado']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Equipado'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
+                    if ($_POST['indisp']){
+                        $query = "select p.utme, p.utmn, p.latitudese, p.longitudes, p.situacao, p.profundidade, p.uso_agua,
+
+                            q.alcalinidade, q.bicarbonatos, q.calcio, q.carbonatos, q.cloretos, q.condutividade_eletrica,
+                            q.data, q.dureza, q.fluor, q.magnesio, q.ph, q.potassio, q.responsavel, q.sodio, 
+                            q.solidos_tot_dissolvidos, q.sulfatos, q.temperatura,
+
+                            c.cap_especifica, c.niveldinamico, c.nivelestatico, c.vazao_estabilizacao
+
+                        from poco as p
+                            left join  qualidade_agua as q
+                                    on p.utme = q.poco_utme and p.utmn = q.poco_utmn
+                            left join  capacidade_poco as c
+                            on p.utme = c.poco_utme and p.utmn = c.poco_utmn
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = '0'";
+
+                        if ($result = mysqli_query($conexao->conn, $query)) {
+                            $coordAux = array();
+                            /* fetch associative array */
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($cordenada, $row["latitudese"], $row["longitudes"], $row["situacao"], $row["profundidade"],
+                                            $row["uso_agua"], $row["alcalinidade"], $row["bicarbonatos"], $row["calcio"],
+                                            $row["carbonatos"], $row["cloretos"], $row["condutividade_eletrica"],$row["dureza"], 
+                                            $row["fluor"], $row["magnesio"], $row["ph"], $row["potassio"], $row["sodio"], 
+                                            $row["solidos_tot_dissolvidos"], $row["sulfatos"], $row["temperatura"], $row["cap_especifica"], 
+                                            $row["niveldinamico"], $row["nivelestatico"], $row["vazao_estabilizacao"]);
+                            }
+                            $coordAux = $coordAux+$cordenada;
+                            mysqli_free_result($result);
+                        }
+                    }
                 }
             }
         }
-        
     }  
-    
-    
-    
+   
     $string_array = implode("|", $coordAux);
     /* close connection */
     mysqli_close($conexao->conn); 

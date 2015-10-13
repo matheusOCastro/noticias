@@ -8,12 +8,11 @@ var infoWindow;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map-canvas'), {
-    zoom: 8,
-    center: {lat: -27.56300, lng: -53.18200},
+    zoom: 9,
+    center: {lat: -27.707, lng: -53.136},
     //mapTypeId: google.maps.MapTypeId.TERRAIN
     mapTypeId: 'roadmap'
   });
-
   // Define the LatLng coordinates for the polygon.
   var boavistamissoes = [
     {lng: -53.400519,lat: -27.620795}, 

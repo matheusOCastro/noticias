@@ -19,11 +19,6 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
     
-    public function municipiosAction()
-    {
-        return new ViewModel();
-    }
-    
     public function pocoscadastradosAction()
     {   
         return new ViewModel();

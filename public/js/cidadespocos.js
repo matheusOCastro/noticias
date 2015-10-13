@@ -9,8 +9,9 @@ var infoWindow;
 
 
 function initialize() {
+    
    var mapOptions = {
-      center: new google.maps.LatLng(-27.24900,-53.03500),
+      center: new google.maps.LatLng(-27.707,-53.136),
       zoom: 9,
       mapTypeId: 'roadmap'
    };
@@ -9986,7 +9987,7 @@ function displayMarkers(){
 
    // esta variável vai definir a área de mapa a abranger e o nível do zoom
    // de acordo com as posições dos marcadores
-   var bounds = new google.maps.LatLngBounds();
+   //var bounds = new google.maps.LatLngBounds();
    
    // Loop que vai estruturar a informação contida em markersData
    // para que a função createMarker possa criar os marcadores 
@@ -10031,13 +10032,14 @@ function displayMarkers(){
 
       // Os valores de latitude e longitude do marcador são adicionados à
       // variável bounds
-      bounds.extend(latlng);  
+      //bounds.extend(latlng);  
    }
 
    // Depois de criados todos os marcadores
    // a API através da sua função fitBounds vai redefinir o nível do zoom
    // e consequentemente a área do mapa abrangida.
-   map.fitBounds(bounds);
+   
+   //map.fitBounds(bounds);
 }
 
 // Função que cria os marcadores e define o conteúdo de cada Info Window.
