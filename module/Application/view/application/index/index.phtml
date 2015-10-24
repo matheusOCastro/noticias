@@ -1,0 +1,26 @@
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"></script>
+ 
+<script type="text/javascript" src="js/cidades.js">
+   
+</script>
+
+    
+<!--
+<div class="jumbotron" style="color: #fff">
+    <center><h1><?php echo sprintf($this->translate('Bem vindo ao Sistema de Visualização de Análise de Água!'), '<span class="zf-green">', '</span>') ?></h1></center>
+    <center><p><?php echo sprintf($this->translate('Sistema capaz de realizar consultas sobre qualidade de água de diferentes lugares na região do Rio da Várzea. Estas consultas estão integradas com APIs do Google Maps em conjunto com diversos outros filtros para facilitar a visualização!'), '<a href="https://github.com/zendframework/ZendSkeletonApplication" target="_blank">', '</a>', \Zend\Version\Version::VERSION) ?></p></center>
+    
+    <p><a class="btn btn-success pull-left" href="/"><?php echo $this->translate('Home') ?> &raquo;</a></p>
+    <p><a class="btn btn-success pull-left" href="/pocoscadastrados"><?php echo $this->translate('Poços Cadastrados') ?> &raquo;</a></p>
+    <p><a class="btn btn-success pull-left" href="/sobre"><?php echo $this->translate('Sobre') ?> &raquo;</a></p></center>
+    
+</div>
+-->
+<div class="titulo" style="color: #fff">
+    <hl><img class='hidden-xs' src="img/mapa.png" alt=""align="left"></hl>
+    <center><img class='visible-xs' src='img/mapa.png' width="150" alt="" /></center>
+    <center><h1><?php echo $this->translate ('Municípios Pertencentes à Bacia do Rio da Várzea') ?></h1></center>
+</div>
+<div id="map-canvas" style=" height: 550px; margin-bottom: 5px"></div>
+<?php echo('Fonte: População (IBGE-2014) ---  Poços Profundos (CPRM-2015)'); ?>

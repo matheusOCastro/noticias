@@ -1,0 +1,131 @@
+<?php echo $this->doctype(); ?>
+
+
+<html lang="pt">
+      
+    <head>
+        
+               
+        <meta charset="utf-8">
+        
+        
+        <?php echo $this->headTitle('DEA -'. $this->translate('Visualização de Análise de Água'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.png'))
+                        ->prependStylesheet($this->basePath('css/style.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/jquery.min.js'))
+            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+    <header class="site-header">
+        <div class="container">
+            <div class="row" style='background-color: white;'>
+                <div class="col-sm-4" style='vertical-align: top;'>
+                    <div class="logo" style='background-color: white; padding: 10px; padding-bottom: 10px; text-align: left;'>
+                        <a href="/" title="UFSM" rel="home">
+                            <img class='hidden-xs' src='img/ufsmlogo.png' width="320" alt="UFSM" />
+                            <center><img class='visible-xs' src='img/ufsmlogo.png' width="250" alt="UFSM" /></center>
+                            
+                        </a>
+                        <a href="/" title="UFSM" rel="home">
+                            <img class='hidden-xs' src='img/larh.png' width="320" alt="LARH" />
+                            <center><img class='visible-xs' src='img/larh.png' width="250" alt="LARH" /></center>
+                            
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="col-sm-7">
+                    <div class="hidden-xs" style="color: #000; font-family:chaparral pro ;text-align: center; font-size: 50px; margin-top: 30px;">
+                    Sistema de Visualização de Qualidade da Água Subterrânea
+                    
+                    </div>
+                    <div class="visible-xs" style="color: #000; font-family:chaparral pro ;text-align: center; font-size: 30px; margin-top: 30px;">
+                    Sistema de Visualização de Qualidade da Água Subterrânea
+                    
+                    </div>
+                        <!--
+                    <div class="logo" style='background-color: white; padding: 40px; text-align: center;'>
+                        <a href="/" title="UFSM" rel="home">
+                            <img class='hidden-xs' src='/img/larh.png' width="320" alt="LARH" />
+                            <img class='visible-xs' src='/img/larh.png' width="150" alt="LARH" />
+                            
+                        </a>
+                        
+                    </div>
+                    -->
+                </div>
+                
+            </div>
+            
+        </div>
+               
+    </header>
+    <!--
+    <center><div class="banner" id="texto">
+                    
+                    <font size="7" face="Myriad Pro">   
+                    <h1><img src="/img/logoufsm.png" alt="Logo UFSM">Universidade Federal de Santa Maria/FW</h1>
+                    <p>Sistema de Visualização de Qualidade da Água Subterrânea </font>
+                    <h2><p>Laboratório de Recursos Hídricos - LARH <img src="/img/logogota.png" alt="Logo Laboratório"></h2></font>
+                    <img src="/img/hr.png" WIDTH="100%" height="2" ALT="hr"> </p>
+        </div></center>
+    -->
+    </head>
+    <body>    
+        
+        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+            
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/gotalogo.png') ?>" alt="Logo Gota"/>&nbsp;<?php echo $this->translate('Sistema - DEA') ?></a>
+                
+                </div>
+                
+                <div class="collapse navbar-collapse">
+                    
+                    <ul class="nav navbar-nav">
+                        
+                        <?php $partial = ['layout/navigation.phtml', 'default']; ?>
+                        <?php $this->navigation('navigation')->menu()->setPartial($partial); ?>
+                        <?php echo $this->navigation('navigation')->menu()->render(); ?>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+        <div class="container">
+            <?php echo $this->content; ?>
+            
+            <img src="img/hr.png" WIDTH="100%" height="2" ALT="hr">
+            
+            <footer class="titulo" style="margin-bottom: 10px; color: #fff">
+                
+                <center><p>&copy;<?php echo date('Y') ?> by MLDLJ - Universidade Federal de Santa Maria/FW. <?php echo $this->translate('Todos os direitos reservados.') ?></p></center>
+            </footer>
+            <center><img src="img/brasao.png" alt=""align="center">
+            <img src="img/gota.png" alt=""align="center"></center>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+    
+</html>
