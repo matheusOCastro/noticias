@@ -83,7 +83,7 @@ class Home extends CI_Controller {
     $this->load->view('auxiliar/login_form');
     $this->load->view('template/footer');   
     }
-    
+
 
     
     
