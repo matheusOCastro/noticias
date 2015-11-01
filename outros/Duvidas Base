@@ -1,0 +1,50 @@
+Para a primeira entrewga vamos considerar apenas as tabelas:
+pontosGeral
+Bacia_varzea
+municipios
+qualidade
+
+seguem as descrições das abreviaturas: 
+
+muni: município
+prof: profundidade
+usoagua: uso da água
+situacao: situação do poço
+vaz_est: vazão de estabilização
+ne: nível estático
+nd: nível dinâmico
+cap_esp: capacidade específica 
+ce: condutividade hidráulica 
+pH é usual usar a abreviatura mesmo - pH (potencial hidrogeniônico)
+na: sódio
+k: potássio
+ca: cálcio
+mg: magnésio
+cl: cloretos
+co3: carbonatos
+hco3: bicarbonatos
+so4: sulfatos
+f: flúor
+std: sólidos totais dissolvidos 
+alcalinida: alcalinidade
+dureza: dureza total
+nome_bacia: nome da bacia
+código_bac: código da bacia
+regiao: região hidrográfica
+siglas: sigla
+hectares: área da bacia em ha (hectares)
+area_max: área total da bacia
+perímetro: perímetro dos municípios
+nome: nome do município
+sede: sede do município
+cod_ibge: código do município (conforme ibge)
+utm e: coordenada UTM leste
+utm n: coordenada UTM norte
+
+Sobre o hidrogeobv: hidrogeologia  da bacia do rio da várzea
+sist_aqui: sistema aquífero
+poss: possibilidade de ocorrência de água subterrânea
+
+Onde tem "bv" quer dizer que é referente a Bacia do Rio da Várzea; onde tem "rs" é recorte do estado do Rio Grande do Sul. 
+
+As tabelas com a parte da Portaria 2914/11 e Conama 396/08, para a parte de qualidade, lhe envio quando estiverem prontas! 
