@@ -57,4 +57,3 @@
 </div>
 <div id="map-canvas" style=" height: 550px; margin-bottom: 5px"></div>
 <?php echo('Fonte: População (IBGE-2014) ---  Poços Profundos (CPRM-2015)'); ?>
->>>>>>> origin/master
