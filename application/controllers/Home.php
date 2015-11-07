@@ -7,87 +7,30 @@ class Home extends CI_Controller {
 
     public function index() {
         
-        $this->load->view('template/header');
-        $this->load->view('home');
-        $this->load->view('template/footer');
+        $this->load->view('site/template/header');
+        $this->load->view('site/home');
+        $this->load->view('site/template/footer');
     }
     
     public function mapaPocos() {
         
-        $this->load->view('template/header');
-        $this->load->view('mapapocos');
-        $this->load->view('template/footer');
+        $this->load->view('site/template/header');
+        $this->load->view('site/mapapocos');
+        $this->load->view('site/template/footer');
     }
     
     public function graficoPocos() {
         
-        $this->load->view('template/header');
-        $this->load->view('graficopocos');
-        $this->load->view('template/footer');
+        $this->load->view('site/template/header');
+        $this->load->view('site/graficopocos');
+        $this->load->view('site/template/footer');
     }
     
     public function sobre(){
-        $this->load->view('template/header');
-        $this->load->view('sobre');
-        $this->load->view('template/footer');
-    }
-    
-    public function constr(){
-        $this->load->view('constr');
-    }
-
-    public function acao(){
-
-
-        $login = $this->input->post('login');
-        $senha = $this->input->post('senha');      
-
-        if( $login && $senha ) {
-        
-            $this->load->model('loginmodel'); // carregamos o model
-            
-            $verifica = $this->loginmodel->verifica($login, $senha);
-            
-            if( $verifica === true ) {
-            
-                $this->session->set_userdata( 'usuario', $login );
-                $this->session->set_userdata( 'logado', true );
-                
-                //$this->load->view('sobre');
-                redirect(site_url('inicial'));
-            
-            } else {
-                
-                redirect(site_url('login?retorno=erro'));
-            
-            }
-            
-        } else {
-           
-            redirect(site_url('login?retorno=campos-vazios'));
-        
-        }
-        
-    }
-    
-    public function logout() {
-        
-        $this->session->sess_destroy();
-        redirect(site_url('login'));
-
-    }
-
-    public function login() {
-    
-    $this->load->view('template/header');
-    $this->load->view('auxiliar/login_form');
-    $this->load->view('template/footer');   
-    }
-
-
-    
-    
-    
+        $this->load->view('site/template/header');
+        $this->load->view('site/sobre');
+        $this->load->view('site/template/footer');
+    }    
     /*
     
     
