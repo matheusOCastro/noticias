@@ -52,18 +52,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['sobre'] = 'home/sobre';
 $route['mapapocos'] = 'home/mapapocos';
+$route['login'] = 'home/login';
 
-$route['login'] = 'adm/login';
-$route['logout'] = 'adm/logout';
-$route['acao'] = 'adm/acao';
-$route['cadastrar'] = 'adm/cadastrar';
-$route['pocos'] = 'adm/pocos';
-$route['conspoco'] = 'adm/conspoco';
-$route['inativar_poco'] = 'adm/inativar_poco';
+$route['adm/logout'] = 'adm/logout';
+$route['adm/acao'] = 'adm/acao';
+$route['adm/cadastrar'] = 'adm/cadastrar';
+$route['adm/pocos'] = 'adm/pocos';
+$route['adm/gravar_edicao'] = 'adm/gravar_edicao';
+$route['adm/inativar_poco'] = 'adm/inativar_poco';
+$route['adm/editar_poco'] = 'adm/editar_poco';
+$route['adm/editar_poco'] = 'adm/editar_poco';
 
-$route['pocos/:num'] = "adm/pocos";
-
-$route['analises'] = 'adm/analises';
+$route['adm/cons_poco'] = 'adm/rel_pocos';
 
 
 

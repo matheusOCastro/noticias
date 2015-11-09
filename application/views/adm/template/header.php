@@ -30,13 +30,13 @@
                 <div class="col-sm-4" style='vertical-align: top;'>
                     <div class="logo" style='padding: 10px; padding-bottom: 10px; text-align: left;'>
                         <a href="<?php echo base_url(); ?>" title="UFSM" rel="home">
-                            <img class='hidden-xs' src='assets/img/ufsmlogo2.png' width="320" alt="UFSM" />
-                            <center><img class='visible-xs' src='assets/img/ufsmlogo2.png' width="250" alt="UFSM" /></center>
+                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/ufsmlogo2.png' width="320" alt="UFSM" />
+                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/ufsmlogo2.png' width="250" alt="UFSM" /></center>
 
                         </a>
                         <a href="<?php echo base_url(); ?>" title="UFSM" rel="home">
-                            <img class='hidden-xs' src='assets/img/larh2.png' width="320" alt="LARH" />
-                            <center><img class='visible-xs' src='assets/img/larh2.png' width="250" alt="LARH" /></center>
+                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/larh2.png' width="320" alt="LARH" />
+                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/larh2.png' width="250" alt="LARH" /></center>
 
                         </a>
 
@@ -74,12 +74,12 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav" >
-                            <li <?=echoActiveClassIfRequestMatches("pocos")?>><a class="glyphicon glyphicon-map-marker" href="<?php echo base_url('/pocos')?>">&nbsp;POÇOS </a></li>
-                            <li <?=echoActiveClassIfRequestMatches("analises")?>><a class="glyphicon glyphicon-tint" href="<?php echo base_url('/analises')?>">&nbsp;ANÁLISES </a></li>
+                            <li <?=echoActiveClassIfRequestMatches("pocos")?>><a class="glyphicon glyphicon-map-marker" href="<?php echo base_url('/adm/pocos')?>">&nbsp;POÇOS </a></li>
+                            <li <?=echoActiveClassIfRequestMatches("analises")?>><a class="glyphicon glyphicon-tint" href="<?php echo base_url('/adm/analises')?>">&nbsp;ANÁLISES </a></li>
                         </ul>
                         
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a class="glyphicon glyphicon-remove-circle" href="<?php echo base_url('/logout')?>">&nbsp;LOGOUT </a></li>
+                            <li><a class="glyphicon glyphicon-remove-circle" href="<?php echo base_url('/adm/logout')?>">&nbsp;LOGOUT </a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->

@@ -8,7 +8,7 @@
 <script type="text/javascript" src="assets/js/cidades.js"></script>
 
 
-<div class="col-sm-7" id="map-canvas" style=" height: 550px; margin-bottom: 5px">
+<div class="col-sm-7" id="map-canvas" style=" height: 700px; margin-bottom: 5px">
 	
 </div>
 
@@ -23,7 +23,7 @@
 <script type="text/javascript" src="assets/js/graficos.js"></script>
 
 
-<div class="col-sm-5" id="piechart" style="height: 275px;"></div>
+<div class="col-sm-5" id="piechart" style="height: 375px;"></div>
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -36,7 +36,7 @@
 </script>
 <script type="text/javascript" src="assets/js/graficos.js"></script>
 
-<div class="col-sm-5" id="columnchart" style="height: 275px;"></div>
+<div class="col-sm-5" id="columnchart" style="height: 325px;"></div>
 
 <div class="row">
     <div class="col-sm-6" >

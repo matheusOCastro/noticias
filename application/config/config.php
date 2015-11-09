@@ -17,8 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-//$config['base_url'] = 'http://deaufsm.esy.es/';
-$config['base_url'] = 'http://localhost:8080/deanovo';
+$config['base_url'] = 'http://localhost:8080/deanovo/';
 
 /*
 |--------------------------------------------------------------------------
@@ -309,7 +308,7 @@ $config['cache_query_string'] = FALSE;
 | http://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = 'ZgHFyY7pCu8LPWpFEeRs';
+$config['encryption_key'] = '';
 
 /*
 |--------------------------------------------------------------------------

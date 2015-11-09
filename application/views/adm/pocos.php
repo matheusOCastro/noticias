@@ -1,4 +1,4 @@
-<script type="text/javascript" src="assets/js/mascaras.js"></script>
+<script type="text/javascript" src="<?php echo(base_url()) ?>assets/js/mascaras.js"></script>
 
 <form action=cadastrar method="post">
    <?php 
@@ -134,7 +134,7 @@
         </div>
     </div>
     
-    <img src="assets/img/hr.png" WIDTH="100%" height="1" ALT="hr">
+    <img src="<?php echo(base_url()) ?>assets/img/hr.png" WIDTH="100%" height="1" ALT="hr">
     
     <h4><b>Capacidade do Poço</b></h4>
     
@@ -174,11 +174,11 @@
     <button type="submit" class="btn btn-success btn-md">Cadastrar &nbsp;<span class="glyphicon glyphicon-ok"></span></button>
 </form>
 
-<img src="assets/img/hr.png" WIDTH="100%" height="3" ALT="hr">
+<img src="<?php echo(base_url()) ?>assets/img/hr.png" WIDTH="100%" height="3" ALT="hr">
 
 <div class="registros">
     <h4><span class="glyphicon glyphicon-search"></span> Pesquisar Poços</h4>
-    <form action=pocos method="post">
+    <form action="<?php echo(base_url())?>adm/pocos" method="post">
         <div class="row">
             <div class="col-sm-2">
                 <div class="form-group">
@@ -264,17 +264,16 @@
                     <td><?php echo $poco->situacao; ?></td>
                     <td><?php echo $poco->nome; ?></td>
                     <td width="220" class="text-center">
-
-                        <form action=inativar_poco method="post">
-                            <input type="hidden" name="editutme" value="<?php echo($poco->utme) ?>" class="form-control" id="editutme" placeholder="UTME">
-                            <input type="hidden" name="editutmn" value="<?php echo($poco->utmn) ?>" class="form-control" id="editutme" placeholder="UTME">
-                            <button type="submit" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span> Inativar</button>
-                            <button type="submit" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                            <button type="submit" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-tint"></span> Análise</button>
-                        </form>
+                        <a href="<?php echo base_url('adm/inativar_poco/'.$poco->utme.'/'.$poco->utmn); ?>" class="btn btn-xs btn-danger" onclick="return confirm('Inativar Poço?');"><span class="glyphicon glyphicon-trash"></span> Inativar</a>
+                        <a href="<?php echo base_url('adm/editar_poco/'.$poco->utme.'/'.$poco->utmn); ?>" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-edit"></span> Editar</a>
+                        <a href="<?php echo base_url('adm/analises/'.$poco->utme.'/'.$poco->utmn); ?>" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-tint"></span> Análise</a>
                     </td>
                 </tr>
                 <?php } } ?>
             </tbody>
         </table>
+    
+    <?php
+        //echo ($paginacao);
+    ?>
 </div>
