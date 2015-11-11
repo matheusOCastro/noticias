@@ -86,7 +86,7 @@
                     <td><?php echo $poco->situacao; ?></td>
                     <td><?php echo $poco->nome; ?></td>
                     <td width="220" class="text-center">
-                        <a href="<?php echo base_url('adm/analises/'.$poco->utme.'/'.$poco->utmn); ?>" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-tint"></span> Selecioanar</a>
+                        <a href="<?php echo base_url('adm/analises/'.$poco->utme.'/'.$poco->utmn); ?>" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-tint"></span> Selecionar</a>
                     </td>
                 </tr>
                 <?php } } ?>

@@ -8,27 +8,52 @@ class Poco_model extends CI_Model{
     }
 
     public function listar_pocos(){
-    $consUtme = $this->input->post('consutme');
-    $consUtmn = $this->input->post('consutmn');
-    $consSituacao = $this->input->post('conssituacao');
-    $consMunicipio = $this->input->post('consmunicipios_cod');
+        $consUtme = $this->input->post('consutme');
+        $consUtmn = $this->input->post('consutmn');
+        $consSituacao = $this->input->post('conssituacao');
+        $consMunicipio = $this->input->post('consmunicipios_cod');
+
+        if ($consUtme == NULL){
+            $consUtme = '%';
+        }
+        if ($consUtmn == NULL){
+            $consUtmn = '%';
+        }
+            return  $this->db->select('*')
+                            ->from('poco p')
+                            ->join('municipio m', 'p.municipios_cod_ibge = m.cod_ibge', 'left')
+                            ->where('p.ativo = 1')
+                            ->where('p.municipios_cod_ibge like "'.$consMunicipio.'"')
+                            ->where('p.situacao like "'.$consSituacao.'"')
+                            ->where('p.utme like "'.$consUtme.'"')
+                            ->where('p.utmn like "'.$consUtmn.'"')
+                            //->limit($maximo, $inicio)
+                            ->get()->result();
     
-    if ($consUtme == NULL){
-        $consUtme = '%';
+
     }
-    if ($consUtmn == NULL){
-        $consUtmn = '%';
-    }
-        return  $this->db->select('*')
-                        ->from('poco p')
-                        ->join('municipio m', 'p.municipios_cod_ibge = m.cod_ibge', 'left')
-                        ->where('p.ativo = 1')
-                        ->where('p.municipios_cod_ibge like "'.$consMunicipio.'"')
-                        ->where('p.situacao like "'.$consSituacao.'"')
-                        ->where('p.utme like "'.$consUtme.'"')
-                        ->where('p.utmn like "'.$consUtmn.'"')
-                        //->limit($maximo, $inicio)
-                        ->get()->result();
+    
+    public function listar_analises(){
+        $poco_Utme = $this->input->post('poco_utme');
+        $poco_Utmn = $this->input->post('pocoutmn');
+        $data = $this->input->post('data');
+        
+        if ($poco_Utme == NULL){
+            $poco_Utme = '%';
+        }
+        if ($poco_Utmn == NULL){
+            $poco_Utmn = '%';
+        }
+        if ($data == NULL){
+            $data = '%';
+        }
+            return  $this->db->select('*')
+                            ->from('qualidade_agua q')
+                            ->where('q.poco_utme like "'.$poco_Utme.'"')
+                            ->where('q.poco_utmn like "'.$poco_Utmn.'"')
+                            ->where('q.data like "'.$data.'"')
+                            ->where('q.ativo =  "1"')
+                            ->get()->result();
     
 
     }
@@ -78,6 +103,42 @@ class Poco_model extends CI_Model{
         }
     }
     
+    public function cadastrar_analise(){
+        $dataAnalise['poco_utme']       = $this->input->post('utme');
+        $dataAnalise['poco_utmn']  = $this->input->post('utmn');
+        $dataAnalise['ponto']      = (double)$this->input->post('ponto');
+        $dataAnalise['sodio']       = (double)$this->input->post('sodio');
+        $dataAnalise['potassio']  = (double)$this->input->post('potassio');
+        $dataAnalise['calcio']      = (double)$this->input->post('calcio');
+        $dataAnalise['magnesio']      = (double)$this->input->post('magnesio');
+        $dataAnalise['cloretos']       = (double)$this->input->post('cloretos');
+        $dataAnalise['sulfatos']  = (double)$this->input->post('sulfatos');
+        $dataAnalise['carbonatos']      = (double)$this->input->post('carbonatos');
+        $dataAnalise['bicarbonatos']      = (double)$this->input->post('bicarbonatos');
+        $dataAnalise['condutividade_eletrica']       = (double)$this->input->post('condutividade_eletrica');
+        $dataAnalise['ph']  = (double)$this->input->post('ph');
+        $dataAnalise['fluor']      = (double)$this->input->post('fluos');
+        $dataAnalise['dureza']      = (double)$this->input->post('dureza');
+        
+        if($this->input->post('alcalinidade') == "sim"){
+            $dataAnalise['alcalinidade'] = 'sim';
+        }else{
+            $dataAnalise['alcalinidade'] = 'não';
+        }
+        
+        $dataAnalise['solidos_tot_dissolvidos']  = (double)$this->input->post('solidos_tot_dissolvidos');
+        $dataAnalise['temperatura']      = (double)$this->input->post('tempertura');
+        $dataAnalise['data']  = $this->input->post('data');
+        $dataAnalise['responsavel']      = $this->input->post('responsavel');
+
+        $this->db->insert('qualidade_agua', $dataAnalise);
+        if($this->db->affected_rows() > 0){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    
     public function inativar($utme = NULL, $utmn = NULL){
         if(isset($utme) && isset($utmn) && !empty($utme) && !empty($utmn) ){
             $data['ativo'] = '0';
@@ -100,6 +161,21 @@ class Poco_model extends CI_Model{
         }
     }
     
+    public function inativar_analises($sequencia = NULL){
+        if(isset($sequencia) && !empty($sequencia)){
+            $data['ativo'] = '0';
+
+            $this->db->update('qualidade_agua', $data, array('sequencia' => $sequencia));
+            if($this->db->affected_rows() > 0){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }else{
+            return FALSE;
+        }
+    }
+    
     public function cons_poco($utme = NULL, $utmn = NULL){
         // Monta a consulta SQL e retorna um objeto
         return $this->db->select('*')
@@ -107,6 +183,14 @@ class Poco_model extends CI_Model{
                         ->join('capacidade_poco c','p.utme = c.poco_utme and p.utmn = c.poco_utmn','left')
                         ->where('p.utme = "'.$utme.'"')
                         ->where('p.utmn = "'.$utmn.'"')
+                        ->get()->result();
+    }
+    
+    public function cons_analise($sequencia = NULL){
+        // Monta a consulta SQL e retorna um objeto
+        return $this->db->select('*')
+                        ->from('qualidade_agua q')
+                        ->where('q.sequencia = "'.$sequencia.'"')
                         ->get()->result();
     }
     
@@ -134,18 +218,59 @@ class Poco_model extends CI_Model{
             $dataCap['municipio_cod_ibge']       = $this->input->post('municipios_cod_ibge');
             $dataCap['ativo']      = '1';
 
-            $this->db->update('poco', $dataPoco, array('utme' => $oldDataPoco['oldutme'],
+            $gravou = $this->db->update('poco', $dataPoco, array('utme' => $oldDataPoco['oldutme'],
                                                        'utmn' => $oldDataPoco['oldutmn']));
             
-            if($this->db->affected_rows() > 0){
-                
-                $this->db->update('capacidade_poco', $dataCap, array('poco_utme' => $dataPoco['utme'],
-                                                                     'poco_utmn' => $dataPoco['utmn']));    
-                    if ($this->db->affected_rows() > 0){
-                        return TRUE;
-                    }else{
-                        return FALSE;
-                    }
+            if($gravou == 1){
+                $gravou = $this->db->update('capacidade_poco', $dataCap, array('poco_utme' => $dataPoco['utme'],
+                                                                 'poco_utmn' => $dataPoco['utmn']));
+                if($gravou == 1){
+                    return TRUE;
+                }else{
+                    return FALSE;
+                }
+            }else{
+                return FALSE;
+            }
+            
+            
+            
+  
+    }
+    
+    public function gravar_edicao_analise(){
+            $dataAnalise['sequencia'] = $this->input->post('sequencia');
+            $dataAnalise['poco_utme']       = $this->input->post('oldutme');
+            $dataAnalise['poco_utmn']  = $this->input->post('oldutmn');
+            $dataAnalise['ponto']      = (double)$this->input->post('ponto');
+            $dataAnalise['sodio']       = (double)$this->input->post('sodio');
+            $dataAnalise['potassio']  = (double)$this->input->post('potassio');
+            $dataAnalise['calcio']      = (double)$this->input->post('calcio');
+            $dataAnalise['magnesio']      = (double)$this->input->post('magnesio');
+            $dataAnalise['cloretos']       = (double)$this->input->post('cloretos');
+            $dataAnalise['sulfatos']  = (double)$this->input->post('sulfatos');
+            $dataAnalise['carbonatos']      = (double)$this->input->post('carbonatos');
+            $dataAnalise['bicarbonatos']      = (double)$this->input->post('bicarbonatos');
+            $dataAnalise['condutividade_eletrica']       = (double)$this->input->post('condutividade_eletrica');
+            $dataAnalise['ph']  = (double)$this->input->post('ph');
+            $dataAnalise['fluor']      = (double)$this->input->post('fluos');
+            $dataAnalise['dureza']      = (double)$this->input->post('dureza');
+
+            if($this->input->post('alcalinidade') == "sim"){
+                $dataAnalise['alcalinidade'] = 'sim';
+            }else{
+                $dataAnalise['alcalinidade'] = 'não';
+            }
+
+            $dataAnalise['solidos_tot_dissolvidos']  = (double)$this->input->post('solidos_tot_dissolvidos');
+            $dataAnalise['temperatura']      = (double)$this->input->post('tempertura');
+            $dataAnalise['data']  = $this->input->post('data');
+            $dataAnalise['responsavel']      = $this->input->post('responsavel');
+
+            $editou = $this->db->update('qualidade_agua', $dataAnalise, array('sequencia' => $dataAnalise['sequencia']));
+            
+            if($editou == 1){
+                return TRUE;
             }else{
                 return FALSE;
             }

@@ -61,7 +61,7 @@ $route['adm/pocos'] = 'adm/pocos';
 $route['adm/gravar_edicao'] = 'adm/gravar_edicao';
 $route['adm/inativar_poco'] = 'adm/inativar_poco';
 $route['adm/editar_poco'] = 'adm/editar_poco';
-$route['adm/editar_poco'] = 'adm/editar_poco';
+$route['adm/editar_analise'] = 'adm/editar_analise';
 
 $route['adm/cons_poco'] = 'adm/rel_pocos';
 

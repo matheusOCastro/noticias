@@ -9757,8 +9757,8 @@ function almiranteCidades(event) {
  
     var contentString = '<b>Almirante Tamandaré do Sul</b><br>';
 
-    contentString += 'População - 2.067<br>'+
-                     'Poços - 17';
+    contentString += 'População: 2.067<br>'+
+                     'Poços: 17';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9771,8 +9771,8 @@ function alpestreCidades(event) {
  
     var contentString = '<b>Alpestre</b><br>';
 
-    contentString += 'População - 8.027<br>'+
-                     'Poços - 17';
+    contentString += 'População: 8.027<br>'+
+                     'Poços: 17';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9785,8 +9785,8 @@ function ametistaCidades(event) {
  
     var contentString = '<b>Ametista do Sul</b><br>';
 
-    contentString += 'População - 7.323<br>'+
-                     'Poços - 21';
+    contentString += 'População: 7.323<br>'+
+                     'Poços: 21';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9799,8 +9799,8 @@ function barraGuaritaCidades(event) {
  
     var contentString = '<b>Barra do Guarita</b><br>';
 
-    contentString += 'População - 3.089<br>'+
-                      'Poços - 7';
+    contentString += 'População: 3.089<br>'+
+                      'Poços: 7';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9813,8 +9813,8 @@ function barraFundaCidades(event) {
  
     var contentString = '<b>Barra Funda</b><br>';
 
-    contentString += 'População - 2.367<br>'+
-                     'Poços - 17';
+    contentString += 'População: 2.367<br>'+
+                     'Poços: 17';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9827,8 +9827,8 @@ function boaVistaCidades(event) {
  
     var contentString = '<b>Boa Vista das Missões</b><br>';
 
-    contentString += 'População - 2.114<br>'+
-                     'Poços - 15';
+    contentString += 'População: 2.114<br>'+
+                     'Poços: 15';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9841,8 +9841,8 @@ function caicaraCidades(event) {
  
     var contentString = '<b>Caiçara</b><br>';
 
-    contentString += 'População - 5.071<br>'+
-                     'Poços - 22';
+    contentString += 'População: 5.071<br>'+
+                     'Poços: 22';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9855,8 +9855,8 @@ function carazinhoCidades(event) {
  
     var contentString = '<b>Carazinho</b><br>';
 
-    contentString += 'População - 59.317<br>'+
-                     'Poços - 7';
+    contentString += 'População: 59.317<br>'+
+                     'Poços: 7';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9869,8 +9869,8 @@ function cerroCidades(event) {
  
     var contentString = '<b>Cerro Grande</b><br>';
 
-    contentString += 'População - 2.417<br>'+
-                     'Poços - 1';
+    contentString += 'População: 2.417<br>'+
+                     'Poços: 1';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9883,8 +9883,8 @@ function chapadaCidades(event) {
  
     var contentString = '<b>Chapada</b><br>';
 
-    contentString += 'População - 9.377<br>'+
-                     'Poços - 13';
+    contentString += 'População: 9.377<br>'+
+                     'Poços: 13';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9897,8 +9897,8 @@ function constantinaCidades(event) {
  
     var contentString = '<b>Constantina</b><br>';
 
-    contentString += 'População - 9.752<br>'+
-                     'Poços - 27';
+    contentString += 'População: 9.752<br>'+
+                     'Poços: 27';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9911,8 +9911,8 @@ function coqueirosCidades(event) {
  
     var contentString = '<b>Coqueiros do Sul</b><br>';
 
-    contentString += 'População - 2.457<br>'+
-                     'Poços - 13';
+    contentString += 'População: 2.457<br>'+
+                     'Poços: 13';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9925,8 +9925,8 @@ function coronelCidades(event) {
  
     var contentString = '<b>Coronel Bicaco</b><br>';
 
-    contentString += 'População - 7.748<br>'+
-                     'Poços - 1';
+    contentString += 'População: 7.748<br>'+
+                     'Poços: 1';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9939,8 +9939,8 @@ function cristalCidades(event) {
  
     var contentString = '<b>Cristal do Sul</b><br>';
 
-    contentString += 'População - 2.826<br>'+
-                     'Poços - 24';
+    contentString += 'População: 2.826<br>'+
+                     'Poços: 24';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9953,8 +9953,8 @@ function derrubadasCidades(event) {
  
     var contentString = '<b>Derrubadas</b><br>';
 
-    contentString += 'População - 3.190<br>'+
-                     'Poços - 8';;
+    contentString += 'População: 3.190<br>'+
+                     'Poços: 8';;
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9967,8 +9967,8 @@ function doisIrmaosCidades(event) {
  
     var contentString = '<b>Dois Irmãos das Missões</b><br>';
 
-    contentString += 'População - 2.157<br>'+
-                     'Poços - 0';
+    contentString += 'População: 2.157<br>'+
+                     'Poços: 0';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9981,8 +9981,8 @@ function engenhoCidades(event) {
  
     var contentString = '<b>Engenho Velho</b><br>';
 
-    contentString += 'População - 1.527<br>'+
-                     'Poços - 6';
+    contentString += 'População: 1.527<br>'+
+                     'Poços: 6';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -9995,8 +9995,8 @@ function ervalCidades(event) {
  
     var contentString = '<b>Erval Seco</b><br>';
 
-    contentString += 'População - 7.878<br>'+
-                     'Poços - 2';
+    contentString += 'População: 7.878<br>'+
+                     'Poços: 2';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10009,8 +10009,8 @@ function fredericoCidades(event) {
  
     var contentString = '<b>Frederico Westphalen</b><br>';
 
-    contentString += 'População - 28.843<br>'+
-                     'Poços - 70';
+    contentString += 'População: 28.843<br>'+
+                     'Poços: 70';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10023,8 +10023,8 @@ function gramadoCidades(event) {
  
     var contentString = '<b>Gramado dos Loureiros</b><br>';
 
-    contentString += 'População - 2.269<br>'+
-                     'Poços - 11';
+    contentString += 'População: 2.269<br>'+
+                     'Poços: 11';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10037,8 +10037,8 @@ function iraiCidades(event) {
  
     var contentString = '<b>Iraí</b><br>';
 
-    contentString += 'População - 8.078<br>'+
-                     'Poços - 16';
+    contentString += 'População: 8.078<br>'+
+                     'Poços: 16';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10051,8 +10051,8 @@ function jaboticabaCidades(event) {
  
     var contentString = '<b>Jaboticaba</b><br>';
 
-    contentString += 'População - 4.098<br>'+
-                     'Poços - 0';
+    contentString += 'População: 4.098<br>'+
+                     'Poços: 0';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10065,8 +10065,8 @@ function lajeadoCidades(event) {
  
     var contentString = '<b>Lajeado do Bugre</b><br>';
 
-    contentString += 'População - 2.487<br>'+
-                     'Poços - 0';
+    contentString += 'População: 2.487<br>'+
+                     'Poços: 0';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10079,8 +10079,8 @@ function liberatoCidades(event) {
  
     var contentString = '<b>Liberato Salzano</b><br>';
 
-    contentString += 'População - 5.780<br>'+
-                     'Poços - 41';
+    contentString += 'População: 5.780<br>'+
+                     'Poços: 41';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10093,8 +10093,8 @@ function miraguaiCidades(event) {
  
     var contentString = '<b>Miraguaí</b><br>';
 
-    contentString += 'População - 4.855<br>'+
-                     'Poços - 3';
+    contentString += 'População: 4.855<br>'+
+                     'Poços: 3';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10107,8 +10107,8 @@ function nonoaiCidades(event) {
  
     var contentString = '<b>Nonoai</b><br>';
 
-    contentString += 'População - 12.074<br>'+
-                     'Poços - 0';
+    contentString += 'População: 12.074<br>'+
+                     'Poços: 0';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10121,8 +10121,8 @@ function novaBoaVistaCidades(event) {
  
     var contentString = '<b>Nova Boa Vista</b><br>';
 
-    contentString += 'População - 1.960<br>'+
-                     'Poços - 15';
+    contentString += 'População: 1.960<br>'+
+                     'Poços: 15';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10135,8 +10135,8 @@ function novoTiradentesCidades(event) {
  
     var contentString = '<b>Novo Tiradentes</b><br>';
 
-    contentString += 'População - 2.277<br>'+
-                     'Poços - 8';
+    contentString += 'População: 2.277<br>'+
+                     'Poços: 8';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10149,8 +10149,8 @@ function novoXinguCidades(event) {
  
     var contentString = '<b>Novo Xingu</b><br>';
 
-    contentString += 'População - 1.757<br>'+
-                     'Poços - 10';
+    contentString += 'População: 1.757<br>'+
+                     'Poços: 10';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10163,8 +10163,8 @@ function novoBarreiroCidades(event) {
  
     var contentString = '<b>Novo Barreiro</b><br>';
 
-    contentString += 'População - 3.978<br>'+
-                     'Poços - 0';
+    contentString += 'População: 3.978<br>'+
+                     'Poços: 0';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10177,8 +10177,8 @@ function palmeiraCidades(event) {
  
     var contentString = '<b>Palmeira das Missões</b><br>';
 
-    contentString += 'População - 34.328<br>'+
-                     'Poços - 136';
+    contentString += 'População: 34.328<br>'+
+                     'Poços: 136';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10191,8 +10191,8 @@ function palmitinhoCidades(event) {
  
     var contentString = '<b>Palmitinho</b><br>';
 
-    contentString += 'População - 6.920<br>'+
-                     'Poços - 14';
+    contentString += 'População: 6.920<br>'+
+                     'Poços: 14';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10205,8 +10205,8 @@ function passoFundoCidades(event) {
  
     var contentString = '<b>Passo Fundo</b><br>';
 
-    contentString += 'População - 184.826<br>'+
-                     'Poços - 5';
+    contentString += 'População: 184.826<br>'+
+                     'Poços: 5';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10219,8 +10219,8 @@ function pinhalCidades(event) {
  
     var contentString = '<b>Pinhal</b><br>';
 
-    contentString += 'População - 2.513<br>'+
-                     'Poços - 0';
+    contentString += 'População: 2.513<br>'+
+                     'Poços: 0';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10233,8 +10233,8 @@ function pinheirinhoCidades(event) {
  
     var contentString = '<b>Pinheirinho do Vale</b><br>';
 
-    contentString += 'População - 4.497<br>'+
-                     'Poços - 15';
+    contentString += 'População: 4.497<br>'+
+                     'Poços: 15';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10247,8 +10247,8 @@ function planaltoCidades(event) {
  
     var contentString = '<b>Planalto</b><br>';
 
-    contentString += 'População - 10.524<br>'+
-                     'Poços - 6';
+    contentString += 'População: 10.524<br>'+
+                     'Poços: 6';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10261,8 +10261,8 @@ function pontaoCidades(event) {
  
     var contentString = '<b>Pontao</b><br>';
 
-    contentString += 'População - 3.857<br>'+
-                     'Poços - 13';
+    contentString += 'População: 3.857<br>'+
+                     'Poços: 13';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10275,8 +10275,8 @@ function redentoreCidades(event) {
  
     var contentString = '<b>Redentora</b><br>';
 
-    contentString += 'População - 10.222<br>'+
-                     'Poços - 5';
+    contentString += 'População: 10.222<br>'+
+                     'Poços: 5';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10289,8 +10289,8 @@ function riodosIndiosCidades(event) {
  
     var contentString = '<b>Rio dos Índios</b><br>';
 
-    contentString += 'População - 3.616<br>'+
-                     'Poços - 3';
+    contentString += 'População: 3.616<br>'+
+                     'Poços: 3';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10303,8 +10303,8 @@ function rodeioCidades(event) {
  
     var contentString = '<b>Rodeio Bonito</b><br>';
 
-    contentString += 'População - 5.743<br>'+
-                     'Poços - 41';
+    contentString += 'População: 5.743<br>'+
+                     'Poços: 41';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10317,8 +10317,8 @@ function rondaCidades(event) {
  
     var contentString = '<b>Ronda Alta</b><br>';
 
-    contentString += 'População - 10.221<br>'+
-                     'Poços - 15';
+    contentString += 'População: 10.221<br>'+
+                     'Poços: 15';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10331,8 +10331,8 @@ function rondinhaCidades(event) {
  
     var contentString = '<b>Rondinha</b><br>';
 
-    contentString += 'População - 5.518<br>'+
-                     'Poços - 35';
+    contentString += 'População: 5.518<br>'+
+                     'Poços: 35';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10345,8 +10345,8 @@ function sagradaCidades(event) {
  
     var contentString = '<b>Sagrada Familia</b><br>';
 
-    contentString += 'População - 2.595<br>'+
-                     'Poços - 0';
+    contentString += 'População: 2.595<br>'+
+                     'Poços: 0';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10359,8 +10359,8 @@ function santoAntonioCidades(event) {
  
     var contentString = '<b>Santo Antônio do Planalto</b><br>';
 
-    contentString += 'População - 1.987<br>'+
-                     'Poços - 2';
+    contentString += 'População: 1.987<br>'+
+                     'Poços: 2';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10373,8 +10373,8 @@ function saoJoseCidades(event) {
  
     var contentString = '<b>São josé das Missões</b><br>';
 
-    contentString += 'População - 2.720<br>'+
-                     'Poços - 0';
+    contentString += 'População: 2.720<br>'+
+                     'Poços: 0';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10387,8 +10387,8 @@ function saoPedroCidades(event) {
  
     var contentString = '<b>São Pedro das Missões</b><br>';
 
-    contentString += 'População - 6.364<br>'+
-                     'Poços - 0';
+    contentString += 'População: 6.364<br>'+
+                     'Poços: 0';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10401,8 +10401,8 @@ function sarandiCidades(event) {
  
     var contentString = '<b>Sarandi</b><br>';
 
-    contentString += 'População - 21.285<br>'+
-                     'Poços - 50';
+    contentString += 'População: 21.285<br>'+
+                     'Poços: 50';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10415,8 +10415,8 @@ function seberiCidades(event) {
  
     var contentString = '<b>Seberi</b><br>';
 
-    contentString += 'População - 10.897<br>'+
-                     'Poços - 19';
+    contentString += 'População: 10.897<br>'+
+                     'Poços: 19';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10429,8 +10429,8 @@ function taquarucuCidades(event) {
  
     var contentString = '<b>Taquaruçu do Sul</b><br>';
 
-    contentString += 'População - 2.966<br>'+
-                     'Poços - 23';
+    contentString += 'População: 2.966<br>'+
+                     'Poços: 23';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10443,8 +10443,8 @@ function tenenteCidades(event) {
  
     var contentString = '<b>Tenente Portela</b><br>';
 
-    contentString += 'População - 13.719<br>'+
-                     'Poços - 52';
+    contentString += 'População: 13.719<br>'+
+                     'Poços: 52';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10457,8 +10457,8 @@ function tresPalmeirasCidades(event) {
  
     var contentString = '<b>Tres Palmeiras</b><br>';
 
-    contentString += 'População - 4.381<br>'+
-                     'Poços - 1';
+    contentString += 'População: 4.381<br>'+
+                     'Poços: 1';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10471,8 +10471,8 @@ function trindadeCidades(event) {
  
     var contentString = '<b>Trindade do Sul</b><br>';
 
-    contentString += 'População - 5.787<br>'+
-                     'Poços - 11';
+    contentString += 'População: 5.787<br>'+
+                     'Poços: 11';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10485,8 +10485,8 @@ function vicenteCidades(event) {
  
     var contentString = '<b>Vicente Dutra</b><br>';
 
-    contentString += 'População - 5.285<br>'+
-                     'Poços - 44';
+    contentString += 'População: 5.285<br>'+
+                     'Poços: 44';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10499,8 +10499,8 @@ function vistaAlegreCidades(event) {
  
     var contentString = '<b>Vista Alegre</b><br>';
 
-    contentString += 'População - 2.832<br>'+
-                     'Poços - 10';
+    contentString += 'População: 2.832<br>'+
+                     'Poços: 10';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);
@@ -10513,8 +10513,8 @@ function vistaGauchaCidades(event) {
  
     var contentString = '<b>Vista Gaucha</b><br>';
 
-    contentString += 'População - 2.759<br>'+
-                     'Poços - 24';
+    contentString += 'População: 2.759<br>'+
+                     'Poços: 24';
   // Replace the info window's content and position.
   infoWindow.setContent(contentString);
   infoWindow.setPosition(event.latLng);

@@ -76,6 +76,24 @@ class Adm extends CI_Controller {
             redirect('adm/pocos','refresh');
         }
     }
+    
+    public function cadastrar_analise(){
+        // Seta as regras para validação do formulário
+        $this->form_validation->set_rules('utme', '<strong>UTME</strong>', 'required|trim');
+        $this->form_validation->set_rules('utmn', '<strong>UTMN</strong>', 'required|trim');
+        $this->form_validation->set_rules('data', '<strong>Data</strong>', 'required|trim');
+       if($this->form_validation->run() === FALSE){
+            $this->analises();
+        }else{
+            // Se é feito o cadastro no bd é retornado true
+            if($this->PM->cadastrar_analise() === TRUE){
+                $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Seu cadastro foi efetuado sem erros.</div>');
+            }else{
+                $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Seu cadastro não foi efetuado.</div>');
+            }
+            redirect('adm/analises','refresh');
+        }
+    }
     /*
     public function pocos() {
     
@@ -129,14 +147,30 @@ class Adm extends CI_Controller {
            
     }
    
-    public function analises() {
+    public function analises($utme = NULL,$utmn=NULL) {
         if($this->session->userdata('logado')==true){
+            $dataConsAnalise['poco_utme'] = $this->input->post('poco_utme');
+            $dataConsAnalise['poco_utmn'] = $this->input->post('poco_utmn');
+            $dataConsAnalise['data'] = $this->input->post('data');
+                       
+            $lista_analise = NULL;
+            
+            if(isset($dataConsAnalise['poco_utme']) || isset($dataConsAnalise['poco_utmn']) || isset($dataConsAnalise['data'])){
+                $lista_analise = $this->PM->listar_analises();
+            }
+            $dados = array(
+                    'utme' => $utme,
+                    'utmn' => $utmn,
+                    'analise' => $lista_analise
+                );
+            
             $this->load->view('adm/template/header');
-            $this->load->view('adm/analises');
-            $this->load->view('adm/template/footer'); 
+            $this->load->view('adm/analises', $dados);
+            $this->load->view('adm/template/footer');
         }else{
             redirect(site_url('login'));
         }
+ 
     }
     
     public function inativar_poco($editUtme = NULL,$editUtmn=NULL){
@@ -147,6 +181,21 @@ class Adm extends CI_Controller {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Não foi possível inativar o posso.</div>');
             }
             redirect('adm/pocos','refresh');
+        }else{
+            redirect(site_url('login'));
+        }
+        
+        
+    }
+    
+    public function inativar_analise($sequencia=NULL){
+        if($this->session->userdata('logado')==true){
+            if($this->PM->inativar_analises($sequencia) === TRUE){
+                $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Análise inativada com sucesso.</div>');
+            }else{
+                $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Não foi possível inativar a análise.</div>');
+            }
+            redirect('adm/analises','refresh');
         }else{
             redirect(site_url('login'));
         }
@@ -167,7 +216,23 @@ class Adm extends CI_Controller {
             $this->load->view('adm/editar_poco', $dados);
             $this->load->view('adm/template/footer');
         }else{
-            redirect('adm/pocos','refresh');
+            redirect(site_url('login'));
+        }
+    }
+    
+    public function editar_analise($sequencia=NULL){
+        if($this->session->userdata('logado')==true){
+            $local_analises = $this->PM->cons_analise($sequencia);
+            
+            $dados = array(
+                    'analise' => $local_analises
+                );
+            
+            $this->load->view('adm/template/header');
+            $this->load->view('adm/editar_analise', $dados);
+            $this->load->view('adm/template/footer');
+        }else{
+            redirect(site_url('login'));
         }
     }
     
@@ -241,6 +306,23 @@ class Adm extends CI_Controller {
                 $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Não foi possível editar o cadastro.</div>');
             }
             redirect('adm/pocos','refresh');
+        }
+    }
+    
+    public function gravar_edicao_analise(){
+        $this->form_validation->set_rules('utme', '<strong>UTME</strong>', 'required|trim');
+        $this->form_validation->set_rules('utmn', '<strong>UTMN</strong>', 'required|trim');
+        $this->form_validation->set_rules('data', '<strong>Data</strong>', 'required|trim');
+        
+        if($this->form_validation->run() === FALSE){
+            $this->editar_analise($this->input->post('oldutme'),$this->input->post('oldutmn'),$this->input->post('sequencia'));
+        }else{
+            if($this->PM->gravar_edicao_analise() === TRUE){
+                $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Análise editada sem erros.</div>');
+            }else{
+                $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Não foi possível editar a análise.</div>');
+            }
+            redirect('adm/analises','refresh');
         }
     }
     

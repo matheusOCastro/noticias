@@ -78,9 +78,11 @@
                         <li <?=echoActiveClassIfRequestMatches("")?>><a class="glyphicon glyphicon-home" href="<?php echo base_url('/')?>">&nbsp;HOME </a></li>
                         <li <?=echoActiveClassIfRequestMatches("mapapocos")?>><a class="glyphicon glyphicon-map-marker" href="<?php echo base_url('/mapapocos')?>">&nbsp;POÇOS </a></li>
                         <li <?=echoActiveClassIfRequestMatches("login")?>><a class="glyphicon glyphicon-wrench" href="<?php echo base_url('/login')?>">&nbsp;ADMINISTRAÇÃO </a></li>
-                        <li <?=echoActiveClassIfRequestMatches("sobre")?>><a class="glyphicon glyphicon-info-sign" href="<?php echo base_url('/sobre')?>">&nbsp;SOBRE</a></li>
-
                       </ul>
+                        
+                        <ul class="nav navbar-nav navbar-right">
+                            <li <?=echoActiveClassIfRequestMatches("sobre")?>><a class="glyphicon glyphicon-info-sign" href="<?php echo base_url('/sobre')?>">&nbsp;SOBRE</a></li>
+                        </ul>
 
 
                     </div><!-- /.navbar-collapse -->
