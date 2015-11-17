@@ -54,45 +54,53 @@ class Adm extends CI_Controller {
 
     
     public function cadastrar(){
-        // Seta as regras para validação do formulário
-        $this->form_validation->set_rules('utme', '<strong>UTME</strong>', 'required|trim');
-        $this->form_validation->set_rules('utmn', '<strong>UTMN</strong>', 'required|trim');
-        $this->form_validation->set_rules('latitudese', '<strong>Latitude</strong>', 'required|trim');
-        $this->form_validation->set_rules('longitudes', '<strong>Longitude</strong>', 'required|trim');
-        
-        $this->form_validation->set_rules('uso_agua', '<strong>Uso da Água</strong>', 'required|trim');
-        $this->form_validation->set_rules('situacao', '<strong>Situação</strong>', 'required|trim');
-        $this->form_validation->set_rules('municipios_cod_ibge', '<strong>Município</strong>', 'required|trim');
-        $this->form_validation->set_rules('bacia_varzea_cod_bacia', '<strong>Bacia</strong>', 'required|trim');
-        if($this->form_validation->run() === FALSE){
-            $this->pocos();
-        }else{
-            // Se é feito o cadastro no bd é retornado true
-            if($this->PM->cadastrar() === TRUE){
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Seu cadastro foi efetuado sem erros.</div>');
+        if($this->session->userdata('logado')==true){
+            // Seta as regras para validação do formulário
+            $this->form_validation->set_rules('utme', '<strong>UTME</strong>', 'required|trim');
+            $this->form_validation->set_rules('utmn', '<strong>UTMN</strong>', 'required|trim');
+            $this->form_validation->set_rules('latitudese', '<strong>Latitude</strong>', 'required|trim');
+            $this->form_validation->set_rules('longitudes', '<strong>Longitude</strong>', 'required|trim');
+
+            $this->form_validation->set_rules('uso_agua', '<strong>Uso da Água</strong>', 'required|trim');
+            $this->form_validation->set_rules('situacao', '<strong>Situação</strong>', 'required|trim');
+            $this->form_validation->set_rules('municipios_cod_ibge', '<strong>Município</strong>', 'required|trim');
+            $this->form_validation->set_rules('bacia_varzea_cod_bacia', '<strong>Bacia</strong>', 'required|trim');
+            if($this->form_validation->run() === FALSE){
+                $this->pocos();
             }else{
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Seu cadastro não foi efetuado.</div>');
+                // Se é feito o cadastro no bd é retornado true
+                if($this->PM->cadastrar() === TRUE){
+                    $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Seu cadastro foi efetuado sem erros.</div>');
+                }else{
+                    $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Seu cadastro não foi efetuado.</div>');
+                }
+                redirect('adm/pocos','refresh');
             }
-            redirect('adm/pocos','refresh');
+        }else{
+            redirect(site_url('login'));
         }
     }
     
     public function cadastrar_analise(){
-        // Seta as regras para validação do formulário
-        $this->form_validation->set_rules('utme', '<strong>UTME</strong>', 'required|trim');
-        $this->form_validation->set_rules('utmn', '<strong>UTMN</strong>', 'required|trim');
-        $this->form_validation->set_rules('data', '<strong>Data</strong>', 'required|trim');
-       if($this->form_validation->run() === FALSE){
-            $this->analises();
-        }else{
-            // Se é feito o cadastro no bd é retornado true
-            if($this->PM->cadastrar_analise() === TRUE){
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Seu cadastro foi efetuado sem erros.</div>');
+        if($this->session->userdata('logado')==true){
+            // Seta as regras para validação do formulário
+            $this->form_validation->set_rules('utme', '<strong>UTME</strong>', 'required|trim');
+            $this->form_validation->set_rules('utmn', '<strong>UTMN</strong>', 'required|trim');
+            $this->form_validation->set_rules('data', '<strong>Data</strong>', 'required|trim');
+            if($this->form_validation->run() === FALSE){
+                $this->analises();
             }else{
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Seu cadastro não foi efetuado.</div>');
+                // Se é feito o cadastro no bd é retornado true
+                if($this->PM->cadastrar_analise() === TRUE){
+                    $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Seu cadastro foi efetuado sem erros.</div>');
+                }else{
+                    $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Seu cadastro não foi efetuado.</div>');
+                }
+                redirect('adm/analises','refresh');
             }
-            redirect('adm/analises','refresh');
-        }
+        }else{
+            redirect(site_url('login'));
+        }    
     }
     /*
     public function pocos() {
@@ -287,42 +295,50 @@ class Adm extends CI_Controller {
     }
     
     public function gravar_edicao(){
-        $this->form_validation->set_rules('utme', '<strong>UTME</strong>', 'required|trim');
-        $this->form_validation->set_rules('utmn', '<strong>UTMN</strong>', 'required|trim');
-        $this->form_validation->set_rules('latitudese', '<strong>Latitude</strong>', 'required|trim');
-        $this->form_validation->set_rules('longitudes', '<strong>Longitude</strong>', 'required|trim');
-        
-        $this->form_validation->set_rules('uso_agua', '<strong>Uso da Água</strong>', 'required|trim');
-        $this->form_validation->set_rules('situacao', '<strong>Situação</strong>', 'required|trim');
-        $this->form_validation->set_rules('municipios_cod_ibge', '<strong>Município</strong>', 'required|trim');
-        $this->form_validation->set_rules('bacia_varzea_cod_bacia', '<strong>Bacia</strong>', 'required|trim');
-        
-        if($this->form_validation->run() === FALSE){
-            $this->editar_poco($this->input->post('oldutme'),$this->input->post('oldutmn'));
-        }else{
-            if($this->PM->gravar_edicao() === TRUE){
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Cadastro editado sem erros.</div>');
+        if($this->session->userdata('logado')==true){
+            $this->form_validation->set_rules('utme', '<strong>UTME</strong>', 'required|trim');
+            $this->form_validation->set_rules('utmn', '<strong>UTMN</strong>', 'required|trim');
+            $this->form_validation->set_rules('latitudese', '<strong>Latitude</strong>', 'required|trim');
+            $this->form_validation->set_rules('longitudes', '<strong>Longitude</strong>', 'required|trim');
+
+            $this->form_validation->set_rules('uso_agua', '<strong>Uso da Água</strong>', 'required|trim');
+            $this->form_validation->set_rules('situacao', '<strong>Situação</strong>', 'required|trim');
+            $this->form_validation->set_rules('municipios_cod_ibge', '<strong>Município</strong>', 'required|trim');
+            $this->form_validation->set_rules('bacia_varzea_cod_bacia', '<strong>Bacia</strong>', 'required|trim');
+
+            if($this->form_validation->run() === FALSE){
+                $this->editar_poco($this->input->post('oldutme'),$this->input->post('oldutmn'));
             }else{
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Não foi possível editar o cadastro.</div>');
+                if($this->PM->gravar_edicao() === TRUE){
+                    $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Cadastro editado sem erros.</div>');
+                }else{
+                    $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Não foi possível editar o cadastro.</div>');
+                }
+                redirect('adm/pocos','refresh');
             }
-            redirect('adm/pocos','refresh');
-        }
+        }else{
+            redirect(site_url('login'));
+        }    
     }
     
     public function gravar_edicao_analise(){
-        $this->form_validation->set_rules('utme', '<strong>UTME</strong>', 'required|trim');
-        $this->form_validation->set_rules('utmn', '<strong>UTMN</strong>', 'required|trim');
-        $this->form_validation->set_rules('data', '<strong>Data</strong>', 'required|trim');
-        
-        if($this->form_validation->run() === FALSE){
-            $this->editar_analise($this->input->post('oldutme'),$this->input->post('oldutmn'),$this->input->post('sequencia'));
-        }else{
-            if($this->PM->gravar_edicao_analise() === TRUE){
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Análise editada sem erros.</div>');
+        if($this->session->userdata('logado')==true){    
+            $this->form_validation->set_rules('utme', '<strong>UTME</strong>', 'required|trim');
+            $this->form_validation->set_rules('utmn', '<strong>UTMN</strong>', 'required|trim');
+            $this->form_validation->set_rules('data', '<strong>Data</strong>', 'required|trim');
+
+            if($this->form_validation->run() === FALSE){
+                $this->editar_analise($this->input->post('oldutme'),$this->input->post('oldutmn'),$this->input->post('sequencia'));
             }else{
-                $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Não foi possível editar a análise.</div>');
+                if($this->PM->gravar_edicao_analise() === TRUE){
+                    $this->session->set_flashdata('mensagem', '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Sucesso!</strong> Análise editada sem erros.</div>');
+                }else{
+                    $this->session->set_flashdata('mensagem', '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong><span class="glyphicon glyphicon-ok"></span> Erro!</strong> Não foi possível editar a análise.</div>');
+                }
+                redirect('adm/analises','refresh');
             }
-            redirect('adm/analises','refresh');
+        }else{
+            redirect(site_url('login'));
         }
     }
     

@@ -143,12 +143,12 @@ class Poco_model extends CI_Model{
         if(isset($utme) && isset($utmn) && !empty($utme) && !empty($utmn) ){
             $data['ativo'] = '0';
 
-            $this->db->update('poco', $data, array('utme' => $utme,
-                                                   'utmn' => $utmn));
-            if($this->db->affected_rows() > 0){
-                $this->db->update('capacidade_poco', $data, array('poco_utme' => $utme,
+            $gravou = $this->db->update('poco', $data, array('utme' => $utme,
+                                        'utmn' => $utmn));
+            if($gravou == 1){
+                $gravou = $this->db->update('capacidade_poco', $data, array('poco_utme' => $utme,
                                                                   'poco_utmn' => $utmn));
-                if ($this->db->affected_rows() > 0){
+                if ($gravou == 1){
                     return TRUE;
                 }else{
                     return FALSE;

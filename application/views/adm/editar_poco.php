@@ -27,7 +27,7 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="utme">*UTME</label>
-                <input type="text" name="utme" class="form-control" id="utme" placeholder="UTME" onkeypress="return SomenteNumeroCoord(event)" value="<?php echo($poco->utme)?>">
+                <input type="text" name="utme" class="form-control" id="utme" placeholder="UTME" onkeypress="return SomenteNumeroCoord(event)" value="<?php echo($poco->utme)?>" disabled>
                 <input type="hidden" name="oldutme" class="form-control" id="oldutme" placeholder="UTME" value="<?php echo($poco->utme)?>">
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="utmn">*UTMN</label>
-                <input type="text" name="utmn" class="form-control" id="utmn" placeholder="UTMN" onkeypress="return SomenteNumeroCoord(event)" value="<?php echo($poco->utmn)?>">
+                <input type="text" name="utmn" class="form-control" id="utmn" placeholder="UTMN" onkeypress="return SomenteNumeroCoord(event)" value="<?php echo($poco->utmn)?>"disabled>
                 <input type="hidden" name="oldutmn" class="form-control" id="oldutmn" placeholder="UTMN" value="<?php echo($poco->utmn)?>">
             </div>
         </div> 
