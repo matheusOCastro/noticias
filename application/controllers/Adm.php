@@ -102,36 +102,7 @@ class Adm extends CI_Controller {
             redirect(site_url('login'));
         }    
     }
-    /*
-    public function pocos() {
     
-        if($this->session->userdata('logado')==true){
-            $dataConsPoco['consutme'] = $this->input->post('consutme');
-            $dataConsPoco['consutmn'] = $this->input->post('consutmn');
-            $dataConsPoco['consmunicipios_cod'] = $this->input->post('consmunicipios_cod');
-            $dataConsPoco['conssituacao'] = $this->input->post('consituacao');
-                       
-            $cidades = $this->PM->listar_municipio();
-            $lista_pocos = NULL;
-            
-            if(isset($dataConsPoco['consutme']) || isset($dataConsPoco['consutmn']) || isset($dataConsPoco['consmunicipios_cod']) || isset($dataConsPoco['conssituacao'])){
-                $lista_pocos = $this->PM->listar_pocos();
-            }
-            
-            $dados = array(
-                        'city' => $cidades,
-                        'conscity' => $cidades,
-                        'poco' => $lista_pocos
-                    );
-            $this->load->view('adm/template/header');
-            $this->load->view('adm/pocos', $dados);
-            $this->load->view('adm/template/footer');
-        }else{
-            redirect('login');
-        }
-        
-    } 
-    */
     public function conspoco() {
     
         if($this->session->userdata('logado')==true){

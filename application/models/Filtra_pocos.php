@@ -21,6 +21,7 @@ $_POST['irrigacao'] = ( isset($_POST['irrigacao']) ) ? 'checked' : null;
 $_POST['recreacao'] = ( isset($_POST['recreacao']) ) ? 'checked' : null;
 
 $_POST['todos'] = ( isset($_POST['todos']) ) ? 'checked' : null;
+$_POST['data'] = ( isset($_POST['data']) ) ? $_POST['data'] : null;
 
 if ($_POST['humano']=='checked' || $_POST['animais'] == 'checked' ||
         $_POST['irrigacao']== 'checked' || $_POST['recreacao'] == 'checked'){
@@ -89,6 +90,16 @@ if ($_POST['bombeando'] == null && $_POST['abandonado']== null && $_POST['nutil'
 
 
 
+if($_POST['data'] != null){
+    $dataCons = " and q.data <= '".$_POST['data']."'";
+    $dataConsWhere = " where q.data <= '".$_POST['data']."'";
+}else{
+    $dataCons = null;
+    $dataConsWhere = null;
+}
+
+
+
 
 require_once 'conexao.php'; 
 $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD); 
@@ -110,7 +121,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                     left join  qualidade_agua as q
                             on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                     left join  capacidade_poco as c
-                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn";
+                    on p.utme = c.poco_utme and p.utmn = c.poco_utmn".$dataConsWhere;
         
                     if ($result = mysqli_query($conexao->conn, $query)) {
                 
@@ -143,7 +154,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                     left join  capacidade_poco as c
                     on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                    where p.situacao = 'Bombeando'";
+                    where p.situacao = 'Bombeando'".$dataCons;
                     
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -174,7 +185,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = 'Abandonado'";
+                        where p.situacao = 'Abandonado'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -205,7 +216,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = 'Não utilizável'";
+                        where p.situacao = 'Não utilizável'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -236,7 +247,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = 'Não Instalado'";
+                        where p.situacao = 'Não Instalado'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -267,7 +278,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = 'Fechado'";
+                        where p.situacao = 'Fechado'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -298,7 +309,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = 'Precário'";
+                        where p.situacao = 'Precário'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -329,7 +340,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = 'Obstruído'";
+                        where p.situacao = 'Obstruído'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -360,7 +371,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = 'Colmatado'";
+                        where p.situacao = 'Colmatado'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -391,7 +402,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = 'Parado'";
+                        where p.situacao = 'Parado'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -422,7 +433,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = 'Seco'";
+                        where p.situacao = 'Seco'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -453,7 +464,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = 'Equipado'";
+                        where p.situacao = 'Equipado'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -484,7 +495,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                        where p.situacao = '0'";
+                        where p.situacao = '0'".$dataCons;
 
                 if ($result = mysqli_query($conexao->conn, $query)) {
 
@@ -520,7 +531,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                     where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                             and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                        and q.solidos_tot_dissolvidos <= 1000";
+                        and q.solidos_tot_dissolvidos <= 1000".$dataCons;
 
                     if ($result = mysqli_query($conexao->conn, $query)) {
                         $coordAux = array();
@@ -555,7 +566,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                     where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                             and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                        and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Bombeando'";
+                        and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Bombeando'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -588,7 +599,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Abandonado'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Abandonado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -622,7 +633,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Não utilizável'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Não utilizável'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -655,7 +666,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Não instalado'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Não instalado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -688,7 +699,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Fechado'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Fechado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -721,7 +732,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Precário'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Precário'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -754,7 +765,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Obstruído'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Obstruído'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -787,7 +798,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Colmatado'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Colmatado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -820,7 +831,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Parado'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Parado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -853,7 +864,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Seco'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Seco'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -886,7 +897,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Equipado'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = 'Equipado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -919,7 +930,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
                                         where q.sodio <= 200 and q.cloretos <= 250 and q.fluor <= 1.5
                                                 and q.ph >= 6 and q.ph <= 9.5 and q.sulfatos <= 250 and q.dureza <= 500
-                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = '0'";
+                            and q.solidos_tot_dissolvidos <= 1000 and p.situacao = '0'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -955,7 +966,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                    where q.fluor <= 2 and q.sulfatos <= 1000 ";
+                                    where q.fluor <= 2 and q.sulfatos <= 1000 ".$dataCons;
 
                     if ($result = mysqli_query($conexao->conn, $query)) {
                         $coordAux = array();
@@ -988,7 +999,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                    where q.fluor <= 2 and q.sulfatos <= 1000  and p.situacao = 'Bombeando'";
+                                    where q.fluor <= 2 and q.sulfatos <= 1000  and p.situacao = 'Bombeando'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1019,7 +1030,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Abandonado'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Abandonado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1051,7 +1062,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Não utilizável'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Não utilizável'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1082,7 +1093,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Não instalado'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Não instalado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1113,7 +1124,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Fechado'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Fechado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1144,7 +1155,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Precário'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Precário'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1175,7 +1186,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Obstruído'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Obstruído'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1206,7 +1217,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Colmatado'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Colmatado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1237,7 +1248,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Parado'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Parado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1268,7 +1279,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Seco'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Seco'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1299,7 +1310,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Equipado'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = 'Equipado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1330,7 +1341,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = '0'";
+                                        where q.fluor <= 2 and q.sulfatos <= 1000 and p.situacao = '0'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1367,7 +1378,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                    where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1";
+                                    where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1".$dataCons;
 
                     if ($result = mysqli_query($conexao->conn, $query)) {
                         $coordAux = array();
@@ -1400,7 +1411,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                    where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1  and p.situacao = 'Bombeando'";
+                                    where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1  and p.situacao = 'Bombeando'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1431,7 +1442,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Abandonado'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Abandonado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1463,7 +1474,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Não utilizável'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Não utilizável'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1494,7 +1505,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Não instalado'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Não instalado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1525,7 +1536,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Fechado'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Fechado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1556,7 +1567,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Precário'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Precário'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1587,7 +1598,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Obstruído'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Obstruído'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1618,7 +1629,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Colmatado'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Colmatado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1649,7 +1660,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Parado'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Parado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1680,7 +1691,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Seco'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Seco'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1711,7 +1722,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Equipado'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = 'Equipado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1742,7 +1753,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = '0'";
+                                        where q.cloretos >= 100 and q.cloretos <= 700 and q.fluor <= 1 and p.situacao = '0'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1780,7 +1791,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                    where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400";
+                                    where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400".$dataCons;
 
                     if ($result = mysqli_query($conexao->conn, $query)) {
                         $coordAux = array();
@@ -1813,7 +1824,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                 on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                         left join  capacidade_poco as c
                         on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                    where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400  and p.situacao = 'Bombeando'";
+                                    where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400  and p.situacao = 'Bombeando'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1844,7 +1855,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Abandonado'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Abandonado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1876,7 +1887,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Não utilizável'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Não utilizável'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1907,7 +1918,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Não instalado'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Não instalado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1938,7 +1949,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Fechado'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Fechado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -1969,7 +1980,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Precário'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Precário'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -2000,7 +2011,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Obstruído'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Obstruído'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -2031,7 +2042,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Colmatado'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Colmatado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -2062,7 +2073,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Parado'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Parado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -2093,7 +2104,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Seco'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Seco'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -2124,7 +2135,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Equipado'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = 'Equipado'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();
@@ -2155,7 +2166,7 @@ $conexao = new Conexao(DB_SERVER, DB_NAME, DB_USERNAME, DB_PASSWORD);
                                     on p.utme = q.poco_utme and p.utmn = q.poco_utmn
                             left join  capacidade_poco as c
                             on p.utme = c.poco_utme and p.utmn = c.poco_utmn
-                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = '0'";
+                                        where q.sodio <= 300 and q.cloretos <= 400 and q.sulfatos <= 400 and p.situacao = '0'".$dataCons;
 
                         if ($result = mysqli_query($conexao->conn, $query)) {
                             $coordAux = array();

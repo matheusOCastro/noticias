@@ -2,9 +2,9 @@
 
 /* global $array_grafico, google, $arrayGrafico_js */
 
-
 var string_grafico_pie = $arrayGrafico_js_pie;
 var arrayGrafico_pie = string_grafico_pie.split("|");
+
 
 var string_grafico_column = $arrayGrafico_js_column;
 var arrayGrafico_column = string_grafico_column.split("|");

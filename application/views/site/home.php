@@ -14,25 +14,20 @@
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<?php
-    require_once 'application/models/Filtra_grafico.php'; 
-?>
+
 <script type="text/javascript">
-    var $arrayGrafico_js_pie = '<?php echo $array_grafico_pie;?>';
+    var $arrayGrafico_js_pie = '<?php echo $pieGra;?>';
 </script>
 <script type="text/javascript" src="assets/js/graficos.js"></script>
 
-
 <div class="col-sm-5" id="piechart" style="height: 375px;"></div>
 
+<!------------------------------------------------------------------->
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<?php
-    require_once 'application/models/Filtra_grafico.php'; 
-?>
 
 <script type="text/javascript">
-    var $arrayGrafico_js_column = '<?php echo $array_grafico_column;?>';
+    var $arrayGrafico_js_column = '<?php echo $columnGra;?>';
 </script>
 <script type="text/javascript" src="assets/js/graficos.js"></script>
 

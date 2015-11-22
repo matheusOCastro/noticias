@@ -56,15 +56,14 @@
                 </div>
                 
             </div>
-            <!--
-            <div class="col-sm-1">
+            
+            <div class="col-sm-3">
                 
-                <?php echo ('<b><br>&nbsp;Visualização </b><br>');?>
-                <a href="<?php echo base_url('/graficopocos')?>"><img src="assets/img/grafico.png" width="100" height="100"></a>
+                <?php echo ('<b><br>Data</b><br>');?>
+                <label for="data">Até:</label>
+                <input type="date" name="data" class="form-control" id="data" placeholder="Data" onchange="submit()" onclick="form.todos.checked=null" value="<?php echo($_POST['data']);?>">
                     
             </div>
-           <input type="submit" name="enviar" value="Enviar" style="visibility: hidden"/>
-           -->
         </form>
     </fieldset>
 </div>
