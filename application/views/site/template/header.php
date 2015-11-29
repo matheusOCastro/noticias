@@ -30,13 +30,13 @@
                 <div class="col-sm-4" style='vertical-align: top;'>
                     <div class="logo" style='padding: 10px; padding-bottom: 10px; text-align: left;'>
                         <a href="<?php echo base_url(); ?>" title="UFSM" rel="home">
-                            <img class='hidden-xs' src='assets/img/ufsmlogo2.png' width="320" alt="UFSM" />
-                            <center><img class='visible-xs' src='assets/img/ufsmlogo2.png' width="250" alt="UFSM" /></center>
+                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/ufsmlogo2.png' width="320" alt="UFSM" />
+                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/ufsmlogo2.png' width="250" alt="UFSM" /></center>
 
                         </a>
                         <a href="<?php echo base_url(); ?>" title="UFSM" rel="home">
-                            <img class='hidden-xs' src='assets/img/larh2.png' width="320" alt="LARH" />
-                            <center><img class='visible-xs' src='assets/img/larh2.png' width="250" alt="LARH" /></center>
+                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/lahrnovo.png' width="320" alt="LARH" />
+                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/lahrnovo.png' width="250" alt="LARH" /></center>
 
                         </a>
 
@@ -46,12 +46,23 @@
 
                 <div class="col-sm-7">
                     <div class="hidden-xs" style="color: #000; font-family:chaparral pro ;text-align: center; font-size: 50px; margin-top: 30px;">
-                    Sistema de Visualização de Qualidade da Água Subterrânea
+                    Sistema de Visualização da Qualidade da Água Subterrânea
 
                     </div>
                     <div class="visible-xs" style="color: #000; font-family:chaparral pro ;text-align: center; font-size: 30px; margin-top: 30px;">
-                    Sistema de Visualização de Qualidade da Água Subterrânea
+                    Sistema de Visualização da Qualidade da Água Subterrânea
 
+                    </div>
+
+                </div>
+                <div class="col-sm-1" style='vertical-align: top;'>
+                    <div class="logo" style='padding-top: 15px; padding-bottom: 10px; text-align: left;'>
+                        <a href="<?php echo base_url(); ?>" title="SI" rel="home">
+                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/si.png' width="130" alt="SI" />
+                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/si.png' width="250" alt="Si" /></center>
+
+                        </a>
+                        
                     </div>
 
                 </div>
