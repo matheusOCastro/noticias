@@ -6,8 +6,7 @@
 
             <center><p>&copy;<?php echo date('Y') ?> by MLDLJ - Universidade Federal de Santa Maria/FW. <?php echo( 'Todos os direitos reservados.') ?></p></center>
         </footer>
-        <center><img src="<?php echo base_url(); ?>assets/img/brasao.png" alt=""align="center">
-        <img src="<?php echo base_url(); ?>assets/img/si.png" alt=""width="150" align="center"></center>
+    
 </div>
     <!-- Javascript -->
     <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>" type="text/javascript"></script>

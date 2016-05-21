@@ -50,14 +50,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'home';
-$route['sobre'] = 'home/sobre';
-$route['mapapocos'] = 'home/mapapocos';
-$route['login'] = 'home/login';
+$route['economia'] = 'home/economia';
+$route['politica'] = 'home/politica';
 
+$route['login'] = 'home/login';
 $route['adm/logout'] = 'adm/logout';
 $route['adm/acao'] = 'adm/acao';
+$route['adm/noticias'] = 'adm/noticias';
+
+
 $route['adm/cadastrar'] = 'adm/cadastrar';
-$route['adm/pocos'] = 'adm/pocos';
 $route['adm/gravar_edicao'] = 'adm/gravar_edicao';
 $route['adm/inativar_poco'] = 'adm/inativar_poco';
 $route['adm/editar_poco'] = 'adm/editar_poco';

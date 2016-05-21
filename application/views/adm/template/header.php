@@ -8,8 +8,8 @@
     <meta name="description" content="Visualização de Análise de Água">
     <meta name="author" content="SI">
 
-    <title>Visualização de Análise de Água</title>
-    
+    <title>MM News</title>
+
     
   </head>
     <header class="site-header">
@@ -23,50 +23,50 @@
         <link href="<?php echo base_url('assets/js/jquery.min.js'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/js/respond.min.js'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/js/html5shiv.min.js'); ?>" rel="stylesheet">
-          
+         
+        <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="<?php echo base_url(); ?>home">MM News</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  
+                  <ul class="nav navbar-nav navbar-right">
+                      <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Pesquisa">
+                        </div>
+                            <button type="submit" class="btn btn-default">Pesquisar</button>
+                      </form>
+                     <li <?=echoActiveClassIfRequestMatches("login")?>><a class="glyphicon glyphicon-user" href="<?php echo base_url('/login')?>">&nbsp;ADMINISTRAÇÃO </a></li>
+                    
+                  </ul>
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav> 
        
         <div class="container">
             <div class="row">
-                <div class="col-sm-4" style='vertical-align: top;'>
-                    <div class="logo" style='padding: 10px; padding-bottom: 10px; text-align: left;'>
-                        <a href="<?php echo base_url(); ?>" title="UFSM" rel="home">
-                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/ufsmlogo2.png' width="320" alt="UFSM" />
-                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/ufsmlogo2.png' width="250" alt="UFSM" /></center>
-
-                        </a>
-                        <a href="<?php echo base_url(); ?>" title="UFSM" rel="home">
-                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/lahrnovo.png' width="320" alt="LARH" />
-                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/lahrnovo.png' width="250" alt="LARH" /></center>
-
-                        </a>
-
-                    </div>
-
-                </div>
+                <div class="col-sm-4" style='vertical-align: top;'></div>
 
                 <div class="col-sm-7">
-                    <div class="hidden-xs" style="color: #000; font-family:chaparral pro ;text-align: center; font-size: 50px; margin-top: 30px;">
-                    Sistema de Visualização da Qualidade da Água Subterrânea
+                    <a href="<?php echo base_url()."home"; ?>" title="News" rel="home">
+                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/logo.png' width="360" alt="news" />
+                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/logo.png' width="250" alt="news" /></center>
 
-                    </div>
-                    <div class="visible-xs" style="color: #000; font-family:chaparral pro ;text-align: center; font-size: 30px; margin-top: 30px;">
-                    Sistema de Visualização da Qualidade da Água Subterrânea
-
-                    </div>
+                        </a>
 
                 </div>
                 
-                <div class="col-sm-1" style='vertical-align: top;'>
-                    <div class="logo" style='padding-top: 15px; padding-bottom: 10px; text-align: left;'>
-                        <a href="<?php echo base_url(); ?>" title="SI" rel="home">
-                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/si.png' width="130" alt="SI" />
-                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/si.png' width="250" alt="Si" /></center>
-
-                        </a>
-                        
-                    </div>
-
-                </div>
 
             </div>
 
@@ -86,8 +86,8 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav" >
-                            <li <?=echoActiveClassIfRequestMatches("pocos")?>><a class="glyphicon glyphicon-map-marker" href="<?php echo base_url('/adm/pocos')?>">&nbsp;POÇOS </a></li>
-                            <li <?=echoActiveClassIfRequestMatches("analises")?>><a class="glyphicon glyphicon-tint" href="<?php echo base_url('/adm/analises')?>">&nbsp;ANÁLISES </a></li>
+                            <li <?=echoActiveClassIfRequestMatches("noticias")?>><a class="glyphicon glyphicon-pencil" href="<?php echo base_url('/adm/noticias')?>">&nbsp;NOTÍCIAS </a></li>
+                            <li <?=echoActiveClassIfRequestMatches("autores")?>><a class="glyphicon glyphicon-user" href="<?php echo base_url('/adm/autor')?>">&nbsp;AUTORES </a></li>
                         </ul>
                         
                         <ul class="nav navbar-nav navbar-right">

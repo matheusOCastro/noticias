@@ -8,7 +8,7 @@
     <meta name="description" content="Visualização de Análise de Água">
     <meta name="author" content="SI">
 
-    <title>Visualização de Análise de Água</title>
+    <title>MM News</title>
 
     
   </head>
@@ -23,49 +23,50 @@
         <link href="<?php echo base_url('assets/js/jquery.min.js'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/js/respond.min.js'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/js/html5shiv.min.js'); ?>" rel="stylesheet">
-          
+         
+        <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="<?php echo base_url(); ?>home">MM News</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  
+                  <ul class="nav navbar-nav navbar-right">
+                      <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Pesquisa">
+                        </div>
+                            <button type="submit" class="btn btn-default">Pesquisar</button>
+                      </form>
+                     <li <?=echoActiveClassIfRequestMatches("login")?>><a class="glyphicon glyphicon-user" href="<?php echo base_url('/login')?>">&nbsp;ADMINISTRAÇÃO </a></li>
+                    
+                  </ul>
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav> 
        
         <div class="container">
             <div class="row">
-                <div class="col-sm-4" style='vertical-align: top;'>
-                    <div class="logo" style='padding: 10px; padding-bottom: 10px; text-align: left;'>
-                        <a href="<?php echo base_url(); ?>" title="UFSM" rel="home">
-                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/ufsmlogo2.png' width="320" alt="UFSM" />
-                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/ufsmlogo2.png' width="250" alt="UFSM" /></center>
-
-                        </a>
-                        <a href="<?php echo base_url(); ?>" title="UFSM" rel="home">
-                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/lahrnovo.png' width="320" alt="LARH" />
-                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/lahrnovo.png' width="250" alt="LARH" /></center>
-
-                        </a>
-
-                    </div>
-
-                </div>
+                <div class="col-sm-4" style='vertical-align: top;'></div>
 
                 <div class="col-sm-7">
-                    <div class="hidden-xs" style="color: #000; font-family:chaparral pro ;text-align: center; font-size: 50px; margin-top: 30px;">
-                    Sistema de Visualização da Qualidade da Água Subterrânea
-
-                    </div>
-                    <div class="visible-xs" style="color: #000; font-family:chaparral pro ;text-align: center; font-size: 30px; margin-top: 30px;">
-                    Sistema de Visualização da Qualidade da Água Subterrânea
-
-                    </div>
-
-                </div>
-                <div class="col-sm-1" style='vertical-align: top;'>
-                    <div class="logo" style='padding-top: 15px; padding-bottom: 10px; text-align: left;'>
-                        <a href="<?php echo base_url(); ?>" title="SI" rel="home">
-                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/si.png' width="130" alt="SI" />
-                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/si.png' width="250" alt="Si" /></center>
+                    <a href="<?php echo base_url()."home"; ?>" title="News" rel="home">
+                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/logo.png' width="360" alt="news" />
+                            <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/logo.png' width="250" alt="news" /></center>
 
                         </a>
-                        
-                    </div>
 
                 </div>
+                
 
             </div>
 
@@ -86,14 +87,16 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                       <ul class="nav navbar-nav" >
                         
-                        <li <?=echoActiveClassIfRequestMatches("")?>><a class="glyphicon glyphicon-home" href="<?php echo base_url('/')?>">&nbsp;HOME </a></li>
-                        <li <?=echoActiveClassIfRequestMatches("mapapocos")?>><a class="glyphicon glyphicon-map-marker" href="<?php echo base_url('/mapapocos')?>">&nbsp;POÇOS </a></li>
-                        <li <?=echoActiveClassIfRequestMatches("login")?>><a class="glyphicon glyphicon-wrench" href="<?php echo base_url('/login')?>">&nbsp;ADMINISTRAÇÃO </a></li>
+                        <li <?=echoActiveClassIfRequestMatches("home")?>><a class="glyphicon glyphicon-home" href="<?php echo base_url('/home')?>">&nbsp;HOME </a></li>
+                        <li <?=echoActiveClassIfRequestMatches("economia")?>><a class="glyphicon glyphicon-usd" href="<?php echo base_url('/economia')?>">&nbsp;ECONOMIA </a></li>
+                        <li <?=echoActiveClassIfRequestMatches("educacao")?>><a class="glyphicon glyphicon-book" href="<?php echo base_url('/educacao')?>">&nbsp;EDUCACAO </a></li>
+                        <li <?=echoActiveClassIfRequestMatches("esportes")?>><a class="glyphicon glyphicon-bullhorn" href="<?php echo base_url('/esportes')?>">&nbsp;ESPORTES </a></li>
+                        <li <?=echoActiveClassIfRequestMatches("mundo")?>><a class="glyphicon glyphicon-globe" href="<?php echo base_url('/mundo')?>">&nbsp;MUNDO </a></li>
+                        <li <?=echoActiveClassIfRequestMatches("musica")?>><a class="glyphicon glyphicon-music" href="<?php echo base_url('/musica')?>">&nbsp;MUSICA </a></li>
+                        <li <?=echoActiveClassIfRequestMatches("politica")?>><a class="glyphicon glyphicon-briefcase" href="<?php echo base_url('/politica')?>">&nbsp;POLITICA </a></li>
+                        <li <?=echoActiveClassIfRequestMatches("tecnologia")?>><a class="glyphicon glyphicon-phone" href="<?php echo base_url('/tecnologia')?>">&nbsp;TECNOLOGIA </a></li>
                       </ul>
-                        
-                        <ul class="nav navbar-nav navbar-right">
-                            <li <?=echoActiveClassIfRequestMatches("sobre")?>><a class="glyphicon glyphicon-info-sign" href="<?php echo base_url('/sobre')?>">&nbsp;SOBRE</a></li>
-                        </ul>
+                       
 
 
                     </div><!-- /.navbar-collapse -->

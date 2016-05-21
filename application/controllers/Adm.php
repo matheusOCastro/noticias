@@ -5,12 +5,8 @@ class Adm extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        // Carrega o model Pessoa
-        $this->load->model('poco_model', 'PM');
-    }
-    
-    public function constr(){
-        $this->load->view('constr');
+        $this->load->model('autor_model', 'AM');
+        $this->load->model('noticia_model', 'NM');
     }
 
     public function acao(){
@@ -19,9 +15,9 @@ class Adm extends CI_Controller {
 
         if( $login && $senha ) {
         
-            $this->load->model('loginmodel'); // carregamos o model
+            $this->load->model('login_model'); // carregamos o model
             
-            $verifica = $this->loginmodel->verifica($login, $senha);
+            $verifica = $this->login_model->verifica($login, $senha);
             
             if( $verifica === true ) {
             
@@ -33,13 +29,13 @@ class Adm extends CI_Controller {
             
             } else {
                 
-                redirect(site_url('adm/login?retorno=erro'));
+                redirect(site_url('login?retorno=erro'));
             
             }
             
         } else {
            
-            redirect(site_url('adm/login?retorno=campos-vazios'));
+            redirect(site_url('login?retorno=campos-vazios'));
         
         }
         
@@ -51,8 +47,32 @@ class Adm extends CI_Controller {
         redirect(site_url('login'));
 
     }
-
     
+    public function noticias(){
+        if($this->session->userdata('logado')==true){
+            $autor = $this->AM->listar_autor();
+            $noticias = $this->NM->listar_noticias();
+            
+            $dados = array(
+                    'lista_autor' => $autor,
+                    'lista_noticia' => $noticias
+                );
+            
+            $this->load->view('adm/template/header');
+            $this->load->view('adm/noticias', $dados);
+            $this->load->view('adm/template/footer');
+        }else{
+            redirect(site_url('login'));
+        }
+    }
+        
+    public function analises(){
+        $this->load->view('adm/template/header');
+        $this->load->view('adm/analises');
+        $this->load->view('adm/template/footer');
+    }
+
+    /*
     public function cadastrar(){
         if($this->session->userdata('logado')==true){
             // Seta as regras para validação do formulário
@@ -215,8 +235,8 @@ class Adm extends CI_Controller {
         }
     }
     
-
-   
+*/
+   /*
     public function pocos(){
         if($this->session->userdata('logado')==true){
             /*         
@@ -235,7 +255,7 @@ class Adm extends CI_Controller {
             $config['prev_link'] = '<';
 
             $this->pagination->initialize($config);
-            */
+            
             $dataConsPoco['consutme'] = $this->input->post('consutme');
             $dataConsPoco['consutmn'] = $this->input->post('consutmn');
             $dataConsPoco['consmunicipios_cod'] = $this->input->post('consmunicipios_cod');
@@ -340,7 +360,7 @@ class Adm extends CI_Controller {
             redirect(site_url('login'));
         }
     }
-
+*/
     
 }
 
