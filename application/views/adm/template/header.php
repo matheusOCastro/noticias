@@ -77,7 +77,7 @@
 
                 <div class="col-sm-7">
                     <a href="<?php echo base_url()."home"; ?>" title="News" rel="home">
-                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/logo.png' width="360" alt="news" />
+                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/logo.png' width="460" alt="news" />
                             <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/logo.png' width="250" alt="news" /></center>
 
                         </a>
