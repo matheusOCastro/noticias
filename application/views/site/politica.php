@@ -18,7 +18,7 @@
                 echo $noticia->corpo;
                 echo "<br><b>";
                 echo "Autor: ";
-                echo $noticia->nome;
+                echo $noticia->nomeautor;
                 echo " --- ";
                 
                 $originalDate = $noticia->dt_publicacao;

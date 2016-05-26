@@ -1,8 +1,6 @@
-<script type="text/javascript" src="<?php echo(base_url()) ?>assets/js/mascaras.js"></script>
-
-<form action="<?php echo(base_url())?>adm/gravar_edicao" method="post">
+<form action="<?php echo(base_url())?>adm/gravar_edicao_noticia" method="post">
    <?php 
-    echo form_fieldset('<h1><span class="glyphicon glyphicon-map-marker"></span> Edição de Poços</h1>');
+    echo form_fieldset('<h1><span class="glyphicon glyphicon-map-marker"></span> Edição de Noticias</h1>');
         if(validation_errors()){
             echo '<div role="alert" class="alert alert-danger alert-dismissible fade in">';
             echo '<button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>';
@@ -19,16 +17,23 @@
         }
     ?>
     <?php 
-        foreach ($poco as $poco) { 
+        foreach ($noticia as $noticia) { 
             
         
     ?>
     <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="id">*ID</label>
+                <input type="text" name="id" class="form-control" id="id" placeholder="ID" value="<?php echo($autor->idusuario)?>" disabled>
+                <input type="hidden" name="idnoticia" class="form-control" id="idnoticia" placeholder="ID" value="<?php echo($autor->idusuario)?>">
+            </div>
+        </div>
+        
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="utme">*UTME</label>
-                <input type="text" name="utme" class="form-control" id="utme" placeholder="UTME" onkeypress="return SomenteNumeroCoord(event)" value="<?php echo($poco->utme)?>" disabled>
-                <input type="hidden" name="oldutme" class="form-control" id="oldutme" placeholder="UTME" value="<?php echo($poco->utme)?>">
+                <label for="titulo">*Titulo</label>
+                <input type="text" name="titulo" class="form-control" id="titulo" placeholder="TITULO" value="<?php echo($poco->utme)?>">
             </div>
         </div>
         

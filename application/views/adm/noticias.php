@@ -1,6 +1,4 @@
-<script type="text/javascript" src="<?php echo(base_url()) ?>assets/js/mascaras.js"></script>
-
-<form action=cadastrar method="post">
+<form action=cadastrar_noticia method="post">
    <?php 
     echo form_fieldset('<h1><span class="glyphicon glyphicon-pencil"></span> Cadastro de novas notícias</h1>');
         if(validation_errors()){
@@ -61,16 +59,17 @@
                     echo "<select name='autor' class='form-control' id='autor'>";
                         if (count($lista_autor)) {
                             foreach ($lista_autor as $autor) {
-                                echo "<option value='".$autor->idusuario . "'>" .$autor->nome . "</option>";
+                                echo "<option value='".$autor->idusuario . "'>" .$autor->nomeautor . "</option>";
                             }
                         }
                     echo "</select><br/>";
                 ?>
             </div>
         </div>
-        
+               
     </div>
-       
+    
+    
     <button type="reset" class="btn btn-default btn-md">Limpar &nbsp;<span class="glyphicon glyphicon-repeat"></span></button>
     <button type="submit" class="btn btn-success btn-md">Cadastrar &nbsp;<span class="glyphicon glyphicon-ok"></span></button>
 </form>
@@ -99,7 +98,7 @@
                         reset($lista_autor);
                             if (count($lista_autor)) {
                                 foreach ($lista_autor as $cons_autor) {
-                                    echo "<option value='".$cons_autor->idusuario . "'>" .$cons_autor->nome . "</option>";
+                                    echo "<option value='".$cons_autor->idusuario . "'>" .$cons_autor->nomeautor . "</option>";
                                 }
                             }
                         echo "</select><br/>";
@@ -160,13 +159,15 @@
                 ?>
                 <tr>
                     <td><?php echo $lista_noticia->titulo; ?></td>
-                    <td><?php echo $lista_noticia->nome; ?></td>
-                    <td><?php echo $lista_noticia->dt_publicacao; ?></td>
+                    <td><?php echo $lista_noticia->nomeautor; ?></td>
+                        <?php $originalDate = $lista_noticia->dt_publicacao;
+                              $newDate = date("d/m/Y", strtotime($originalDate));
+                        ?>
+                    <td><?php echo $newDate; ?></td>
                     <td><?php echo $lista_noticia->nome; ?></td>
                     <td width="220" class="text-center">
-                        <a href="<?php echo base_url('adm/inativar_poco/'.$lista_noticia->idnoticias); ?>" class="btn btn-xs btn-danger" onclick="return confirm('Deletar noticia?');"><span class="glyphicon glyphicon-trash"></span> Inativar</a>
-                        <a href="<?php echo base_url('adm/editar_poco/'.$lista_noticia->idnoticias); ?>" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-edit"></span> Editar</a>
-                        <a href="<?php echo base_url('adm/analises/'.$lista_noticia->idnoticias); ?>" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-tint"></span> Análise</a>
+                        <a href="<?php echo base_url('adm/inativar_noticia/'.$lista_noticia->idnoticias); ?>" class="btn btn-xs btn-danger" onclick="return confirm('Deletar noticia?');"><span class="glyphicon glyphicon-trash"></span> Inativar</a>
+                        <a href="<?php echo base_url('adm/editar_noticia/'.$lista_noticia->idnoticias); ?>" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-edit"></span> Editar</a>
                     </td>
                 </tr>
                 <?php } } ?>

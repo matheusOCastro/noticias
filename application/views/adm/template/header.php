@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <link rel="icon" href="<?php echo base_url(); ?>/assets/img/favicon.png" type="image/png">
+    <link rel="icon" href="<?php echo base_url(); ?>/assets/img/favicon.png" type="image/png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Visualização de Análise de Água">
     <meta name="author" content="SI">
+    <script type="text/javascript" src='<?php echo base_url(); ?>assets/js/tinymce/tinymce.min.js'></script>
+    <script type="text/javascript">
+	tinymce.init({
+            selector: '#noticia',
+            theme: 'modern',
+            width: 750,
+            height: 300,
+            plugins: [
+              'advlist autolink link lists charmap print preview hr anchor pagebreak spellchecker',
+              'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime nonbreaking',
+              'save table contextmenu directionality template paste image'
+            ],
+            
+            content_css: 'css/content.css',
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+        });
+    </script>
 
     <title>MM News</title>
 
@@ -87,7 +104,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav" >
                             <li <?=echoActiveClassIfRequestMatches("noticias")?>><a class="glyphicon glyphicon-pencil" href="<?php echo base_url('/adm/noticias')?>">&nbsp;NOTÍCIAS </a></li>
-                            <li <?=echoActiveClassIfRequestMatches("autores")?>><a class="glyphicon glyphicon-user" href="<?php echo base_url('/adm/autor')?>">&nbsp;AUTORES </a></li>
+                            <li <?=echoActiveClassIfRequestMatches("autor")?>><a class="glyphicon glyphicon-user" href="<?php echo base_url('/adm/autor')?>">&nbsp;AUTORES </a></li>
                         </ul>
                         
                         <ul class="nav navbar-nav navbar-right">

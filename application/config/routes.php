@@ -52,16 +52,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['economia'] = 'home/economia';
 $route['politica'] = 'home/politica';
+$route['educacao'] = 'home/educacao';
+$route['esportes'] = 'home/esportes';
+$route['musica'] = 'home/musica';
+$route['mundo'] = 'home/mundo';
+$route['tecnologia'] = 'home/tecnologia';
 
 $route['login'] = 'home/login';
 $route['adm/logout'] = 'adm/logout';
 $route['adm/acao'] = 'adm/acao';
 $route['adm/noticias'] = 'adm/noticias';
+$route['adm/autor'] = 'adm/autor';
+$route['adm/inativar_noticia'] = 'adm/inativar_noticia';
+$route['adm/inativar_autor'] = 'adm/autor';
+$route['adm/cadastrar_autor'] = 'adm/cadastrar_autor';
+$route['adm/cadastrar_noticia'] = 'adm/cadastrar_noticia';
+$route['adm/editar_autor'] = 'adm/editar_autor';
+$route['adm/gravar_edicao_autor'] = 'adm/gravar_edicao_autor';
+$route['adm/editar_noticia'] = 'adm/editar_noticia';
+$route['adm/gravar_edicao_noticia'] = 'adm/gravar_edicao_noticia';
+
 
 
 $route['adm/cadastrar'] = 'adm/cadastrar';
 $route['adm/gravar_edicao'] = 'adm/gravar_edicao';
-$route['adm/inativar_poco'] = 'adm/inativar_poco';
 $route['adm/editar_poco'] = 'adm/editar_poco';
 $route['adm/editar_analise'] = 'adm/editar_analise';
 

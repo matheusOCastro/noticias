@@ -15,14 +15,16 @@ class Noticia_model extends CI_Model{
                         ->get()->result();
     }
     
-    public function listar_noticias_politica(){
+    public function listar_noticias_assunto($assunto){
         //return $this->db->get('noticias')->result();
         return $this->db->select('*')
                         ->from('noticias n')
                         ->join('usuario a','usuario_idusuario = idusuario','left')
-                        ->where('assunto_idassunto = 1')
+                        ->where('assunto_idassunto = '.$assunto)
                         ->get()->result();
     }
+    
+       
     
     public function listar_noticias(){
         $consTitulo = $this->input->post('constitulo');
@@ -38,10 +40,48 @@ class Noticia_model extends CI_Model{
                             ->join('assunto s', 'n.assunto_idassunto = s.idassunto', 'left')
                             ->where('n.usuario_idusuario like "'.$consAutor.'"')
                             ->where('n.assunto_idassunto like "'.$consAssunto.'"')
+                            ->where('n.titulo like "%'.$consTitulo.'%"')
+                            ->where('n.ativo = 1')
                             //->limit($maximo, $inicio)
                             ->get()->result();
     
 
+    }
+    
+    public function inativarNoticia($idnoticia=NULL){
+        if(isset($idnoticia) && !empty($idnoticia)){
+            $data['ativo'] = '0';
+
+            $gravou = $this->db->update('noticias', $data, array('idnoticias' => $idnoticia));
+            
+                if ($gravou == 1){
+                    return TRUE;
+                }else{
+                    return FALSE;
+                }
+           
+            return FALSE;
+            
+        }else{
+            return FALSE;
+        }
+    }
+    
+    public function cadastrar_noticia(){
+        $dataNoticia['titulo']       = $this->input->post('titulo');
+        $dataNoticia['corpo']       = $this->input->post('noticia');
+        $dataNoticia['assunto_idassunto']       = $this->input->post('assunto');
+        $dataNoticia['usuario_idusuario']       = $this->input->post('autor');
+        $dataNoticia['dt_publicacao']       = date ("Y-m-d");
+        $dataNoticia['foto'] = $this->input->post('imagem');
+        $dataNoticia['ativo'] = 1;
+        
+        $this->db->insert('noticias', $dataNoticia);
+        if($this->db->affected_rows() > 0){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
     }
     
     
@@ -52,7 +92,7 @@ class Noticia_model extends CI_Model{
     
     
     
-    
+    /*
     
     
     public function contaRegistros() {
@@ -272,7 +312,7 @@ class Noticia_model extends CI_Model{
                 return FALSE;
             }
   
-    }
+    }*/
 
 
 }
