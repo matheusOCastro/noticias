@@ -31,4 +31,21 @@
 
         ?>
     </div>
+    <div class="col-sm-4">
+        <div class="noticias" style="color: #fff">
+            <center><h3><?php echo('Últimas notícias') ?></h3></center>
+        </div>
+        <?php 
+            foreach ($titulos as $titulos) { 
+                echo"<b>";
+                echo $titulos->titulo;
+                echo"</b>";
+                echo "<br>";
+                echo "--------------------------------------------";
+                echo "<br>";
+            }
+
+        ?>
+    </div>
+    
 </div>

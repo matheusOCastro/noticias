@@ -57,6 +57,7 @@ $route['esportes'] = 'home/esportes';
 $route['musica'] = 'home/musica';
 $route['mundo'] = 'home/mundo';
 $route['tecnologia'] = 'home/tecnologia';
+$route['pesquisar'] = 'home/pesquisar';
 
 $route['login'] = 'home/login';
 $route['adm/logout'] = 'adm/logout';
@@ -72,19 +73,6 @@ $route['adm/gravar_edicao_autor'] = 'adm/gravar_edicao_autor';
 $route['adm/editar_noticia'] = 'adm/editar_noticia';
 $route['adm/gravar_edicao_noticia'] = 'adm/gravar_edicao_noticia';
 
-
-
-$route['adm/cadastrar'] = 'adm/cadastrar';
-$route['adm/gravar_edicao'] = 'adm/gravar_edicao';
-$route['adm/editar_poco'] = 'adm/editar_poco';
-$route['adm/editar_analise'] = 'adm/editar_analise';
-
-$route['adm/cons_poco'] = 'adm/rel_pocos';
-
-
-
-
-$route['graficopocos'] = 'home/graficopocos';
 $route['constr'] = 'home/constr';
 
 $route['404_override'] = '';

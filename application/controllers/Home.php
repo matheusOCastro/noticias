@@ -9,9 +9,11 @@ class Home extends CI_Controller {
 
     public function index() {
         $noticias = $this->NM->listar_noticias_home();
+        $titulos = $this->NM->listar_titulos_home();
         
         $dados = array(
-                    'noticia' => $noticias
+                    'noticia' => $noticias,
+                    'titulos' => $titulos
                 );
         
         $this->load->view('site/template/header');
@@ -19,11 +21,25 @@ class Home extends CI_Controller {
         $this->load->view('site/template/footer');
     }
     
-    public function politica() {
-        $noticias = $this->NM->listar_noticias_assunto(1);
+    public function pesquisar() {
+        $noticias = $this->NM->listar_noticias_pesquisar();
         
         $dados = array(
                     'noticia' => $noticias
+                );
+        
+        $this->load->view('site/template/header');
+        $this->load->view('site/pesquisar', $dados);
+        $this->load->view('site/template/footer');
+    }
+    
+    public function politica() {
+        $noticias = $this->NM->listar_noticias_assunto(1);
+        $titulos = $this->NM->listar_titulos_assunto(1);
+        
+        $dados = array(
+                    'noticia' => $noticias,
+                    'titulos' => $titulos
                 );
         
         $this->load->view('site/template/header');
@@ -33,9 +49,11 @@ class Home extends CI_Controller {
     
     public function economia() {
         $noticias = $this->NM->listar_noticias_assunto(2);
+        $titulos = $this->NM->listar_titulos_assunto(2);
         
         $dados = array(
-                    'noticia' => $noticias
+                    'noticia' => $noticias,
+                    'titulos' => $titulos
                 );
         
         $this->load->view('site/template/header');
@@ -45,9 +63,11 @@ class Home extends CI_Controller {
     
     public function educacao() {
         $noticias = $this->NM->listar_noticias_assunto(3);
+        $titulos = $this->NM->listar_titulos_assunto(3);
         
         $dados = array(
-                    'noticia' => $noticias
+                    'noticia' => $noticias,
+                    'titulos' => $titulos
                 );
         
         $this->load->view('site/template/header');
@@ -57,9 +77,11 @@ class Home extends CI_Controller {
     
     public function esportes() {
         $noticias = $this->NM->listar_noticias_assunto(4);
+        $titulos = $this->NM->listar_titulos_assunto(4);
         
         $dados = array(
-                    'noticia' => $noticias
+                    'noticia' => $noticias,
+                    'titulos' => $titulos
                 );
         
         $this->load->view('site/template/header');
@@ -69,9 +91,11 @@ class Home extends CI_Controller {
     
     public function mundo() {
         $noticias = $this->NM->listar_noticias_assunto(5);
+        $titulos = $this->NM->listar_titulos_assunto(5);
         
         $dados = array(
-                    'noticia' => $noticias
+                    'noticia' => $noticias,
+                    'titulos' => $titulos
                 );
         
         $this->load->view('site/template/header');
@@ -81,9 +105,11 @@ class Home extends CI_Controller {
     
     public function musica() {
         $noticias = $this->NM->listar_noticias_assunto(6);
+        $titulos = $this->NM->listar_titulos_assunto(6);
         
         $dados = array(
-                    'noticia' => $noticias
+                    'noticia' => $noticias,
+                    'titulos' => $titulos
                 );
         
         $this->load->view('site/template/header');
@@ -93,9 +119,11 @@ class Home extends CI_Controller {
     
     public function tecnologia() {
         $noticias = $this->NM->listar_noticias_assunto(7);
+        $titulos = $this->NM->listar_titulos_assunto(7);
         
         $dados = array(
-                    'noticia' => $noticias
+                    'noticia' => $noticias,
+                    'titulos' => $titulos
                 );
         
         $this->load->view('site/template/header');

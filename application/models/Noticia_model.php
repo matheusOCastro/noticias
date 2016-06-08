@@ -12,6 +12,29 @@ class Noticia_model extends CI_Model{
         return $this->db->select('*')
                         ->from('noticias n')
                         ->join('usuario a','usuario_idusuario = idusuario','left')
+                        ->order_by('n.dt_publicacao', 'desc')
+                        ->get()->result();
+    }
+    
+    public function listar_titulos_home(){
+        //return $this->db->get('noticias')->result();
+        return $this->db->limit(5)->select('*')
+                        ->from('noticias n')
+                        ->join('usuario a','usuario_idusuario = idusuario','left')
+                        ->order_by('n.dt_publicacao', 'desc')
+                        ->get()->result();
+    }
+    
+    public function listar_noticias_pesquisar(){
+        $consNoticia = $this->input->post('pesquisar');
+        if ($consNoticia == NULL){
+            $consNoticia = '%';
+        }
+        return $this->db->select('*')
+                        ->from('noticias n')
+                        ->join('usuario a','usuario_idusuario = idusuario','left')
+                        ->where('n.titulo like "%'.$consNoticia.'%"')
+                        ->order_by('n.dt_publicacao', 'desc')
                         ->get()->result();
     }
     
@@ -21,6 +44,17 @@ class Noticia_model extends CI_Model{
                         ->from('noticias n')
                         ->join('usuario a','usuario_idusuario = idusuario','left')
                         ->where('assunto_idassunto = '.$assunto)
+                        ->order_by('n.dt_publicacao', 'desc')
+                        ->get()->result();
+    }
+    
+    public function listar_titulos_assunto($assunto){
+        //return $this->db->get('noticias')->result();
+        return $this->db->limit(5)->select('*')
+                        ->from('noticias n')
+                        ->join('usuario a','usuario_idusuario = idusuario','left')
+                        ->where('assunto_idassunto = '.$assunto)    
+                        ->order_by('n.dt_publicacao', 'desc')
                         ->get()->result();
     }
     
@@ -42,7 +76,7 @@ class Noticia_model extends CI_Model{
                             ->where('n.assunto_idassunto like "'.$consAssunto.'"')
                             ->where('n.titulo like "%'.$consTitulo.'%"')
                             ->where('n.ativo = 1')
-                            //->limit($maximo, $inicio)
+                            ->order_by('n.dt_publicacao', 'desc')
                             ->get()->result();
     
 
@@ -73,7 +107,6 @@ class Noticia_model extends CI_Model{
         $dataNoticia['assunto_idassunto']       = $this->input->post('assunto');
         $dataNoticia['usuario_idusuario']       = $this->input->post('autor');
         $dataNoticia['dt_publicacao']       = date ("Y-m-d");
-        $dataNoticia['foto'] = $this->input->post('imagem');
         $dataNoticia['ativo'] = 1;
         
         $this->db->insert('noticias', $dataNoticia);

@@ -4140,7 +4140,7 @@ textarea.input-group-sm>.input-group-btn>.btn{
     color:#999
 }
 .navbar-inverse .navbar-nav>li>a{
-    color:#FFF;
+    color:#CBCCC3;
     font-weight: bold
 }
 .navbar-inverse .navbar-nav>li>a:hover,
@@ -4798,6 +4798,45 @@ a.thumbnail.active{
         font-size:35px
     }
 }
+
+.noticias{
+    padding:15px;
+    margin-bottom:30px;
+    font-size:15px;
+    font-weight:100;
+    line-height:2.1428571435;
+    color:inherit;
+    background-color:#950000
+}
+.noticias h1,
+.noticias .h1{
+    line-height:1;
+    color:inherit
+}
+.noticias p{
+    line-height:1.4
+}
+.container .noticias{
+    border-radius:6px
+}
+.noticias .container{
+    max-width:100%
+}
+@media screen and (min-width:768px){
+    .noticias{
+        padding-top:8px;
+        padding-bottom:8px
+    }
+    .container .noticias{
+        padding-right:20px;
+        padding-left:10px
+    }
+    .noticias h1,
+    .noticias .h1{
+        font-size:35px
+    }
+}
+
 .media,
 .media-body{
     overflow:hidden;

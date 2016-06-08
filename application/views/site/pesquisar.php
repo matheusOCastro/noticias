@@ -1,7 +1,7 @@
 <div class="titulo" style="color: #fff">
-    <hl><img class='hidden-xs' src="assets/img/tecnologia.png" alt="" width="130" align="left"></hl>
-    <center><img class='visible-xs' src="assets/img/tecnologia.png" width="130" alt="" /></center>
-    <center><h1><?php echo('Tecnologia') ?></h1></center>
+    <hl><img class='hidden-xs' src="assets/img/search.png" alt="" width="130" align="left"></hl>
+    <center><img class='visible-xs' src="assets/img/search.png" width="130" alt="" /></center>
+    <center><h1><?php echo('Pesquisa') ?></h1></center>
 </div>
 
 <div class="row">
@@ -27,22 +27,6 @@
                 echo "Publicação: ".$newDate;
                 echo "</b><br>";
                 echo "----------------------------------------------------------";
-            }
-
-        ?>
-    </div>
-    <div class="col-sm-4">
-        <div class="noticias" style="color: #fff">
-            <center><h3><?php echo('Últimas notícias') ?></h3></center>
-        </div>
-        <?php 
-            foreach ($titulos as $titulos) { 
-                echo"<b>";
-                echo $titulos->titulo;
-                echo"</b>";
-                echo "<br>";
-                echo "--------------------------------------------";
-                echo "<br>";
             }
 
         ?>

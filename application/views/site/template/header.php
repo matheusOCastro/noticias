@@ -41,9 +41,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   
                   <ul class="nav navbar-nav navbar-right">
-                      <form class="navbar-form navbar-left" role="search">
+                      <form action="pesquisar" method="post" class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Pesquisa">
+                            <input type="text" name="pesquisar" class="form-control" placeholder="Pesquisa">
                         </div>
                             <button type="submit" class="btn btn-default">Pesquisar</button>
                       </form>
@@ -60,7 +60,7 @@
 
                 <div class="col-sm-7">
                     <a href="<?php echo base_url()."home"; ?>" title="News" rel="home">
-                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/logo.png' width="460" alt="news" />
+                            <img class='hidden-xs' src='<?php echo base_url(); ?>assets/img/logo.png' width="400" alt="news" />
                             <center><img class='visible-xs' src='<?php echo base_url(); ?>assets/img/logo.png' width="250" alt="news" /></center>
 
                         </a>
@@ -75,7 +75,7 @@
                 <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -84,7 +84,7 @@
                     </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse">
                       <ul class="nav navbar-nav" >
                         
                         <li <?=echoActiveClassIfRequestMatches("home")?>><a class="glyphicon glyphicon-home" href="<?php echo base_url('/home')?>">&nbsp;HOME </a></li>
